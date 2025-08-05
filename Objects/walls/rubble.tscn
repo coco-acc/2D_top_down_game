@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://c83c46fs005n7"]
+
+[ext_resource type="Texture2D" uid="uid://40og64pgnfkj" path="res://Img_assests/rubble.png" id="1_v3rwt"]
+
+[node name="rubble" type="StaticBody2D" groups=["Non_destructables"]]
+z_index = 2
+collision_layer = 16
+collision_mask = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("1_v3rwt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(6, 6)
+polygon = PackedVector2Array(60, 21, -89, 20, -88, 33, -100, 34, -101, 48, 85, 50, 86, -63, 61, -64)

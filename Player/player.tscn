@@ -1,0 +1,178 @@
+[gd_scene load_steps=24 format=3 uid="uid://bh7e4pymisjtq"]
+
+[ext_resource type="Script" uid="uid://dycd6wu6x8pt5" path="res://Player/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://kphvfgbqhouo" path="res://Img_assests/player/idle.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://1d5rwgjfgkvf" path="res://Img_assests/player/jump.png" id="3_k53q1"]
+[ext_resource type="Texture2D" uid="uid://gwpf41hbj1r3" path="res://Img_assests/player/move.png" id="4_fhl08"]
+[ext_resource type="Texture2D" uid="uid://d4ldenx1cxb23" path="res://Img_assests/player/legs/1.png" id="5_o28un"]
+[ext_resource type="Texture2D" uid="uid://dlslm0lwwbg5v" path="res://Img_assests/player/attack_1.png" id="5_vtle1"]
+[ext_resource type="Texture2D" uid="uid://ce3e4hnwn7x11" path="res://Img_assests/player/crouch.png" id="6_fhl08"]
+[ext_resource type="Texture2D" uid="uid://b3yco4gxit071" path="res://Img_assests/player/legs/2.png" id="6_n471f"]
+[ext_resource type="Texture2D" uid="uid://clopfd6f43bwx" path="res://Img_assests/player/legs/3.png" id="7_7emwf"]
+[ext_resource type="Texture2D" uid="uid://bpwrjqxwmwkx" path="res://Img_assests/player/legs/4.png" id="8_hshwv"]
+[ext_resource type="Texture2D" uid="uid://o1hd654rf6k6" path="res://Img_assests/player/legs/5.png" id="9_gpjlu"]
+[ext_resource type="Texture2D" uid="uid://c7st5fpp44mcx" path="res://Img_assests/player/legs/6.png" id="10_8mwp6"]
+[ext_resource type="Texture2D" uid="uid://bgh60sxmwyg1o" path="res://Img_assests/player/legs/7.png" id="11_qemgg"]
+[ext_resource type="Texture2D" uid="uid://dtv685lfijxpc" path="res://Img_assests/player/legs/8.png" id="12_8viyr"]
+[ext_resource type="Texture2D" uid="uid://cpqndtro7xhg8" path="res://Img_assests/player/legs/9.png" id="13_sm0op"]
+[ext_resource type="Texture2D" uid="uid://jkhtlr5eiowj" path="res://Img_assests/player/legs/10.png" id="14_76lrf"]
+[ext_resource type="Texture2D" uid="uid://bvu0t6i0f8ikm" path="res://Img_assests/player/legs/11.png" id="15_efx54"]
+[ext_resource type="Texture2D" uid="uid://bdyeimkes0cj1" path="res://Img_assests/player/legs/12.png" id="16_755ss"]
+[ext_resource type="Texture2D" uid="uid://di74psjkvcbij" path="res://Img_assests/player/move2.png" id="17_o28un"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
+radius = 130.096
+
+[sub_resource type="GDScript" id="GDScript_qhqgy"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0h3t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_o28un")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n471f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7emwf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hshwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gpjlu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8mwp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qemgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8viyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sm0op")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_76lrf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_efx54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_755ss")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o28un"]
+size = Vector2(28, 148)
+
+[node name="Player" type="CharacterBody2D"]
+light_mask = 2
+visibility_layer = 3
+z_index = 1
+collision_mask = 31
+script = ExtResource("1_qhqgy")
+camera_offset_distance = 200
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -14)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CircleShape2D_btcbx")
+
+[node name="idle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-64, -42)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_4ntmi")
+script = SubResource("GDScript_qhqgy")
+
+[node name="jump" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-64, -9)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_k53q1")
+script = SubResource("GDScript_qhqgy")
+
+[node name="move" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-65, -12)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_fhl08")
+script = SubResource("GDScript_qhqgy")
+
+[node name="move2" type="Node2D" parent="."]
+position = Vector2(-73, -16)
+scale = Vector2(0.8, 0.8)
+
+[node name="legs" type="AnimatedSprite2D" parent="move2"]
+position = Vector2(73, 16)
+rotation = -0.00709798
+sprite_frames = SubResource("SpriteFrames_m0h3t")
+frame = 6
+
+[node name="base" type="Sprite2D" parent="move2"]
+position = Vector2(72.5, -125)
+texture = ExtResource("17_o28un")
+
+[node name="attack" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, 2.4)
+rotation = 0.0475044
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_vtle1")
+script = SubResource("GDScript_qhqgy")
+
+[node name="crouch" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-55, -18)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_fhl08")
+script = SubResource("GDScript_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -1)
+zoom = Vector2(0.6, 0.6)
+
+[node name="shootDelay" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="secondaryDelay" type="Timer" parent="."]
+one_shot = true
+
+[node name="jumpTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="BulletPosition" type="Marker2D" parent="."]
+position = Vector2(35, -151)
+
+[node name="gun_collider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gun_collider"]
+position = Vector2(17, -214)
+shape = SubResource("RectangleShape2D_o28un")
+
+[connection signal="timeout" from="shootDelay" to="." method="_on_shoot_delay_timeout"]
+[connection signal="timeout" from="secondaryDelay" to="." method="_on_secondary_delay_timeout"]
+[connection signal="timeout" from="jumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="body_entered" from="gun_collider" to="." method="_on_gun_collider_body_entered"]
+[connection signal="body_exited" from="gun_collider" to="." method="_on_gun_collider_body_exited"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbbk7360uccfd"]
+
+[ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
+[ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
+[ext_resource type="PackedScene" uid="uid://c83c46fs005n7" path="res://Objects/walls/rubble.tscn" id="3_jku83"]
+[ext_resource type="Script" uid="uid://clb4nw7swjhh3" path="res://Level/Level_prototype/obstacles.gd" id="3_kbho2"]
+[ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
+[ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/turret_1.tscn" id="6_ibnq1"]
+
+[node name="Level" type="Node2D"]
+
+[node name="ground" parent="." instance=ExtResource("1_5xok0")]
+
+[node name="Player" parent="." instance=ExtResource("2_jcr5m")]
+position = Vector2(3987, 813)
+
+[node name="walls" type="Node2D" parent="."]
+position = Vector2(3074, 2764)
+
+[node name="rubble" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-1271, -1185)
+
+[node name="rubble4" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(2515, -1576)
+
+[node name="rubble5" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(752, -1572)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="rubble6" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(762, -2737)
+rotation = 3.14159
+
+[node name="rubble2" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-2827, -1460)
+rotation = 1.56669
+
+[node name="rubble3" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-2681, -3303)
+rotation = 3.14159
+
+[node name="Obstacles" type="Node2D" parent="."]
+script = ExtResource("3_kbho2")
+
+[node name="box" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(311, 756)
+rotation = 1.57079
+
+[node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(1970, -139)
+
+[node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4174, 346)
+
+[node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4651, 2145)
+
+[node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(5191, 877)
+rotation = 1.57079
+
+[node name="box8" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(2710, 2643)
+rotation = 1.57079
+
+[node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(312, 48)
+rotation = 1.57079
+
+[node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(1167, 1638)
+
+[node name="torret_1" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-681, 325)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_2" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(936, 2635)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_3" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(4655, 2989)
+collision_layer = 2
+collision_mask = 23

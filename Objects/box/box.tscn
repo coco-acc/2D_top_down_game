@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfxqxhno71ju5"]
+
+[ext_resource type="Script" uid="uid://d336leh7qky28" path="res://Objects/box/box.gd" id="1_535pf"]
+[ext_resource type="Texture2D" uid="uid://dkthens0la1ob" path="res://Img_assests/box1.png" id="2_0lkq5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvlik"]
+size = Vector2(194.497, 83.0116)
+
+[node name="box" type="StaticBody2D" groups=["obstacles"]]
+z_index = -4
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_535pf")
+
+[node name="ColorRect" type="Sprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(1.686, 1.657)
+texture = ExtResource("2_0lkq5")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(2.108, 2.072)
+shape = SubResource("RectangleShape2D_rvlik")

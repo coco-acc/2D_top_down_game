@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg5ksfp2edphh"]
+
+[ext_resource type="Script" uid="uid://dfi4i4w0i2b1v" path="res://Globals/bullets/bullet_1.gd" id="1_l0bw7"]
+[ext_resource type="Texture2D" uid="uid://e6ro2l0lf486" path="res://Globals/bullets/blue.png" id="2_klgmw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_768je"]
+radius = 6.0
+height = 63.3333
+
+[node name="Bullet_1" type="Area2D"]
+collision_layer = 8
+collision_mask = 23
+script = ExtResource("1_l0bw7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-29, -1)
+rotation = 1.57335
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_klgmw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+shape = SubResource("CapsuleShape2D_768je")
+
+[node name="SelfDestructTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SelfDestructTimer" to="." method="_on_self_destruct_timer_timeout"]
