@@ -54,7 +54,7 @@ position = Vector2(1970, -139)
 position = Vector2(4174, 346)
 
 [node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(4651, 2145)
+position = Vector2(4651, 2383)
 
 [node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(5191, 877)
@@ -88,3 +88,4 @@ z_index = -1
 position = Vector2(4655, 2989)
 collision_layer = 2
 collision_mask = 23
+metadata/_edit_lock_ = true

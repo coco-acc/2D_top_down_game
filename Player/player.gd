@@ -8,6 +8,7 @@ var is_jumping := false
 var is_crouching := false
 var can_crouch := false
 var crouched := false
+var hold := false
 # var can_Jump := false
 
 # Combat properties
@@ -148,17 +149,29 @@ func idle_state(direction: Vector2):
 
 func move_state(direction: Vector2, delta: float):
 	var animation = $move2/legs
-	var base = $move2/base
+	var img1 = $move2/base
+	var img2 = $move2/base2
+	var base: Sprite2D
+
+	if hold:
+		img1.hide()
+		img2.show()
+		base = img2
+	else:
+		img2.hide()
+		img1.show()
+		base = img1
+
 	var angle = 3
 
 	var switch_time = 0.5  # Time in seconds between switches (adjust for faster/slower)
 
-	if Input.is_action_pressed("run") and direction:
-		speed = 650
+	if Input.is_action_pressed("walk") and direction:
+		speed = 350
 		switch_time = 0.2
 		animation.sprite_frames.set_animation_speed("default", 24)
 	else:
-		speed = 350
+		speed = 450
 		switch_time = 0.5
 		animation.sprite_frames.set_animation_speed("default", 12)
 		angle = 1
@@ -264,8 +277,10 @@ func _on_jump_timer_timeout() -> void:
 
 
 func _on_gun_collider_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
-
+	if body.is_in_group("Non_destructables"):
+		print('detected')
+		hold = true
 
 func _on_gun_collider_body_exited(body: Node2D) -> void:
-	pass # Replace with function body.
+	if body.is_in_group("Non_destructables"):
+		hold = false
