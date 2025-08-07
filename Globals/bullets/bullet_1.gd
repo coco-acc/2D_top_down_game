@@ -17,6 +17,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("hit"):
 		body.hit()
 
+	if body.is_in_group("Non_destructables"):
+		Utils.Bullet_hole(global_position, get_tree().current_scene)
+
 	if body.is_in_group("Non_destructables") or body is CharacterBody2D:
 		queue_free()
 

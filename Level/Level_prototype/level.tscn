@@ -69,7 +69,7 @@ position = Vector2(312, 48)
 rotation = 1.57079
 
 [node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1167, 1638)
+position = Vector2(1082, 1528)
 
 [node name="torret_1" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
@@ -82,6 +82,7 @@ z_index = -1
 position = Vector2(936, 2635)
 collision_layer = 2
 collision_mask = 23
+metadata/_edit_lock_ = true
 
 [node name="torret_3" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1

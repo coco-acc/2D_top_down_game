@@ -79,6 +79,19 @@ func _physics_process(delta: float):
 		can_crouch = false
 		is_crouching = false
 
+	if Input.is_action_pressed("Mouse_shoot"):
+		 # Get mouse position in world coordinates
+		var mouse_pos = get_global_mouse_position()
+	
+		# Calculate direction from player to mouse
+		direction = (mouse_pos - global_position)
+	
+		# Calculate angle in radians and convert to degrees + 90 degrees
+		var angle = direction.angle() + PI/2
+	
+		# Apply rotation to the player
+		rotation = angle
+
 
 	handle_state(delta)
 	move_and_slide()
@@ -142,7 +155,7 @@ func idle_state(direction: Vector2):
 		change_state(State.MOVE)
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
-	elif Input.is_action_just_pressed("Primary_action") and shoot:
+	elif (Input.is_action_just_pressed("Primary_action") or Input.is_action_just_pressed("Mouse_shoot")) and shoot:
 		change_state(State.ATTACK)
 	elif can_crouch:
 		change_state(State.CROUCH)
@@ -189,7 +202,7 @@ func move_state(direction: Vector2, delta: float):
 		change_state(State.IDLE)
 	if Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
-	elif Input.is_action_just_pressed("Primary_action") and shoot:
+	elif (Input.is_action_just_pressed("Primary_action") or Input.is_action_just_pressed("Mouse_shoot")) and shoot:
 		change_state(State.ATTACK)
 	elif can_crouch:
 		change_state(State.CROUCH)
@@ -201,6 +214,7 @@ func jump_state(direction: Vector2):
 		jump_timer.start()
 		velocity = jump_velocity * direction
 		is_jumping = true
+		camera.zoom = Vector2(0.52, 0.52)
 		# can_Jump = false
 		# secondary_delay.start()
 	else:
@@ -212,7 +226,7 @@ func crouch_state(direction):
 		crouched = false
 		# change_state(previous_state) #---> possible bug
 		change_state(State.IDLE)
-	elif Input.is_action_just_pressed("Primary_action") and shoot:
+	elif (Input.is_action_just_pressed("Primary_action") or Input.is_action_just_pressed("Mouse_shoot")) and shoot:
 		crouched = false
 		change_state(State.ATTACK)
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
@@ -228,11 +242,12 @@ func attack_state(direction):
 		bullet_instance.rotation = (rotation - deg_to_rad(90))
 		get_tree().current_scene.add_child(bullet_instance)
 		Utils.recoil(attac, -6)
+		
 
 		shoot = false
 		shoot_delay.start()
 
-	if Input.is_action_just_released("Primary_action"):
+	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
 		if previous_state:
 			change_state(previous_state)
 		else:
@@ -269,6 +284,7 @@ func _on_secondary_delay_timeout() -> void:
 
 func _on_jump_timer_timeout() -> void:
 	is_jumping = false  # Reset jumping flag when timer ends
+	camera.zoom = Vector2(0.5, 0.5)
 	change_state(State.IDLE)
 
 # func _on_jump_delay_timeout() -> void:
@@ -278,7 +294,6 @@ func _on_jump_timer_timeout() -> void:
 
 func _on_gun_collider_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Non_destructables"):
-		print('detected')
 		hold = true
 
 func _on_gun_collider_body_exited(body: Node2D) -> void:
