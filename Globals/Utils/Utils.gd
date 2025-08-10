@@ -60,8 +60,9 @@ static func recoil(sprite: Node2D, recoil_distance: float, duration: float = 0.1
 	var orig_position := sprite.position
 
 	# Calculate direction vector based on current rotation
-	var recoil_offset := Vector2(randf_range(-0.3, 0.3), -1.0).rotated(sprite.rotation)\
+	var recoil_offset := Vector2(randf_range(-0.5, 0.5), -1.0).rotated(sprite.rotation)\
 	* recoil_distance
+	# var recoil_offset := Vector2.UP.rotated(sprite.rotation) * recoil_distance
 
 	# Instantly move back along the facing direction
 	sprite.position += recoil_offset
@@ -90,15 +91,15 @@ static func get_hit(stats: Dictionary) -> Dictionary:
 	
 	return stats
 
-static func hit_effect(sprite: Node2D, effect_size: float, duration: float = 0.1) -> void:
-	var orig_position := sprite.position
-	var offset := Vector2.UP.rotated(sprite.rotation) * effect_size
+# static func hit_effect(sprite: Node2D, effect_size: float, duration: float = 0.1) -> void:
+# 	var orig_position := sprite.position
+# 	var offset := Vector2.UP.rotated(sprite.rotation) * effect_size
 
-	sprite.position += offset
-	var tween = sprite.create_tween()
-	tween.tween_property(sprite, "position", orig_position, duration)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
+# 	sprite.position += offset
+# 	var tween = sprite.create_tween()
+# 	tween.tween_property(sprite, "position", orig_position, duration)\
+# 		.set_trans(Tween.TRANS_SINE)\
+# 		.set_ease(Tween.EASE_OUT)
 
 static func Levels():
 	var difficulty := {
@@ -146,3 +147,14 @@ static func Bullet_hole(position: Vector2, scene_root: Node2D, scale: float = 0.
 
 	# Correct connection using Callable
 	timer.timeout.connect(Callable(bullet_hole, "queue_free"))
+
+static func spawn_particles(spawn_pos: Vector2, scene_root, lifetime = 0.25, speed_scale = 2.5):
+	var particles := preload("res://Globals/Particles/Explosion_particles.tscn")
+	var p = particles.instantiate()
+	p.global_position = spawn_pos
+	scene_root.add_child(p)
+	var s = p.get_child(0)
+	s.emitting = true
+	s.lifetime = lifetime
+	s.speed_scale = speed_scale
+	# s.amount = amount

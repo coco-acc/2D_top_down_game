@@ -69,7 +69,7 @@ func _physics_process(delta):
 					# shoot()
 				if can_shoot:
 					shoot()
-					Utils.recoil(gun_sprite, -8)
+					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
 			else:
 				start_cooldown_phase()
 		TurretState.COOLDOWN:

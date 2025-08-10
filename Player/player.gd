@@ -242,7 +242,7 @@ func attack_state(direction):
 		bullet_instance.rotation = (rotation - deg_to_rad(90))
 		get_tree().current_scene.add_child(bullet_instance)
 		Utils.recoil(attac, -6)
-		
+		Utils.spawn_particles($particlepos.global_position, get_tree().current_scene, 0.8, 2.5)
 
 		shoot = false
 		shoot_delay.start()
