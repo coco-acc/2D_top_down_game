@@ -39,4 +39,9 @@ position = Vector2(-0.232308, -162.348)
 rotation = -1.5708
 scale = Vector2(0.666667, 0.666667)
 
+[node name="cartridge" type="Marker2D" parent="GunSprite"]
+position = Vector2(35.1016, -5.68179)
+rotation = -1.5708
+scale = Vector2(0.666667, 0.666667)
+
 [node name="ShootTimer" type="Timer" parent="."]

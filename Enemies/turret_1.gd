@@ -70,6 +70,7 @@ func _physics_process(delta):
 				if can_shoot:
 					shoot()
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
+					Utils.bullet_cartridge($GunSprite/cartridge.global_position, get_tree().current_scene, rotation)
 			else:
 				start_cooldown_phase()
 		TurretState.COOLDOWN:
