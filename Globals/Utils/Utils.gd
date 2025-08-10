@@ -158,3 +158,53 @@ static func spawn_particles(spawn_pos: Vector2, scene_root, lifetime = 0.25, spe
 	s.lifetime = lifetime
 	s.speed_scale = speed_scale
 	# s.amount = amount
+
+	# Queue free after particle lifetime
+	var t := Timer.new()
+	t.wait_time = lifetime
+	t.one_shot = true
+	t.connect("timeout", Callable(p, "queue_free"))
+	p.add_child(t)
+	t.start()
+	
+static func bullet_cartridge(position: Vector2, scene_root: Node2D) -> void:
+	var cartridge := Sprite2D.new()
+	var sprite = [
+		preload("res://Img_assests/overlays/cartridges/mg1.png"),
+		preload("res://Img_assests/overlays/cartridges/9mm.png"),
+		preload("res://Img_assests/overlays/cartridges/shotgun.png")
+	]
+
+	# Initial settings
+	cartridge.global_position = position
+	cartridge.texture = sprite[0] # Pick cartridge type
+	cartridge.rotation_degrees = randf_range(0, 360) # Random start rotation
+	cartridge.scale = Vector2(1,1) * 0.05
+	cartridge.z_index = 1
+	scene_root.add_child(cartridge)
+
+	# Add tween for movement & rotation
+	var tween = cartridge.create_tween()
+
+	# Random eject direction (slightly angled)
+	var eject_dir = Vector2.RIGHT.rotated(deg_to_rad(randf_range(-30, 30)))
+	var eject_distance = randf_range(40, 70) # how far it moves
+	var target_pos = position + eject_dir * eject_distance
+
+	# Move quickly at first (0.15s)
+	tween.tween_property(cartridge, "global_position", target_pos, 0.15)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	# Rotate while moving (random spin)
+	var spin_amount = randf_range(720, 1440) # 2–4 full spins
+	tween.parallel().tween_property(cartridge, "rotation_degrees", cartridge.rotation_degrees + spin_amount, 0.5)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	# Make it drop slightly (gravity-like)
+	tween.tween_property(cartridge, "position:y", cartridge.position.y + randf_range(10, 25), 0.3)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
+	# Optional: Fade out after some time
+	tween.tween_interval(1.5)
+	tween.tween_property(cartridge, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(func(): cartridge.queue_free())

@@ -88,7 +88,7 @@ size = Vector2(28, 148)
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
 visibility_layer = 3
-z_index = 1
+z_index = 2
 collision_mask = 31
 script = ExtResource("1_qhqgy")
 camera_offset_distance = 200
@@ -140,6 +140,7 @@ position = Vector2(72.5, -125)
 texture = ExtResource("17_o28un")
 
 [node name="attack" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(22, 2.4)
 rotation = 0.0475044
 scale = Vector2(0.8, 0.8)
@@ -170,6 +171,9 @@ one_shot = true
 
 [node name="BulletPosition" type="Marker2D" parent="."]
 position = Vector2(35, -151)
+
+[node name="cartridgepos" type="Marker2D" parent="."]
+position = Vector2(60, 20)
 
 [node name="particlepos" type="Marker2D" parent="."]
 position = Vector2(35, -174)
