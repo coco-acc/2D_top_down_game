@@ -50,18 +50,42 @@ rotation = 1.57079
 [node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(1970, -139)
 
+[node name="box9" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-6862, 2036)
+rotation = 1.5708
+
+[node name="box10" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-6862, 2036)
+rotation = 1.5708
+
+[node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-18649, 3073)
+rotation = 1.5708
+
+[node name="box14" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-15169, 1607)
+rotation = 1.5708
+
+[node name="box13" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-19304, 1774)
+rotation = 1.5708
+
+[node name="box11" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-9628, 1643)
+rotation = 1.5708
+
 [node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4174, 346)
 
 [node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(4651, 2145)
+position = Vector2(4651, 2383)
 
 [node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(5191, 877)
 rotation = 1.57079
 
 [node name="box8" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(2710, 2643)
+position = Vector2(1888, 2643)
 rotation = 1.57079
 
 [node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
@@ -69,11 +93,50 @@ position = Vector2(312, 48)
 rotation = 1.57079
 
 [node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1167, 1638)
+position = Vector2(1082, 1528)
 
 [node name="torret_1" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-681, 325)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_4" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-7811, 2043)
+collision_layer = 2
+collision_mask = 23
+metadata/_edit_lock_ = true
+
+[node name="torret_5" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-10315, 1178)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_7" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-16054, 1743)
+collision_layer = 2
+collision_mask = 23
+metadata/_edit_lock_ = true
+
+[node name="torret_8" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-16076, 1346)
+collision_layer = 2
+collision_mask = 23
+metadata/_edit_lock_ = true
+
+[node name="torret_9" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-20124, 1765)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_6" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-10314, 2712)
 collision_layer = 2
 collision_mask = 23
 
@@ -82,9 +145,11 @@ z_index = -1
 position = Vector2(936, 2635)
 collision_layer = 2
 collision_mask = 23
+metadata/_edit_lock_ = true
 
 [node name="torret_3" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(4655, 2989)
 collision_layer = 2
 collision_mask = 23
+metadata/_edit_lock_ = true

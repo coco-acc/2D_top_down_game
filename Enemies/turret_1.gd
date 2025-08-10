@@ -69,6 +69,7 @@ func _physics_process(delta):
 					# shoot()
 				if can_shoot:
 					shoot()
+					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
 			else:
 				start_cooldown_phase()
 		TurretState.COOLDOWN:
@@ -90,7 +91,8 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	bullet.z_index = -1
 	get_tree().current_scene.add_child(bullet)
-	Utils.recoil(gun_sprite, -8)
+
+	# Utils.recoil(gun_sprite, -8)
 	
 	# Set bullet position and direction
 	bullet.global_position = bulletPos.global_position

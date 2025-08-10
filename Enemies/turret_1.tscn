@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://3bc7687txjg3" path="res://Img_assests/Torret/top.png" id="2_mm85b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mm85b"]
-radius = 1603.51
+radius = 1348.07
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_apq2m"]
 radius = 107.564
