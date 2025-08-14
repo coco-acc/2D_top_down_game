@@ -158,3 +158,61 @@ static func spawn_particles(spawn_pos: Vector2, scene_root, lifetime = 0.25, spe
 	s.lifetime = lifetime
 	s.speed_scale = speed_scale
 	# s.amount = amount
+
+	# Queue free after particle lifetime
+	var t := Timer.new()
+	t.wait_time = lifetime
+	t.one_shot = true
+	t.connect("timeout", Callable(p, "queue_free"))
+	p.add_child(t)
+	t.start()
+	
+static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotation) -> void:
+	var cartridge := Sprite2D.new()
+	var sprite = [
+		preload("res://Img_assests/overlays/cartridges/mg1.png"),
+		preload("res://Img_assests/overlays/cartridges/9mm.png"),
+		preload("res://Img_assests/overlays/cartridges/shotgun.png")
+	]
+
+	# Initial settings
+	cartridge.global_position = position
+	cartridge.texture = sprite[0] # Pick cartridge type
+	cartridge.rotation_degrees = randf_range(0, 360) # Random start rotation
+	cartridge.scale = Vector2(1,1) * 0.05
+	cartridge.z_index = 1
+	cartridge.modulate = Color(0.82, 0.82, 0.82)
+	scene_root.add_child(cartridge)
+
+	# Add tween for movement & rotation
+	var tween = cartridge.create_tween()
+
+	# Random ejection angle relative to player facing
+	# This makes it eject slightly to the right/back of the player
+	var eject_angle = facing_rotation + deg_to_rad(randf_range(-40, -20))
+	var eject_dir = Vector2.RIGHT.rotated(eject_angle)
+	var eject_distance = randf_range(40, 70)
+	var target_pos = position + eject_dir * eject_distance
+
+	# Move
+	tween.tween_property(cartridge, "global_position", target_pos, 0.15)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	# Spin
+	var spin_amount = randf_range(720, 1440)
+	tween.parallel().tween_property(cartridge, "rotation_degrees", cartridge.rotation_degrees + spin_amount, 0.5)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	# # Drop
+	# tween.tween_property(cartridge, "position:y", cartridge.position.y + randf_range(-10, -25), 0.3)\
+	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
+	# THEN drop **in world-space** (add a positive Y offset)
+	# var drop_amount = randf_range(10, 25)
+	# tween.tween_property(cartridge, "global_position", target_pos + Vector2(0, drop_amount), 0.3)\
+	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+
+	# Fade out
+	tween.tween_interval(10.0)
+	tween.tween_property(cartridge, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(func(): cartridge.queue_free())
