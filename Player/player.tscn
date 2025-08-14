@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bh7e4pymisjtq"]
+[gd_scene load_steps=26 format=3 uid="uid://bh7e4pymisjtq"]
 
 [ext_resource type="Script" uid="uid://dycd6wu6x8pt5" path="res://Player/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://kphvfgbqhouo" path="res://Img_assests/player/idle.png" id="2_4ntmi"]
@@ -84,6 +84,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o28un"]
 size = Vector2(28, 148)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n471f"]
+polygon = PackedVector2Array(-118, 2, -92, -33, -41, -47, 32, -49, 74, -29, 92, -5, 69, 20, 25, 38, -30, 40, -83, 31)
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 2
@@ -184,6 +187,9 @@ collision_mask = 254
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gun_collider"]
 position = Vector2(17, -214)
 shape = SubResource("RectangleShape2D_o28un")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_n471f")
 
 [connection signal="timeout" from="shootDelay" to="." method="_on_shoot_delay_timeout"]
 [connection signal="timeout" from="secondaryDelay" to="." method="_on_secondary_delay_timeout"]

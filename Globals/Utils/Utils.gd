@@ -181,6 +181,7 @@ static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotat
 	cartridge.rotation_degrees = randf_range(0, 360) # Random start rotation
 	cartridge.scale = Vector2(1,1) * 0.05
 	cartridge.z_index = 1
+	cartridge.modulate = Color(0.82, 0.82, 0.82)
 	scene_root.add_child(cartridge)
 
 	# Add tween for movement & rotation
@@ -205,13 +206,13 @@ static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotat
 	# # Drop
 	# tween.tween_property(cartridge, "position:y", cartridge.position.y + randf_range(-10, -25), 0.3)\
 	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	
+
 	# THEN drop **in world-space** (add a positive Y offset)
-	var drop_amount = randf_range(10, 25)
-	tween.tween_property(cartridge, "global_position", target_pos + Vector2(0, drop_amount), 0.3)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	# var drop_amount = randf_range(10, 25)
+	# tween.tween_property(cartridge, "global_position", target_pos + Vector2(0, drop_amount), 0.3)\
+	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 	# Fade out
-	tween.tween_interval(1.5)
+	tween.tween_interval(10.0)
 	tween.tween_property(cartridge, "modulate:a", 0.0, 0.3)
 	tween.tween_callback(func(): cartridge.queue_free())

@@ -39,6 +39,7 @@ var state: TurretState = TurretState.FIRING
 @onready var attack_zone := $AttackZone  # Detection area
 @onready var shoot_timer := $ShootTimer   # Timer for firing rate
 @onready var bulletPos := $GunSprite/BulletPos
+@onready var cartridge := $GunSprite/cartridge
 
 func _ready():
 	current_level = level["1"]
@@ -64,13 +65,13 @@ func _physics_process(delta):
 				direction = (target.global_position - global_position).normalized()
 				attack_angle = direction.angle() + deg_to_rad(90)
 				gun_sprite.rotation = lerp_angle(gun_sprite.rotation, attack_angle, rotation_speed * delta)
-				
+			
 				# if can_shoot and abs(gun_sprite.rotation - attack_angle) < 0.2:
 					# shoot()
 				if can_shoot:
 					shoot()
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
-					Utils.bullet_cartridge($GunSprite/cartridge.global_position, get_tree().current_scene, rotation)
+					Utils.bullet_cartridge(cartridge.global_position, get_tree().current_scene, gun_sprite.rotation)
 			else:
 				start_cooldown_phase()
 		TurretState.COOLDOWN:

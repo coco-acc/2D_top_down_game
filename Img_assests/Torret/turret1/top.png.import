@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chh5s7r1b00jo"
-path="res://.godot/imported/base.png-54c3af6ff0e9fab3306e4082619ee3c3.ctex"
+uid="uid://p3sb5pi6o58i"
+path="res://.godot/imported/top.png-023554ada831bb3ce5780e623edc64dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Img_assests/Torret/base.png"
-dest_files=["res://.godot/imported/base.png-54c3af6ff0e9fab3306e4082619ee3c3.ctex"]
+source_file="res://Img_assests/Torret/turret1/top.png"
+dest_files=["res://.godot/imported/top.png-023554ada831bb3ce5780e623edc64dc.ctex"]
 
 [params]
 

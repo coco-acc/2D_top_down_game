@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c83c46fs005n7"]
+[gd_scene load_steps=3 format=3 uid="uid://c83c46fs005n7"]
 
 [ext_resource type="Texture2D" uid="uid://40og64pgnfkj" path="res://Img_assests/rubble.png" id="1_v3rwt"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_v3rwt"]
+polygon = PackedVector2Array(364, -384, 518, -377, 510, 300, -606, 288, -607, 195, -533, 194, -534, 119, 362, 128)
 
 [node name="rubble" type="StaticBody2D" groups=["Non_destructables"]]
 z_index = 2
@@ -14,3 +17,6 @@ texture = ExtResource("1_v3rwt")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(6, 6)
 polygon = PackedVector2Array(60, 21, -89, 20, -88, 33, -100, 34, -101, 48, 85, 50, 86, -63, 61, -64)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_v3rwt")

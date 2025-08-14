@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1335mosm0ipn"]
+
+[ext_resource type="Texture2D" uid="uid://cbco1aks534fk" path="res://Img_assests/overlays/ligts/white.png" id="1_iw0hg"]
+
+[node name="PointLight" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(2, 2)
+energy = 1.4
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.2
+texture = ExtResource("1_iw0hg")
+texture_scale = 5.04

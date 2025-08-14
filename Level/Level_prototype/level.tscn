@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=8 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://clb4nw7swjhh3" path="res://Level/Level_prototype/obstacles.gd" id="3_kbho2"]
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/turret_1.tscn" id="6_ibnq1"]
+[ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
 
 [node name="Level" type="Node2D"]
 
@@ -51,31 +52,35 @@ rotation = 1.57079
 position = Vector2(1970, -139)
 
 [node name="box9" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-6862, 2036)
+position = Vector2(-8399, 3013)
 rotation = 1.5708
 
 [node name="box10" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-6862, 2036)
+position = Vector2(-6862, 2962)
 rotation = 1.5708
 
 [node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-18649, 3073)
+position = Vector2(-18649, 2766)
 rotation = 1.5708
 
 [node name="box14" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-15169, 1607)
+position = Vector2(-14593, 2720)
 rotation = 1.5708
 
 [node name="box13" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-19304, 1774)
+position = Vector2(-22509, 2695)
 rotation = 1.5708
 
 [node name="box11" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-9628, 1643)
+position = Vector2(-9671, 3249)
 rotation = 1.5708
 
 [node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4174, 346)
+
+[node name="box15" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(2607, 691)
+rotation = 1.0472
 
 [node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4651, 2383)
@@ -103,40 +108,43 @@ collision_mask = 23
 
 [node name="torret_4" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-7811, 2043)
+position = Vector2(-7811, 2969)
 collision_layer = 2
 collision_mask = 23
-metadata/_edit_lock_ = true
 
 [node name="torret_5" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-10315, 1178)
+position = Vector2(-10311, 2887)
 collision_layer = 2
 collision_mask = 23
 
 [node name="torret_7" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-16054, 1743)
+position = Vector2(-15478, 2962)
 collision_layer = 2
 collision_mask = 23
-metadata/_edit_lock_ = true
 
 [node name="torret_8" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-16076, 1346)
+position = Vector2(-15500, 2364)
 collision_layer = 2
 collision_mask = 23
-metadata/_edit_lock_ = true
 
 [node name="torret_9" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-20124, 1765)
+position = Vector2(-23521, 2206)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_10" parent="." instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-23545, 3028)
 collision_layer = 2
 collision_mask = 23
 
 [node name="torret_6" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-10314, 2712)
+position = Vector2(-10314, 3623)
 collision_layer = 2
 collision_mask = 23
 
@@ -145,11 +153,25 @@ z_index = -1
 position = Vector2(936, 2635)
 collision_layer = 2
 collision_mask = 23
-metadata/_edit_lock_ = true
 
 [node name="torret_3" parent="." instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(4655, 2989)
 collision_layer = 2
 collision_mask = 23
+
+[node name="PointLight" parent="." instance=ExtResource("7_5rxru")]
+position = Vector2(2980, 587)
+metadata/_edit_lock_ = true
+
+[node name="PointLight2" parent="." instance=ExtResource("7_5rxru")]
+position = Vector2(-3105, 146)
+metadata/_edit_lock_ = true
+
+[node name="PointLight3" parent="." instance=ExtResource("7_5rxru")]
+position = Vector2(-16796, 1406)
+metadata/_edit_lock_ = true
+
+[node name="PointLight4" parent="." instance=ExtResource("7_5rxru")]
+position = Vector2(-27749, 968)
 metadata/_edit_lock_ = true
