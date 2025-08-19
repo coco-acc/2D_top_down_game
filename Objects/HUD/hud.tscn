@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfn3cmniyyrww"]
+
+[ext_resource type="Script" uid="uid://bepkyxhe7elmb" path="res://Objects/HUD/hud.gd" id="1_x4ej0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x4ej0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3me4v"]
+texture = SubResource("CanvasTexture_x4ej0")
+modulate_color = Color(1, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_x4ej0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_top = 624.0
+offset_right = 1154.0
+offset_bottom = 647.0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Ammo" type="Label" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 40.0
+size_flags_vertical = 8
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Health" type="Label" parent="HBoxContainer2/MarginContainer2"]
+layout_mode = 2
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+offset_left = 15.0
+offset_right = 215.0
+offset_bottom = 60.0
+theme_override_constants/margin_top = 50
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer3"]
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.159497, 0.415138, 0.301838, 1)
+theme_override_styles/fill = SubResource("StyleBoxTexture_3me4v")
+show_percentage = false

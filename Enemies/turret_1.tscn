@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbuux1n4snffx"]
+[gd_scene load_steps=8 format=3 uid="uid://cbuux1n4snffx"]
 
 [ext_resource type="Script" uid="uid://bpvl0dcv5jimw" path="res://Enemies/turret_1.gd" id="1_mm85b"]
 [ext_resource type="Texture2D" uid="uid://bshfkgmrs805v" path="res://Img_assests/Torret/turret1/base.png" id="2_8jw6i"]
 [ext_resource type="Texture2D" uid="uid://p3sb5pi6o58i" path="res://Img_assests/Torret/turret1/top.png" id="3_8jw6i"]
 [ext_resource type="Texture2D" uid="uid://dmrjn13gju0tm" path="res://Img_assests/Torret/turret1/guard.png" id="3_qle5a"]
+[ext_resource type="PackedScene" uid="uid://bv81mq5hwr28i" path="res://Objects/Lights/glow/glow.tscn" id="5_6fobd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mm85b"]
 radius = 1348.07
@@ -67,5 +68,13 @@ rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_8jw6i")
 offset = Vector2(-89.3333, -0.666339)
+
+[node name="glow" parent="GunSprite" instance=ExtResource("5_6fobd")]
+z_index = 2
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(-0.232514, -219.348)
+rotation = -1.5708
+scale = Vector2(0.833333, 1)
 
 [node name="ShootTimer" type="Timer" parent="."]

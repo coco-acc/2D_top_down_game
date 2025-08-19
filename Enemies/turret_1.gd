@@ -25,7 +25,8 @@ var turret_stats = {
     "health": 100,
     "speed": 0,
     "is_alive": true,
-    "ammo": 124
+    "ammo": 124,
+    "heat_up": 0.0
 }
 
 var level = Utils.Levels()
@@ -40,6 +41,7 @@ var state: TurretState = TurretState.FIRING
 @onready var shoot_timer := $ShootTimer   # Timer for firing rate
 @onready var bulletPos := $GunSprite/BulletPos
 @onready var cartridge := $GunSprite/cartridge
+@onready var muzzle := $GunSprite/glow
 
 func _ready():
 	current_level = level["1"]
@@ -71,7 +73,12 @@ func _physics_process(delta):
 				if can_shoot:
 					shoot()
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
-					Utils.bullet_cartridge(cartridge.global_position, get_tree().current_scene, gun_sprite.rotation)
+					Utils.bullet_cartridge(cartridge.global_position, get_tree()\
+					.current_scene, gun_sprite.rotation)
+					turret_stats["ammo"] -= 1
+					if turret_stats["heat_up"] < 10:
+						turret_stats["heat_up"] += 0.01
+					# print("heat: ", turret_stats["heat_up"])
 			else:
 				start_cooldown_phase()
 		TurretState.COOLDOWN:
@@ -80,6 +87,11 @@ func _physics_process(delta):
 				gun_sprite.rotation += rotation_change
 			else:
 				gun_sprite.rotation -= rotation_change
+			if turret_stats["heat_up"] > 0:
+				turret_stats["heat_up"] -= 0.0025
+	# if turret_stats["ammo"] < 0:
+	# 	start_cooldown_phase()
+	muzzle.material.set("shader_parameter/emission_strength", turret_stats["heat_up"])
 
 func shoot():
 	if not bullet_scene:
