@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv81mq5hwr28i"]
+
+[ext_resource type="Texture2D" uid="uid://dmf1eulldq2vl" path="res://Img_assests/overlays/ligts/rect.png" id="1_w3w6e"]
+[ext_resource type="Shader" uid="uid://laaukheqx3ni" path="res://Objects/Lights/glow/glow.gdshader" id="1_w8y6n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4jelw"]
+shader = ExtResource("1_w8y6n")
+shader_parameter/emission_color = Color(1, 0, 0, 1)
+shader_parameter/emission_strength = 3.0
+shader_parameter/fade_height = 0.3
+shader_parameter/center_boost = 0.35
+
+[node name="glow" type="Sprite2D"]
+material = SubResource("ShaderMaterial_4jelw")
+texture = ExtResource("1_w3w6e")

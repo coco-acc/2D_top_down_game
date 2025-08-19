@@ -24,7 +24,7 @@ var direction_to = Vector2()
 var aspect_ratio: float = 16.0 / 9.0
 
 # State machine
-enum State { IDLE, JUMP, CROUCH, MOVE, ATTACK, MELE_ATTACK, DIA }
+enum State { IDLE, JUMP, CROUCH, MOVE, ATTACK, RELOAD, MELE_ATTACK, DIA }
 var current_state: State = State.IDLE
 var previous_state: State = State.IDLE
 
@@ -33,7 +33,8 @@ var stats = {
 	"health": 100,
 	"speed": speed,
 	"is_alive": true,
-	"ammo": 124
+	"ammo": 30,
+	"reload": 5.0
 }
 
 # @onready var jump_delay := $jumpDelay
@@ -47,7 +48,11 @@ var stats = {
 @onready var move := $move2
 @onready var node := $"."
 
+@onready var reload_timer = Timer.new()
+
 @onready var bullet = preload("res://Globals/bullets/Bullet_1.tscn")
+@onready var HUD_scene = preload("res://Objects/HUD/hud.tscn")
+var HUD = null
 
 func _ready():
 	#camera setup
@@ -58,6 +63,15 @@ func _ready():
 	# Connect signals
 	# $jumpDelay.timeout.connect(_on_jump_delay_timeout)
 	jump_timer.wait_time = 0.05
+	jump_timer.one_shot = true
+	reload_timer.wait_time = stats["reload"]
+	reload_timer.one_shot = true
+	node.add_child(reload_timer)
+
+	HUD = HUD_scene.instantiate()
+	node.add_child(HUD)
+	HUD.set_ammo(stats["ammo"])
+	HUD.set_health(stats["health"])
 
 func _physics_process(delta: float):
 	# if not player_stats["is_alive"]:
@@ -139,6 +153,8 @@ func handle_state(delta: float):
 			mele_attack_state()
 		State.DIA:
 			dia_state()
+		State.RELOAD:
+			reload_state()
 	
 	# Handle camera rotation
 	if direction.length() > 0:
@@ -234,7 +250,9 @@ func crouch_state(direction):
 		change_state(State.JUMP)
 
 func attack_state(direction):
-	if shoot:
+	if stats["ammo"] < 1:
+		change_state(State.RELOAD)
+	elif shoot and not stats["ammo"] < 1:
 		var bullet_position = $BulletPosition
 		# shoot_bullet.emit(bullet_position.global_position)
 		var bullet_instance = bullet.instantiate()
@@ -246,6 +264,8 @@ func attack_state(direction):
 		Utils.bullet_cartridge($cartridgepos.global_position, get_tree().current_scene, rotation)
 
 		shoot = false
+		stats["ammo"] -= 1
+		HUD.set_ammo(stats["ammo"])
 		shoot_delay.start()
 
 	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
@@ -255,6 +275,24 @@ func attack_state(direction):
 			change_state(State.IDLE)
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
+
+func reload_state():
+	reload_timer.start()
+
+	# Disconnect first to avoid duplicate connections
+	# if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):
+	# 	reload_timer.disconnect("timeout", Callable(self, "reload_mag"))
+	
+	if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):
+		pass
+	else:
+		reload_timer.connect("timeout", Callable(self, "reload_mag"))
+	change_state(State.IDLE)
+
+func reload_mag():
+	stats["ammo"] = 30
+	HUD.set_ammo(stats["ammo"])
+	change_state(State.IDLE)
 
 func mele_attack_state():
 	# Implement male attack logic here
@@ -270,7 +308,14 @@ func change_state(new_state):
 		current_state = new_state
 
 func hit():
-	Utils.get_hit(stats)
+	# Utils.get_hit(stats)
+	if stats["is_alive"]:
+		stats["health"] -= 2
+
+		if stats["health"] <= 0:
+			stats["health"] = 0
+			stats["is_alive"] = false
+	HUD.set_health(stats["health"])
 	if stats["health"] <= 0:
 		print("Player is dead.")
 		# You can trigger death animation, game over screen, etc. here

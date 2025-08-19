@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=9 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -7,6 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
+
+[sub_resource type="Environment" id="Environment_5rxru"]
+glow_enabled = true
+glow_intensity = 1.5
+glow_bloom = 1.0
+glow_blend_mode = 0
+glow_hdr_scale = 1.0
 
 [node name="Level" type="Node2D"]
 
@@ -100,78 +107,85 @@ rotation = 1.57079
 [node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(1082, 1528)
 
-[node name="torret_1" parent="." instance=ExtResource("6_ibnq1")]
+[node name="turrets" type="Node2D" parent="."]
+
+[node name="torret_1" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-681, 325)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_4" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_4" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-7811, 2969)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_5" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_5" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-10311, 2887)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_7" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_7" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-15478, 2962)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_8" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_8" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-15500, 2364)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_9" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_9" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-23521, 2206)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_10" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_10" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-23545, 3028)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_6" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_6" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-10314, 3623)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_2" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_2" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(936, 2635)
 collision_layer = 2
 collision_mask = 23
 
-[node name="torret_3" parent="." instance=ExtResource("6_ibnq1")]
+[node name="torret_3" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(4655, 2989)
 collision_layer = 2
 collision_mask = 23
 
-[node name="PointLight" parent="." instance=ExtResource("7_5rxru")]
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="PointLight" parent="Lights" instance=ExtResource("7_5rxru")]
 position = Vector2(2980, 587)
 metadata/_edit_lock_ = true
 
-[node name="PointLight2" parent="." instance=ExtResource("7_5rxru")]
+[node name="PointLight2" parent="Lights" instance=ExtResource("7_5rxru")]
 position = Vector2(-3105, 146)
 metadata/_edit_lock_ = true
 
-[node name="PointLight3" parent="." instance=ExtResource("7_5rxru")]
+[node name="PointLight3" parent="Lights" instance=ExtResource("7_5rxru")]
 position = Vector2(-16796, 1406)
 metadata/_edit_lock_ = true
 
-[node name="PointLight4" parent="." instance=ExtResource("7_5rxru")]
+[node name="PointLight4" parent="Lights" instance=ExtResource("7_5rxru")]
 position = Vector2(-27749, 968)
 metadata/_edit_lock_ = true
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5rxru")
