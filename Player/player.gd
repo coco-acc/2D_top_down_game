@@ -49,6 +49,7 @@ var stats = {
 @onready var node := $"."
 
 @onready var reload_timer = Timer.new()
+@onready var sfx = AudioStreamPlayer2D.new()
 
 @onready var bullet = preload("res://Globals/bullets/Bullet_1.tscn")
 @onready var HUD_scene = preload("res://Objects/HUD/hud.tscn")
@@ -67,6 +68,7 @@ func _ready():
 	reload_timer.wait_time = stats["reload"]
 	reload_timer.one_shot = true
 	node.add_child(reload_timer)
+	node.add_child(sfx)
 
 	HUD = HUD_scene.instantiate()
 	node.add_child(HUD)
@@ -181,6 +183,7 @@ func move_state(direction: Vector2, delta: float):
 	var img1 = $move2/base
 	var img2 = $move2/base2
 	var base: Sprite2D
+	# Utils.sfx(node, "step")
 
 	if hold:
 		img1.hide()
@@ -260,8 +263,14 @@ func attack_state(direction):
 		bullet_instance.rotation = (rotation - deg_to_rad(90))
 		get_tree().current_scene.add_child(bullet_instance)
 		Utils.recoil(attac, -6)
-		Utils.spawn_particles($particlepos.global_position, get_tree().current_scene, 0.8, 2.5)
+		# Utils.spawn_particles($particlepos.global_position, get_tree().current_scene, 0.8, 2.5)
 		Utils.bullet_cartridge($cartridgepos.global_position, get_tree().current_scene, rotation)
+		# Utils.sfx(node, "MG2", 0.555)
+
+		sfx.stream = Utils.sfx_audio["MG2"]
+		# sfx.stream.loop = true
+		if not sfx.playing:
+			sfx.play()
 
 		shoot = false
 		stats["ammo"] -= 1
@@ -269,15 +278,19 @@ func attack_state(direction):
 		shoot_delay.start()
 
 	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
+		sfx.stop()
 		if previous_state:
 			change_state(previous_state)
+			
 		else:
 			change_state(State.IDLE)
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
+		sfx.stop()
 
 func reload_state():
 	reload_timer.start()
+	sfx.stop()
 
 	# Disconnect first to avoid duplicate connections
 	# if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):

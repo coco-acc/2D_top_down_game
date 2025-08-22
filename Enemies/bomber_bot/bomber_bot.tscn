@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://qfdb8lsf4bkm"]
+
+[ext_resource type="Texture2D" uid="uid://cduolp2vwsj6g" path="res://Img_assests/bomber/idle/bomber_bot.png" id="1_ve1vr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mi0qa"]
+radius = 66.0
+
+[node name="Bomber_bot" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20, -29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ve1vr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mi0qa")

@@ -6,7 +6,7 @@
 polygon = PackedVector2Array(364, -384, 518, -377, 510, 300, -606, 288, -607, 195, -533, 194, -534, 119, 362, 128)
 
 [node name="rubble" type="StaticBody2D" groups=["Non_destructables"]]
-z_index = 2
+z_index = 3
 collision_layer = 16
 collision_mask = 11
 

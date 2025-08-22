@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c83c46fs005n7" path="res://Objects/walls/rubble.tscn" id="3_jku83"]
 [ext_resource type="Script" uid="uid://clb4nw7swjhh3" path="res://Level/Level_prototype/obstacles.gd" id="3_kbho2"]
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
-[ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/turret_1.tscn" id="6_ibnq1"]
+[ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/Turret/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
 
 [sub_resource type="Environment" id="Environment_5rxru"]
@@ -86,7 +86,7 @@ rotation = 1.5708
 position = Vector2(4174, 346)
 
 [node name="box15" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(2607, 691)
+position = Vector2(2015, 718)
 rotation = 1.0472
 
 [node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
