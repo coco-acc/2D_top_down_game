@@ -75,6 +75,7 @@ func _physics_process(delta):
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
 					Utils.bullet_cartridge(cartridge.global_position, get_tree()\
 					.current_scene, gun_sprite.rotation)
+					Utils.sfx(self, "MG1", 0.3)
 					turret_stats["ammo"] -= 1
 					if turret_stats["heat_up"] < 10:
 						turret_stats["heat_up"] += 0.01

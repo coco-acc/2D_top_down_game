@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/Img_assests/
+/Audio_assests/
