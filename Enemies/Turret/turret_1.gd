@@ -22,11 +22,11 @@ var attack_angle: float = 0.0           # Angle to face toward target
 var direction := Vector2.RIGHT
 
 var turret_stats = {
-    "health": 100,
-    "speed": 0,
-    "is_alive": true,
-    "ammo": 124,
-    "heat_up": 0.0
+	"health": 100,
+	"speed": 0,
+	"is_alive": true,
+	"ammo": 124,
+	"heat_up": 0.0
 }
 
 var level = Utils.Levels()
@@ -75,13 +75,15 @@ func _physics_process(delta):
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
 					Utils.bullet_cartridge(cartridge.global_position, get_tree()\
 					.current_scene, gun_sprite.rotation)
-					Utils.sfx(self, "MG1", 0.3)
+					#Utils.sfx(self, "MG1", 0.3)
 					turret_stats["ammo"] -= 1
 					if turret_stats["heat_up"] < 10:
 						turret_stats["heat_up"] += 0.01
 					# print("heat: ", turret_stats["heat_up"])
+					Audio_Player.play_sfx(self, "MG2", true)
 			else:
 				start_cooldown_phase()
+				Audio_Player.stop_sfx()
 		TurretState.COOLDOWN:
 			var rotation_change = idle_rotation_speed * delta
 			if rotate_clockwise:
@@ -114,8 +116,9 @@ func shoot():
 	bullet.rotation = gun_sprite.rotation - deg_to_rad(90)
 	bullet.direction = direction
 
-func hit():
-	Utils.get_hit(turret_stats)
+func hit(damage):
+	damage = 10
+	Utils.get_hit(turret_stats, damage)
 	if not turret_stats["is_alive"]:
 		print('Turret is distroyed')
 		queue_free()

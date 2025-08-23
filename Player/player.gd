@@ -1,5 +1,5 @@
-extends CharacterBody2D
 class_name Player
+extends CharacterBody2D
 
 # Movement properties
 var speed = 400
@@ -9,13 +9,10 @@ var is_crouching := false
 var can_crouch := false
 var crouched := false
 var hold := false
-# var can_Jump := false
 
 # Combat properties
 var shoot: bool = true
 var attack: bool = true
-# signal shoot_bullet(pos)
-# signal secondary_attack(pos)
 
 # Camera properties
 @onready var camera := $Camera2D
@@ -49,7 +46,7 @@ var stats = {
 @onready var node := $"."
 
 @onready var reload_timer = Timer.new()
-@onready var sfx = AudioStreamPlayer2D.new()
+# @onready var sfx = AudioStreamPlayer2D.new()
 
 @onready var bullet = preload("res://Globals/bullets/Bullet_1.tscn")
 @onready var HUD_scene = preload("res://Objects/HUD/hud.tscn")
@@ -62,13 +59,12 @@ func _ready():
 	camera.rotation_smoothing_speed = 5.0  # Adjust smoothness (higher = faster follow)
 
 	# Connect signals
-	# $jumpDelay.timeout.connect(_on_jump_delay_timeout)
 	jump_timer.wait_time = 0.05
 	jump_timer.one_shot = true
 	reload_timer.wait_time = stats["reload"]
 	reload_timer.one_shot = true
 	node.add_child(reload_timer)
-	node.add_child(sfx)
+	# node.add_child(sfx)
 
 	HUD = HUD_scene.instantiate()
 	node.add_child(HUD)
@@ -84,13 +80,15 @@ func _physics_process(delta: float):
 		var collision = get_last_slide_collision()
 		# print("Collided with:", collision.get_collider().name)
 		var collider = collision.get_collider()
-		
-		if collider.is_in_group("obstacles") and !is_crouching:
-			can_crouch = true
-			is_crouching = true
-		elif !collider.is_in_group("obstacles"):
-			can_crouch = false
-			is_crouching = false
+		if not collider == null:
+			if collider.is_in_group("obstacles") and !is_crouching:
+				can_crouch = true
+				is_crouching = true
+			elif !collider.is_in_group("obstacles"):
+				can_crouch = false
+				is_crouching = false
+		else:
+			pass
 	else:
 		can_crouch = false
 		is_crouching = false
@@ -114,6 +112,9 @@ func _physics_process(delta: float):
 
 func handle_state(delta: float):
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
+	# if Input.is_action_pressed("Left") or Input.is_action_pressed("Right")\
+	# or Input.is_action_pressed("Up") or Input.is_action_pressed("Down"):
+	# 	Audio_Player.play_sfx(self, "step", true)
 	
 	match current_state:
 		State.IDLE:
@@ -184,6 +185,7 @@ func move_state(direction: Vector2, delta: float):
 	var img2 = $move2/base2
 	var base: Sprite2D
 	# Utils.sfx(node, "step")
+	# Audio_Player.play_sfx(self, "step", true)
 
 	if hold:
 		img1.hide()
@@ -208,6 +210,7 @@ func move_state(direction: Vector2, delta: float):
 		animation.sprite_frames.set_animation_speed("default", 12)
 		angle = 1
 	animation.play()
+
 	# Continuous rotation effect while moving
 	if direction.length() > 0.1:
 		 # Switch between angles based on time
@@ -234,8 +237,6 @@ func jump_state(direction: Vector2):
 		velocity = jump_velocity * direction
 		is_jumping = true
 		camera.zoom = Vector2(0.52, 0.52)
-		# can_Jump = false
-		# secondary_delay.start()
 	else:
 		velocity = jump_velocity * direction
 
@@ -257,7 +258,6 @@ func attack_state(direction):
 		change_state(State.RELOAD)
 	elif shoot and not stats["ammo"] < 1:
 		var bullet_position = $BulletPosition
-		# shoot_bullet.emit(bullet_position.global_position)
 		var bullet_instance = bullet.instantiate()
 		bullet_instance.global_position = bullet_position.global_position
 		bullet_instance.rotation = (rotation - deg_to_rad(90))
@@ -267,10 +267,11 @@ func attack_state(direction):
 		Utils.bullet_cartridge($cartridgepos.global_position, get_tree().current_scene, rotation)
 		# Utils.sfx(node, "MG2", 0.555)
 
-		sfx.stream = Utils.sfx_audio["MG2"]
+		# sfx.stream = Utils.sfx_audio["MG2"]
 		# sfx.stream.loop = true
-		if not sfx.playing:
-			sfx.play()
+		# if not sfx.playing:
+		# 	sfx.play()
+		Audio_Player.play_sfx(self, "MG2", true)
 
 		shoot = false
 		stats["ammo"] -= 1
@@ -278,24 +279,23 @@ func attack_state(direction):
 		shoot_delay.start()
 
 	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
-		sfx.stop()
+		# sfx.stop()
+		Audio_Player.stop_sfx()
 		if previous_state:
 			change_state(previous_state)
-			
 		else:
 			change_state(State.IDLE)
+
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
-		sfx.stop()
+		Audio_Player.stop_sfx()
 
 func reload_state():
 	reload_timer.start()
-	sfx.stop()
+	# sfx.stop()
+	Audio_Player.stop_sfx()
 
 	# Disconnect first to avoid duplicate connections
-	# if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):
-	# 	reload_timer.disconnect("timeout", Callable(self, "reload_mag"))
-	
 	if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):
 		pass
 	else:
@@ -320,10 +320,10 @@ func change_state(new_state):
 		previous_state = current_state
 		current_state = new_state
 
-func hit():
+func hit(damage):
 	# Utils.get_hit(stats)
 	if stats["is_alive"]:
-		stats["health"] -= 2
+		stats["health"] -= damage
 
 		if stats["health"] <= 0:
 			stats["health"] = 0
@@ -331,25 +331,17 @@ func hit():
 	HUD.set_health(stats["health"])
 	if stats["health"] <= 0:
 		print("Player is dead.")
-		# You can trigger death animation, game over screen, etc. here
 
 func _on_shoot_delay_timeout() -> void:
 	shoot = true
 
 func _on_secondary_delay_timeout() -> void:
 	attack = true
-	# print('jump timeout')
-	# can_Jump = true
 
 func _on_jump_timer_timeout() -> void:
 	is_jumping = false  # Reset jumping flag when timer ends
 	camera.zoom = Vector2(0.5, 0.5)
 	change_state(State.IDLE)
-
-# func _on_jump_delay_timeout() -> void:
-# 	can_Jump = true
-# 	print('jump timeout')
-
 
 func _on_gun_collider_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Non_destructables"):

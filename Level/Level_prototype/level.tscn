@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=10 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/Turret/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
+[ext_resource type="PackedScene" uid="uid://qfdb8lsf4bkm" path="res://Enemies/bomber_bot/bomber_bot.tscn" id="8_275vi"]
 
 [sub_resource type="Environment" id="Environment_5rxru"]
 glow_enabled = true
@@ -189,3 +190,21 @@ metadata/_edit_lock_ = true
 
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5rxru")
+
+[node name="Bomber_bot" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(4913, 444)
+
+[node name="Bomber_bot2" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(4723, 4028)
+
+[node name="Bomber_bot3" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(3964, 3401)
+
+[node name="Bomber_bot4" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(6516, 3500)
+
+[node name="Bomber_bot5" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(6010, 4358)
+
+[node name="Bomber_bot6" parent="." instance=ExtResource("8_275vi")]
+position = Vector2(5944, 2444)
