@@ -79,9 +79,9 @@ static func recoil(sprite: Node2D, recoil_distance: float, duration: float = 0.1
 		# distance sld be negative for backward recoil 
 		#shld be called when the bullet is fired
 
-static func get_hit(stats: Dictionary) -> Dictionary:
+static func get_hit(stats: Dictionary, damage) -> Dictionary:
 	if stats["is_alive"]:
-		stats["health"] -= 10
+		stats["health"] -= damage
 
 		if stats["health"] <= 0:
 			stats["health"] = 0
@@ -221,55 +221,55 @@ static var player: AudioStreamPlayer2D = null
 static var time: Timer = null
 
 # Preload sounds into a dictionary
-static var sfx_audio := {
-		"step": preload("res://Audio_assests/sfx/Step_rock_02.wav"),
-		"gunshot1": preload("res://Audio_assests/sfx/gunshot1.mp3"),
-		"gunshot2": preload("res://Audio_assests/sfx/gunshot2.mp3"),
-		"MG1" : preload("res://Audio_assests/sfx/machin-gun-mg34-double-sound.mp3"),
-		"MG2" : preload("res://Audio_assests/sfx/mg1.wav")
-	}
+# static var sfx_audio := {
+# 		"step": preload("res://Audio_assests/sfx/Step_rock_02.wav"),
+# 		"gunshot1": preload("res://Audio_assests/sfx/gunshot1.mp3"),
+# 		"gunshot2": preload("res://Audio_assests/sfx/gunshot2.mp3"),
+# 		"MG1" : preload("res://Audio_assests/sfx/machin-gun-mg34-double-sound.mp3"),
+# 		"MG2" : preload("res://Audio_assests/sfx/mg1.wav")
+# 	}
 
-static func sfx(scene_root: Node, file: String, duration: float = -1.0, continuous: bool = false, start: float = 0.0) -> void:
-	# Create the player only once
-	if player == null:
-		player = AudioStreamPlayer2D.new()
-		scene_root.add_child(player)
+# static func sfx(scene_root: Node, file: String, duration: float = -1.0, continuous: bool = false, start: float = 0.0) -> void:
+# 	# Create the player only once
+# 	if player == null:
+# 		player = AudioStreamPlayer2D.new()
+# 		scene_root.add_child(player)
 
-	# Create a timer only once
-	if time == null:
-		time = Timer.new()
-		time.one_shot = true
-		scene_root.add_child(time)
+# 	# Create a timer only once
+# 	if time == null:
+# 		time = Timer.new()
+# 		time.one_shot = true
+# 		scene_root.add_child(time)
 
-	# Validate
-	if not sfx_audio.has(file):
-		push_warning("Invalid SFX name: %s" % file)
-		return
+# 	# Validate
+# 	if not sfx_audio.has(file):
+# 		push_warning("Invalid SFX name: %s" % file)
+# 		return
 
-	# Play only if not already playing
-	if continuous:
-		if not player.playing:
-			player.stream = sfx_audio[file]
-			player.play(start)
-	else:
-		player.stream = sfx_audio[file]
-		player.play(start)
+# 	# Play only if not already playing
+# 	if continuous:
+# 		if not player.playing:
+# 			player.stream = sfx_audio[file]
+# 			player.play(start)
+# 	else:
+# 		player.stream = sfx_audio[file]
+# 		player.play(start)
 
-	# If duration > 0, stop after that time
-	if duration > 0.0:
-		time.start(duration)
-		time.timeout.connect(
-			func():
-				if player.playing:
-					player.stop(),
-			CONNECT_ONE_SHOT
-		)
+# 	# If duration > 0, stop after that time
+# 	if duration > 0.0:
+# 		time.start(duration)
+# 		time.timeout.connect(
+# 			func():
+# 				if player.playing:
+# 					player.stop(),
+# 			CONNECT_ONE_SHOT
+# 		)
 
-	# Play only if not already playing
-	if continuous:
-		if not player.playing:
-			player.stream = sfx_audio[file]
-			player.play()
+# 	# Play only if not already playing
+# 	if continuous:
+# 		if not player.playing:
+# 			player.stream = sfx_audio[file]
+# 			player.play()
 
 # Plays full sound normally
 # Utils.sfx(self, "step")

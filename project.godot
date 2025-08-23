@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.4", "Mobile")
 [autoload]
 
 Utility="*res://Globals/Utils/Utils.gd"
+AudioPlayer="*res://Globals/Utils/Audio_player.gd"
 
 [dotnet]
 

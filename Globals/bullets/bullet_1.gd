@@ -1,7 +1,9 @@
+class_name Bullet
 extends Area2D
 
 var speed: int = 10000
 var direction: Vector2 = Vector2.RIGHT  # Default direction (will be updated)
+var damage := 2
 
 func _ready():
 	# Set the movement direction based on the laser's rotation
@@ -15,7 +17,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("hit"):
-		body.hit()
+		body.hit(damage)
 
 	if body.is_in_group("Non_destructables"):
 		Utils.Bullet_hole(global_position, get_tree().current_scene)
