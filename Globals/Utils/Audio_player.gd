@@ -1,31 +1,43 @@
 extends Node
 class_name Audio_Player
 
-static var player: AudioStreamPlayer2D = null
-static var time: Timer = null
+# static var player: AudioStreamPlayer2D = null
+# static var time: Timer = null
+static var active_players := {}
 
 # Dictionary of preloaded SFX (set this up elsewhere)
 static var sfx_audio := {
-	"step": preload("res://Audio_assests/sfx/Step_rock_02.wav"),
-	"gunshot1": preload("res://Audio_assests/sfx/gunshot1.mp3"),
-	"gunshot2": preload("res://Audio_assests/sfx/gunshot2.mp3"),
-	"MG1" : preload("res://Audio_assests/sfx/machin-gun-mg34-double-sound.mp3"),
-	"MG2" : preload("res://Audio_assests/sfx/mg1.wav"),
+	"step": preload("res://Audio_assets/sfx/Step_rock_02.wav"),
+	"gunshot1": preload("res://Audio_assets/sfx/gunshot1.mp3"),
+	"gunshot2": preload("res://Audio_assets/sfx/gunshot2.mp3"),
+	"MG1" : preload("res://Audio_assets/sfx/machin-gun-mg34-double-sound.mp3"),
+	"MG2" : preload("res://Audio_assets/sfx/mg1.wav"),
 
-	"explosion" : preload("res://Audio_assests/sfx/explosion-fx.mp3")
+	"explosion" : preload("res://Audio_assets/sfx/explosion-fx.mp3")
 }
 
-static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, continuous: bool = false, start: float = 0.0) -> void:
+static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, continuous: bool = false, start: float = 0.0, bus: String = "SFX") -> void:
+	# Validate SFX
+	if not sfx_audio.has(file):
+		push_warning("Invalid SFX name: %s" % file)
+		return
+
 	# Create player once
-	if player == null:
-		player = AudioStreamPlayer2D.new()
-		scene_root.add_child(player)
+	# if player == null:
+	var player = AudioStreamPlayer2D.new()
+	scene_root.add_child(player)
+
+	# Assign bus (fallback to Master if invalid)
+	if AudioServer.get_bus_index(bus) != -1:
+		player.bus = bus
+	else:
+		player.bus = "Master"
 
 	# Create timer once
-	if time == null:
-		time = Timer.new()
-		time.one_shot = true
-		scene_root.add_child(time)
+	# if time == null:
+	var time = Timer.new()
+	time.one_shot = true
+	scene_root.add_child(time)
 
 	# Validate SFX
 	if not sfx_audio.has(file):
@@ -43,6 +55,8 @@ static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, con
 		player.play(start)
 
 
+	active_players[file] = player
+
 	# Continuous (loop-like) playback
 	# if continuous:
 	# 	player.stream.loop_mode = AudioStream.LOOP_FORWARD
@@ -56,13 +70,28 @@ static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, con
 		time.timeout.connect(
 			func():
 				if player.playing:
-					player.stop(),
+					player.stop()
+				player.queue_free()
+				time.queue_free(),
 			CONNECT_ONE_SHOT
 		)
+	else:
+		# Auto cleanup when playback finishes (non-continuous only)
+		if not continuous:
+			player.finished.connect(
+				func():
+					player.queue_free()
+					time.queue_free(),
+				CONNECT_ONE_SHOT
+			)
 
-static func stop_sfx() -> void:
-	if player != null and player.playing:
-		player.stop()
+static func stop_sfx(file: String) -> void:
+	if active_players.has(file):
+		var player = active_players[file]
+		if player and player.playing:
+			player.stop()
+			# player.queue_free()
+		active_players.erase(file)
 
 
 # Play a gunshot once

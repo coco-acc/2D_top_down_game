@@ -83,7 +83,7 @@ func _physics_process(delta):
 					Audio_Player.play_sfx(self, "MG2", true)
 			else:
 				start_cooldown_phase()
-				Audio_Player.stop_sfx()
+				Audio_Player.stop_sfx("MG2")
 		TurretState.COOLDOWN:
 			var rotation_change = idle_rotation_speed * delta
 			if rotate_clockwise:

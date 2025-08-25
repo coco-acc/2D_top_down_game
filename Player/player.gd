@@ -167,6 +167,9 @@ func handle_state(delta: float):
 	direction_to = facing_direction
 	var target_offset = facing_direction * camera_offset_distance
 	camera.offset = camera.offset.lerp(target_offset, 2.0 * delta)
+
+	# if current_state != State.ATTACK:
+		# Audio_Player.stop_sfx("MG2")
 	  
 
 func idle_state(direction: Vector2):
@@ -271,7 +274,7 @@ func attack_state(direction):
 		# sfx.stream.loop = true
 		# if not sfx.playing:
 		# 	sfx.play()
-		Audio_Player.play_sfx(self, "MG2", true)
+		Audio_Player.play_sfx(self, "MG2", 2.0, true, 0.0, "SFX")
 
 		shoot = false
 		stats["ammo"] -= 1
@@ -280,7 +283,7 @@ func attack_state(direction):
 
 	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
 		# sfx.stop()
-		Audio_Player.stop_sfx()
+		# Audio_Player.stop_sfx("MG2")
 		if previous_state:
 			change_state(previous_state)
 		else:
@@ -288,12 +291,12 @@ func attack_state(direction):
 
 	elif Input.is_action_just_pressed("Secondary_action") and direction:
 		change_state(State.JUMP)
-		Audio_Player.stop_sfx()
+		# Audio_Player.stop_sfx("MG2")
 
 func reload_state():
 	reload_timer.start()
 	# sfx.stop()
-	Audio_Player.stop_sfx()
+	Audio_Player.stop_sfx("MG2")
 
 	# Disconnect first to avoid duplicate connections
 	if reload_timer.is_connected("timeout", Callable(self, "reload_mag")):

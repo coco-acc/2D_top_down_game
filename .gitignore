@@ -1,5 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
+default_bus_layout.tres/
 /android/
 /Img_assests/
-/Audio_assests/
+/Audio_assets/
+
