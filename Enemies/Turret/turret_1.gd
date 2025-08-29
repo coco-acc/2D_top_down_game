@@ -80,10 +80,10 @@ func _physics_process(delta):
 					if turret_stats["heat_up"] < 10:
 						turret_stats["heat_up"] += 0.01
 					# print("heat: ", turret_stats["heat_up"])
-					Audio_Player.play_sfx(self, "MG2", true)
+					Audio_Player.play_sfx(self, "MG2", 0.1, true)
 			else:
 				start_cooldown_phase()
-				Audio_Player.stop_sfx()
+				Audio_Player.stop_sfx("MG2")
 		TurretState.COOLDOWN:
 			var rotation_change = idle_rotation_speed * delta
 			if rotate_clockwise:
@@ -115,6 +115,7 @@ func shoot():
 	bullet.global_position = bulletPos.global_position
 	bullet.rotation = gun_sprite.rotation - deg_to_rad(90)
 	bullet.direction = direction
+	bullet.shooter = self
 
 func hit(damage):
 	damage = 10

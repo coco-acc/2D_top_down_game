@@ -192,7 +192,7 @@ metadata/_edit_lock_ = true
 environment = SubResource("Environment_5rxru")
 
 [node name="Bomber_bot" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(4913, 444)
+position = Vector2(4858, 527)
 
 [node name="Bomber_bot2" parent="." instance=ExtResource("8_275vi")]
 position = Vector2(4723, 4028)

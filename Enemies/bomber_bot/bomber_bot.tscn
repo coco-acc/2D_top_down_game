@@ -1,7 +1,8 @@
-[gd_scene load_steps=133 format=3 uid="uid://qfdb8lsf4bkm"]
+[gd_scene load_steps=134 format=3 uid="uid://qfdb8lsf4bkm"]
 
 [ext_resource type="Script" uid="uid://dmbqtb83t4lal" path="res://Enemies/bomber_bot/bomber_bot.gd" id="1_mi0qa"]
 [ext_resource type="Texture2D" uid="uid://cduolp2vwsj6g" path="res://Img_assests/bomber/idle/bomber_bot.png" id="1_ve1vr"]
+[ext_resource type="Texture2D" uid="uid://bjy5jwatvdknp" path="res://Img_assests/bomber/shadow/shadow.png" id="2_3wvvv"]
 [ext_resource type="Texture2D" uid="uid://baup86kf8pgw1" path="res://Img_assests/bomber/walk/10001.png" id="2_qjkug"]
 [ext_resource type="Texture2D" uid="uid://bwh16aufjo08l" path="res://Img_assests/bomber/walk/10002.png" id="3_2v151"]
 [ext_resource type="Texture2D" uid="uid://2id2vx3w68bh" path="res://Img_assests/bomber/walk/10003.png" id="4_hpige"]
@@ -684,14 +685,29 @@ collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_mi0qa")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(4.23516e-22, 9)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_3wvvv")
+
 [node name="walk" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(16, -32)
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(6, -29)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_l6rxt")
 frame = 15
 
 [node name="explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(2, 2)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_qjkug")
@@ -699,22 +715,28 @@ frame = 23
 frame_progress = 0.712778
 
 [node name="idle" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(20, -29)
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(30, 11)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ve1vr")
 
 [node name="shoot" type="Sprite2D" parent="."]
 visible = false
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(20, -29)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("76_hpige")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(6, -13)
 shape = SubResource("RectangleShape2D_qjkug")
 
 [node name="explosion_Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosion_Area2D"]
 shape = SubResource("CircleShape2D_v04uv")
