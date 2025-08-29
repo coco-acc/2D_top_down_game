@@ -71,9 +71,13 @@ func _on_explosion_body_entered(body: CharacterBody2D) -> void:
 
 
 func hit(damage) -> void:
+	# Ignore hits if already exploding or exploded
+	if is_exploding or has_exploded:
+		return  
+
 	damage = 10
 	Utils.get_hit(bot_stats, damage)
-	if bot_stats["health"] <= 0:
+	if bot_stats["health"] <= 0 and not has_exploded:
 		explode()
 
 func explode() -> void:
@@ -82,14 +86,21 @@ func explode() -> void:
 	is_exploding = true
 	if explosion_area:
 		explosion_area.queue_free()
+		
+	#play SFX
+	Audio_Player.play_sfx(self, "explosion", 5.0, true, 0.0, "UI")
 	# Damage player (if it has a health variable or method)
+
+	# Remove collision from physics world (bullets can't hit anymore)
+	set_collision_layer(0)
+	set_collision_mask(0)
+
 	explosion.show()
 	shadow.hide()
 	idle.hide()
 	walk.hide()
 
 	# Queue free after short delay
-	Audio_Player.play_sfx(self, "explosion", 5.0, true, 0.0, "UI")
 	# can_explode = false
 	explosion.sprite_frames.set_animation_loop("default", false)
 	explosion.play("default")
