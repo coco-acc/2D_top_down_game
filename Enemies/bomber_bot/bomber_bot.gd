@@ -53,7 +53,7 @@ func _physics_process(_delta: float) -> void:
 		idle.hide()
 		walk.show()
 		# walk.sprite_frames.set_animation_("default", 24)
-		walk.speed_scale = 1.5
+		walk.speed_scale = 1.0
 		walk.play("default")
 		
 	else:
@@ -63,11 +63,11 @@ func _physics_process(_delta: float) -> void:
 	# Check if close enough damage the player
 	# if global_position.distance_to(player.global_position) <= impact_radius and is_exploding:
 		
-func _on_explosion_body_entered(body: CharacterBody2D) -> void:
-	if body == player: # only explode if it's the player
+func _on_explosion_body_entered(body: Node) -> void:
+	if body == player and body is CharacterBody2D:
 		explode()
-		if player.has_method("hit"):
-			player.hit(explosion_damage)
+		if body.has_method("hit"):
+			body.hit(explosion_damage)
 
 
 func hit(damage) -> void:

@@ -129,11 +129,13 @@ static func Bullet_hole(position: Vector2, scene_root: Node2D, scale: float = 0.
 	]
 	bullet_hole.texture = textures.pick_random()
 
-	bullet_hole.global_position = position
+	# bullet_hole.global_position = position
+	bullet_hole.position = scene_root.to_local(position)
 	bullet_hole.modulate = Color(0.4, 0.4, 0.4, 0.6)
 	bullet_hole.rotation = rotation
 	bullet_hole.scale = Vector2(scale, scale) * randf_range(0.6, 1.4)
 	bullet_hole.scale.y = bullet_hole.scale.y * 0.6 
+	bullet_hole.z_index = scene_root.z_as_relative
 	bullet_hole.z_index = 3
 
 	scene_root.add_child(bullet_hole)

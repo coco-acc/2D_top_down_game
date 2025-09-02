@@ -60,6 +60,9 @@ func _ready():
 	attack_zone.body_entered.connect(_on_attack_zone_body_entered)
 	attack_zone.body_exited.connect(_on_attack_zone_body_exited)
 
+	if muzzle.material:
+		muzzle.material = muzzle.material.duplicate(true)
+
 func _physics_process(delta):
 	match state:
 		TurretState.FIRING:
@@ -71,19 +74,20 @@ func _physics_process(delta):
 				# if can_shoot and abs(gun_sprite.rotation - attack_angle) < 0.2:
 					# shoot()
 				if can_shoot:
+					apply_rotation_recoil()  # new rotation recoil
 					shoot()
 					Utils.recoil(gun_sprite, -8, shoot_timer.wait_time)
 					Utils.bullet_cartridge(cartridge.global_position, get_tree()\
 					.current_scene, gun_sprite.rotation)
-					#Utils.sfx(self, "MG1", 0.3)
 					turret_stats["ammo"] -= 1
 					if turret_stats["heat_up"] < 10:
 						turret_stats["heat_up"] += 0.01
-					# print("heat: ", turret_stats["heat_up"])
-					Audio_Player.play_sfx(self, "MG2", 0.1, true)
+					# Audio_Player.play_sfx(self, "MG2", 0.1, true)
+					Audio_Player.play_sfx(self, "explosion", 0.5, false, 0.0, "SFX")
 			else:
 				start_cooldown_phase()
-				Audio_Player.stop_sfx("MG2")
+				# Audio_Player.stop_sfx("explosion") stops all explosion sounds
+
 		TurretState.COOLDOWN:
 			var rotation_change = idle_rotation_speed * delta
 			if rotate_clockwise:
@@ -109,13 +113,13 @@ func shoot():
 	bullet.z_index = -1
 	get_tree().current_scene.add_child(bullet)
 
-	# Utils.recoil(gun_sprite, -8)
 	
 	# Set bullet position and direction
 	bullet.global_position = bulletPos.global_position
 	bullet.rotation = gun_sprite.rotation - deg_to_rad(90)
 	bullet.direction = direction
 	bullet.shooter = self
+	bullet.damage = 1
 
 func hit(damage):
 	damage = 10
@@ -152,3 +156,19 @@ func _on_attack_zone_body_entered(body):
 func _on_attack_zone_body_exited(body):
 	if body == target:
 		target = null
+func apply_rotation_recoil():
+	var recoil_tween = create_tween()
+	var rot = 2
+	recoil_tween.tween_property(
+		gun_sprite,
+		"rotation_degrees",
+		gun_sprite.rotation_degrees + randf_range(-rot, rot),
+		0.05  # quick kick
+	)
+	recoil_tween.tween_property(
+		gun_sprite,
+		"rotation_degrees",
+		attack_angle * 180 / PI, # restore to target angle
+		0.1  # settle back
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+

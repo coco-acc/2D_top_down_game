@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bln81cgcs1cxx"]
 
 [ext_resource type="Texture2D" uid="uid://cj1733ld48ahk" path="res://Img_assests/tilesets/floor1/floor1.png" id="1_b323f"]
-[ext_resource type="Texture2D" uid="uid://c1ey8kjutv2ou" path="res://Level/Level_prototype/render3.png" id="2_ccqul"]
+[ext_resource type="Texture2D" uid="uid://c1ey8kjutv2ou" path="res://Img_assests/tilesets/render3.png" id="2_ccqul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccqul"]
 texture = ExtResource("1_b323f")
@@ -18,15 +18,41 @@ sources/0 = SubResource("TileSetAtlasSource_ccqul")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7daa"]
 texture = ExtResource("2_ccqul")
 texture_region_size = Vector2i(640, 640)
+0:0/next_alternative_id = 6
 0:0/0 = 0
+0:0/5 = 5
+0:0/5/transpose = true
+1:0/next_alternative_id = 7
 1:0/0 = 0
+1:0/6 = 6
+1:0/6/transpose = true
+2:0/next_alternative_id = 2
 2:0/0 = 0
+2:0/1 = 1
+2:0/1/transpose = true
+0:1/next_alternative_id = 6
 0:1/0 = 0
+0:1/5 = 5
+0:1/5/transpose = true
+1:1/next_alternative_id = 2
 1:1/0 = 0
+1:1/1 = 1
+2:1/next_alternative_id = 2
 2:1/0 = 0
+2:1/1 = 1
+2:1/1/transpose = true
+0:2/next_alternative_id = 2
 0:2/0 = 0
+0:2/1 = 1
+0:2/1/transpose = true
+1:2/next_alternative_id = 2
 1:2/0 = 0
+1:2/1 = 1
+1:2/1/transpose = true
+2:2/next_alternative_id = 2
 2:2/0 = 0
+2:2/1 = 1
+2:2/1/transpose = true
 
 [sub_resource type="TileSet" id="TileSet_76q8f"]
 tile_size = Vector2i(640, 640)
@@ -44,7 +70,7 @@ layer_0/tile_data = PackedInt32Array(-131076, 0, 0, -65540, 0, 0, -4, 0, 0, 6553
 position = Vector2(3, 0)
 tile_set = SubResource("TileSet_76q8f")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65519, 65537, 1, 17, 65537, 1, 65553, 65537, 1, 131089, 65537, 1, 196625, 65537, 1, 262161, 65537, 1, 262162, 65537, 1, 262163, 65537, 1, 196627, 65537, 1, 131091, 65537, 1, 65555, 65537, 1, 19, 65537, 1, -65517, 65537, 1, -65518, 65537, 1, 196626, 65537, 1, 131090, 65537, 1, 65554, 65537, 1, 18, 65537, 1, 327697, 65537, 1, 327698, 65537, 1, 327699, 65537, 1, 65549, 65537, 1, 65550, 65537, 1, 65551, 65537, 1, 65552, 65537, 1, 131088, 65537, 1, 131087, 65537, 1, 131086, 65537, 1, 131085, 65537, 1)
+layer_0/tile_data = PackedInt32Array(-65519, 65537, 1, 17, 65537, 1, 65555, 65537, 1, 19, 65537, 1, -65517, 65537, 1, -65518, 65537, 1, 131090, 65537, 1, 65554, 65537, 1, 18, 65537, 1, 65549, 65537, 1, 65550, 65537, 1, 65551, 65537, 1, 65552, 1, 1, 131087, 65537, 1, 131086, 65537, 1, 131085, 65537, 1, 262160, 1, 1, 196624, 1, 1, 131088, 1, 1, 16, 1, 0, 327696, 1, 2)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap2"]
 tile_set = SubResource("TileSet_76q8f")

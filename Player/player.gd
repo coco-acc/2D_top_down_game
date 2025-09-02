@@ -265,6 +265,7 @@ func attack_state(direction):
 		bullet_instance.global_position = bullet_position.global_position
 		bullet_instance.rotation = (rotation - deg_to_rad(90))
 		bullet_instance.shooter = self
+		bullet_instance.damage = 10
 		get_tree().current_scene.add_child(bullet_instance)
 		Utils.recoil(attac, -6)
 		# Utils.spawn_particles($particlepos.global_position, get_tree().current_scene, 0.8, 2.5)
@@ -276,6 +277,7 @@ func attack_state(direction):
 		# if not sfx.playing:
 		# 	sfx.play()
 		Audio_Player.play_sfx(self, "MG2", 0.1, false, 0.0, "SFX")
+		# Audio_Player.play_sfx(self, "explosion", 0.5, false, 0.0, "SFX")
 
 		shoot = false
 		stats["ammo"] -= 1
