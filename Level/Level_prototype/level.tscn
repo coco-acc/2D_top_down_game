@@ -10,13 +10,24 @@
 [ext_resource type="PackedScene" uid="uid://qfdb8lsf4bkm" path="res://Enemies/bomber_bot/bomber_bot.tscn" id="8_275vi"]
 
 [sub_resource type="Environment" id="Environment_5rxru"]
+background_mode = 3
 glow_enabled = true
-glow_intensity = 1.5
+glow_intensity = 0.3
+glow_strength = 0.84
 glow_bloom = 1.0
 glow_blend_mode = 0
-glow_hdr_scale = 1.0
+glow_hdr_threshold = 1.18
+glow_hdr_scale = 0.87
+glow_hdr_luminance_cap = 52.27
+glow_map_strength = 0.36
+adjustment_enabled = true
+adjustment_brightness = 0.7
+adjustment_contrast = 1.02
 
 [node name="Level" type="Node2D"]
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5rxru")
 
 [node name="ground" parent="." instance=ExtResource("1_5xok0")]
 
@@ -187,9 +198,6 @@ metadata/_edit_lock_ = true
 [node name="PointLight4" parent="Lights" instance=ExtResource("7_5rxru")]
 position = Vector2(-27749, 968)
 metadata/_edit_lock_ = true
-
-[node name="World" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_5rxru")
 
 [node name="Bomber_bot" parent="." instance=ExtResource("8_275vi")]
 position = Vector2(4858, 527)

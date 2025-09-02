@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bpvl0dcv5jimw" path="res://Enemies/Turret/turret_1.gd" id="1_mm85b"]
 [ext_resource type="Texture2D" uid="uid://bshfkgmrs805v" path="res://Img_assests/Torret/turret1/base.png" id="2_8jw6i"]
 [ext_resource type="Texture2D" uid="uid://p3sb5pi6o58i" path="res://Img_assests/Torret/turret1/top.png" id="3_8jw6i"]
-[ext_resource type="Texture2D" uid="uid://dmrjn13gju0tm" path="res://Img_assests/Torret/turret1/guard.png" id="3_qle5a"]
+[ext_resource type="PackedScene" uid="uid://ti6tn58jpx1l" path="res://Enemies/Turret/guard.tscn" id="3_swfx4"]
 [ext_resource type="PackedScene" uid="uid://bv81mq5hwr28i" path="res://Objects/Lights/glow/glow.tscn" id="5_6fobd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mm85b"]
@@ -50,14 +50,13 @@ position = Vector2(35.7681, -43.0151)
 rotation = -1.5708
 scale = Vector2(0.666667, 0.666667)
 
-[node name="Sprite2D2" type="Sprite2D" parent="GunSprite"]
+[node name="guard" parent="GunSprite" instance=ExtResource("3_swfx4")]
 z_index = 2
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(0.434557, -107.682)
-rotation = 1.57079
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_qle5a")
+position = Vector2(0.434562, -106.348)
+rotation = -1.5708
+scale = Vector2(-1.2, 1.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="GunSprite"]
 z_index = 2
