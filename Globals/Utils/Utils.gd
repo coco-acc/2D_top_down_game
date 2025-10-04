@@ -182,7 +182,7 @@ static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotat
 	cartridge.texture = sprite[0] # Pick cartridge type
 	cartridge.rotation_degrees = randf_range(0, 360) # Random start rotation
 	cartridge.scale = Vector2(1,1) * 0.05
-	cartridge.z_index = 1
+	cartridge.z_index = -1
 	cartridge.modulate = Color(0.82, 0.82, 0.82)
 	scene_root.add_child(cartridge)
 

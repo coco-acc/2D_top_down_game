@@ -26,6 +26,11 @@ func _ready() -> void:
 		obstacle_swap_states[obstacle] = false
 		obstacle_swap_groups[obstacle] = false
 
+		if not is_in_group("obstacles"):
+			obstacle.add_to_group("obstacles")
+
+		obstacle.z_index = -4
+
 func _process(_delta: float) -> void:
 	if not is_instance_valid(player):
 		return

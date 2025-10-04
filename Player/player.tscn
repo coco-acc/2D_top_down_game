@@ -134,11 +134,11 @@ frame = 8
 frame_progress = 0.406259
 
 [node name="base2" type="Sprite2D" parent="move2"]
+visible = false
 position = Vector2(5, -12.5)
 texture = ExtResource("17_n471f")
 
 [node name="base" type="Sprite2D" parent="move2"]
-visible = false
 position = Vector2(72.5, -125)
 texture = ExtResource("17_o28un")
 
@@ -190,6 +190,15 @@ shape = SubResource("RectangleShape2D_o28un")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_n471f")
+
+[node name="OverLay" type="ColorRect" parent="."]
+visible = false
+z_as_relative = false
+offset_left = -2512.0
+offset_top = -2239.0
+offset_right = 3263.0
+offset_bottom = 2436.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="timeout" from="shootDelay" to="." method="_on_shoot_delay_timeout"]
 [connection signal="timeout" from="secondaryDelay" to="." method="_on_secondary_delay_timeout"]
