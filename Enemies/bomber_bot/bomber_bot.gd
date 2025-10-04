@@ -88,7 +88,7 @@ func explode() -> void:
 		explosion_area.queue_free()
 		
 	#play SFX
-	Audio_Player.play_sfx(self, "explosion", 5.0, true, 0.0, "UI")
+	Audio_Player.play_sfx(self, "explosion", 5.0, true, 0.0, "Explosion")
 	# Damage player (if it has a health variable or method)
 
 	# Remove collision from physics world (bullets can't hit anymore)

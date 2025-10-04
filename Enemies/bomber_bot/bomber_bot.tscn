@@ -493,7 +493,7 @@ size = Vector2(218, 192)
 radius = 140.032
 
 [node name="Bomber_bot" type="CharacterBody2D"]
-z_index = 1
+z_index = 2
 z_as_relative = false
 y_sort_enabled = true
 collision_layer = 2
@@ -537,8 +537,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ve1vr")
 
 [node name="shoot" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.262932, 0.262932, 0.262932, 1)
+modulate = Color(0.237539, 0.237539, 0.237539, 0.835294)
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true

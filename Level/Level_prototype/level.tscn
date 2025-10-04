@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=12 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -8,18 +8,23 @@
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/Turret/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
 [ext_resource type="PackedScene" uid="uid://qfdb8lsf4bkm" path="res://Enemies/bomber_bot/bomber_bot.tscn" id="8_275vi"]
+[ext_resource type="PackedScene" uid="uid://cnba2rxkex3p" path="res://Objects/obstacles/obstacle_1.tscn" id="10_lxc0q"]
+[ext_resource type="PackedScene" uid="uid://ckp4ly8cqst8x" path="res://Objects/obstacles/obstacle_2.tscn" id="10_w2736"]
 
 [sub_resource type="Environment" id="Environment_5rxru"]
-background_mode = 3
+background_energy_multiplier = 0.1
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
+tonemap_exposure = 1.98
+tonemap_white = 16.0
 glow_enabled = true
-glow_intensity = 0.3
-glow_strength = 0.84
-glow_bloom = 1.0
+glow_intensity = 0.27
+glow_strength = 0.5
+glow_bloom = 0.19
 glow_blend_mode = 0
-glow_hdr_threshold = 1.18
-glow_hdr_scale = 0.87
-glow_hdr_luminance_cap = 52.27
-glow_map_strength = 0.36
+glow_hdr_scale = 0.1
+glow_map_strength = 0.35
 adjustment_enabled = true
 adjustment_brightness = 0.7
 adjustment_contrast = 1.02
@@ -30,94 +35,30 @@ adjustment_contrast = 1.02
 environment = SubResource("Environment_5rxru")
 
 [node name="ground" parent="." instance=ExtResource("1_5xok0")]
+position = Vector2(0, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(3987, 813)
+position = Vector2(3103, 7754)
 
-[node name="walls" type="Node2D" parent="."]
-position = Vector2(3074, 2764)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="rubble" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(-1271, -1185)
+[node name="Bomber_bot" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(4858, 527)
 
-[node name="rubble4" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(2515, -1576)
+[node name="Bomber_bot2" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(4723, 4028)
 
-[node name="rubble5" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(752, -1572)
-rotation = 3.14159
-scale = Vector2(1, -1)
+[node name="Bomber_bot3" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(4686, 3675)
 
-[node name="rubble6" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(762, -2737)
-rotation = 3.14159
+[node name="Bomber_bot4" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(7208, 4021)
 
-[node name="rubble2" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(-2827, -1460)
-rotation = 1.56669
+[node name="Bomber_bot5" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(4900, 4561)
 
-[node name="rubble3" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(-2681, -3303)
-rotation = 3.14159
-
-[node name="Obstacles" type="Node2D" parent="."]
-script = ExtResource("3_kbho2")
-
-[node name="box" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(311, 756)
-rotation = 1.57079
-
-[node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1970, -139)
-
-[node name="box9" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-8399, 3013)
-rotation = 1.5708
-
-[node name="box10" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-6862, 2962)
-rotation = 1.5708
-
-[node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-18649, 2766)
-rotation = 1.5708
-
-[node name="box14" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-14593, 2720)
-rotation = 1.5708
-
-[node name="box13" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-22509, 2695)
-rotation = 1.5708
-
-[node name="box11" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(-9671, 3249)
-rotation = 1.5708
-
-[node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(4174, 346)
-
-[node name="box15" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(2015, 718)
-rotation = 1.0472
-
-[node name="box7" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(4651, 2383)
-
-[node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(5191, 877)
-rotation = 1.57079
-
-[node name="box8" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1888, 2643)
-rotation = 1.57079
-
-[node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(312, 48)
-rotation = 1.57079
-
-[node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1082, 1528)
+[node name="Bomber_bot6" parent="Enemies" instance=ExtResource("8_275vi")]
+position = Vector2(6900, 1753)
 
 [node name="turrets" type="Node2D" parent="."]
 
@@ -129,13 +70,13 @@ collision_mask = 23
 
 [node name="torret_4" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-7811, 2969)
+position = Vector2(-7797, 2579)
 collision_layer = 2
 collision_mask = 23
 
 [node name="torret_5" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-10311, 2887)
+position = Vector2(-10300, 2161)
 collision_layer = 2
 collision_mask = 23
 
@@ -165,21 +106,273 @@ collision_mask = 23
 
 [node name="torret_6" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(-10314, 3623)
+position = Vector2(-10227, 3081)
 collision_layer = 2
 collision_mask = 23
 
 [node name="torret_2" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(936, 2635)
+position = Vector2(-415, 2822)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_18" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-3259, 2927)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_11" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-13, 7630)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_12" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(4248, 8524)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_13" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(6244, 8513)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_16" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(5011, 6329)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_17" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(7275, 5095)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_14" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(7415, 8552)
+collision_layer = 2
+collision_mask = 23
+
+[node name="torret_15" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(8855, 8514)
 collision_layer = 2
 collision_mask = 23
 
 [node name="torret_3" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
-position = Vector2(4655, 2989)
+position = Vector2(5005, 2603)
+rotation = -3.14159
 collision_layer = 2
 collision_mask = 23
+
+[node name="High_obstacles" type="Node2D" parent="." groups=["Non_destructables"]]
+
+[node name="obstacle_2" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(8638, 456)
+
+[node name="obstacle_3" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(8369, 1549)
+rotation = 0.785397
+
+[node name="obstacle_4" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(7824, 1539)
+rotation = 0.785397
+
+[node name="obstacle_6" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9288, 4830)
+
+[node name="obstacle_10" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(6686, 3845)
+rotation = -3.14159
+
+[node name="obstacle_7" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9302, 5238)
+
+[node name="obstacle_9" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9296, 5643)
+
+[node name="obstacle_5" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(-5676, 2861)
+rotation = 2.09439
+
+[node name="obstacle_8" parent="High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(-4375, 2262)
+rotation = -1.57079
+
+[node name="walls" type="Node2D" parent="."]
+position = Vector2(3074, 2764)
+
+[node name="rubble" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-785, -4247)
+
+[node name="rubble6" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(786, -3059)
+rotation = 3.14159
+
+[node name="rubble2" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-3228, -1333)
+rotation = 1.56669
+
+[node name="rubble3" parent="walls" instance=ExtResource("3_jku83")]
+position = Vector2(-3082, -3176)
+rotation = 3.14159
+
+[node name="Obstacles" type="Node2D" parent="."]
+script = ExtResource("3_kbho2")
+
+[node name="box" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(311, 756)
+rotation = 1.57079
+
+[node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(1970, -139)
+
+[node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-18649, 2766)
+rotation = 1.5708
+
+[node name="box14" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-14593, 2720)
+rotation = 1.5708
+
+[node name="box13" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-22509, 2695)
+rotation = 1.5708
+
+[node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4174, 346)
+
+[node name="box15" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(1950, 506)
+rotation = 1.0472
+
+[node name="box18" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4118, 8015)
+
+[node name="box19" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4595, 8015)
+
+[node name="box24" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(4919, 6006)
+
+[node name="box25" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(5255, 7027)
+
+[node name="box27" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(8315, 6902)
+
+[node name="box20" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(6892, 7942)
+
+[node name="box21" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(7412, 7942)
+
+[node name="box22" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(8300, 7942)
+
+[node name="box23" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(8809, 7942)
+
+[node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(5429, 519)
+rotation = 1.57079
+
+[node name="box17" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(1223, 7651)
+rotation = 1.57079
+
+[node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(312, 48)
+rotation = 1.57079
+
+[node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(-404, 3969)
+
+[node name="box16" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+position = Vector2(282, 3969)
+
+[node name="Obstacle_1" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(7869, 471)
+rotation = -3.14159
+
+[node name="Obstacle_2" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(4944, 2003)
+
+[node name="Obstacle_6" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-7145, 2403)
+rotation = 1.57079
+
+[node name="Obstacle_8" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-4880, 2302)
+rotation = 3.14159
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_9" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-5306, 2302)
+rotation = 3.14159
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_10" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-6263, 2832)
+rotation = 6.28318
+
+[node name="Obstacle_7" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-8389, 2717)
+rotation = 1.57079
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_12" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-9455, 2364)
+rotation = 1.57079
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_11" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(-9460, 2848)
+rotation = 1.57079
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_3" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(5294, 3295)
+rotation = 3.14159
+
+[node name="Obstacle_4" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(7308, 3194)
+rotation = 1.57079
+scale = Vector2(1, -1)
+
+[node name="Obstacle_13" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(8599, 3627)
+scale = Vector2(-1, -1)
+
+[node name="Obstacle_16" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(9125, 6012)
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_15" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(6897, 4582)
+
+[node name="Obstacle_17" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(7545, 4582)
+
+[node name="Obstacle_14" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(9120, 3593)
+scale = Vector2(-1, -1)
+
+[node name="Obstacle_18" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(9246, 4307)
+rotation = 1.57079
+scale = Vector2(1, -1)
+
+[node name="Obstacle_5" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(6807, 2319)
+rotation = 4.71238
+scale = Vector2(1, -1)
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -199,20 +392,4 @@ metadata/_edit_lock_ = true
 position = Vector2(-27749, 968)
 metadata/_edit_lock_ = true
 
-[node name="Bomber_bot" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(4858, 527)
-
-[node name="Bomber_bot2" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(4723, 4028)
-
-[node name="Bomber_bot3" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(3964, 3401)
-
-[node name="Bomber_bot4" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(6516, 3500)
-
-[node name="Bomber_bot5" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(6010, 4358)
-
-[node name="Bomber_bot6" parent="." instance=ExtResource("8_275vi")]
-position = Vector2(5944, 2444)
+[node name="GlowLayer" type="CanvasLayer" parent="."]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxf4gej6jjbfq"]
+
+[ext_resource type="Script" uid="uid://c6xqiclhk734f" path="res://Objects/Door/door.gd" id="1_7y0h0"]
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_7y0h0")
+
+[node name="door_frame" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 11
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door_frame"]
+position = Vector2(-5778.9, -8005)
+polygon = PackedVector2Array(6051, 7685, 6053, 7872, 5786, 7857, 5466, 7871, 5467, 7682, 5791, 7683)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="door_frame"]
+position = Vector2(-5775.9, -7551)
+polygon = PackedVector2Array(6044, 7678, 6046, 7871, 5791, 7870, 5465, 7870, 5464, 7686, 5777, 7700)
+
+[node name="door_way" type="StaticBody2D" parent="."]
+
+[node name="doorWay" type="CollisionPolygon2D" parent="door_way"]
+position = Vector2(-5777, -8006)
+polygon = PackedVector2Array(6052, 7875, 6047, 8131, 5468, 8135, 5466, 7873)
+
+[node name="A" type="Marker2D" parent="door_way"]
+unique_name_in_owner = true
+position = Vector2(-342, 0)
+
+[node name="B" type="Marker2D" parent="door_way"]
+unique_name_in_owner = true
+position = Vector2(312, 0)
+
+[node name="Area2D" type="Area2D" parent="door_way"]
+unique_name_in_owner = true
+position = Vector2(-5777, -8006)
+
+[node name="doorWay" type="CollisionPolygon2D" parent="door_way/Area2D"]
+polygon = PackedVector2Array(6069, 7921, 6069, 8094, 5449, 8094, 5450, 7924)

@@ -9,7 +9,7 @@ _data = [Vector2(0.0121951, 1), 0.0, 0.0, 0, 0, Vector2(0.993902, 0.0898877), 0.
 point_count = 2
 
 [node name="Explosion_Particles" type="Node2D"]
-z_index = 10
+z_index = 5
 material = SubResource("CanvasItemMaterial_vx24t")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

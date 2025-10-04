@@ -2,7 +2,7 @@ class_name Turret
 extends CharacterBody2D
 
 # Turret settings
-var rotation_speed: float = 10.0  # How fast the turret rotates (radians/sec)
+var rotation_speed: float = deg_to_rad(0.1)  # How fast the turret rotates (radians/sec)
 var fire_rate: float = 10.83       # Shots per second during active phase
 var bullet_scene = preload("res://Globals/bullets/Bullet_1.tscn")   # Preload your bullet scene here
 
@@ -36,7 +36,7 @@ var current_level: float
 enum TurretState { FIRING, COOLDOWN }
 var state: TurretState = TurretState.FIRING
 
-@onready var gun_sprite := $GunSprite  # Assuming you have a sprite for the gun
+@onready var gun_sprite := $GunSprite  # sprite for the gun
 @onready var attack_zone := $AttackZone  # Detection area
 @onready var shoot_timer := $ShootTimer   # Timer for firing rate
 @onready var bulletPos := $GunSprite/BulletPos
