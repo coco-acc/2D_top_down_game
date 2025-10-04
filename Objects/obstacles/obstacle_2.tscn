@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckp4ly8cqst8x"]
+
+[ext_resource type="Texture2D" uid="uid://gvb6wcnxol6d" path="res://Img_assests/Objects/img_9_2.png" id="1_2s0l8"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x18yh"]
+polygon = PackedVector2Array(-58.5714, -8.57143, -48.5714, -35.7143, -22.8571, -61.4286, 1.42857, -77.1429, 17.8571, -82.8571, 43.5714, -82.8571, 58.5714, -78.5714, 84.2857, -67.1429, 107.143, -49.2857, 120.714, -24.2857, 126.429, -2.85714, 127.857, 22.8571, 123.571, 42.8571, 115.714, 60.7143, 101.429, 77.8571, 80.7143, 93.5714, 62.1429, 100, 34.2857, 105, 10, 102.857, 10, 102.857, -8.57143, 93.5714, -28.5714, 82.1429, -45, 64.2857, -57.1429, 35.7143, -61.4286, 10)
+
+[node name="obstacle_2" type="StaticBody2D" groups=["Non_destructables"]]
+collision_layer = 4
+collision_mask = 11
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_2s0l8")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-40, 12)
+scale = Vector2(1.4, 1.4)
+polygon = PackedVector2Array(-129.286, -9.28571, -125, -34.2857, -115.714, -57.1429, -98.5714, -83.5714, -72.1429, -105, -44.2857, -118.571, -12.1429, -126.429, 20, -125, 45, -117.857, 67.8571, -104.286, 85.7143, -92.1429, 92.8571, -84.2857, 110.714, -75.7143, 127.857, -66.4286, 142.143, -48.5714, 151.429, -32.1429, 156.429, -5.71428, 156.429, 14.2857, 153.571, 31.4286, 145.714, 47.8571, 128.571, 68.5714, 110, 85, 87.8571, 91.4286, 67.8571, 106.429, 44.2857, 119.286, 18.5714, 125, -5.71429, 126.429, -37.8571, 122.143, -65, 109.286, -85, 96.4286, -106.429, 75, -120.714, 54.2857, -126.429, 34.2857, -130, 10.7143)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(1.4, 1.4)
+occluder = SubResource("OccluderPolygon2D_x18yh")

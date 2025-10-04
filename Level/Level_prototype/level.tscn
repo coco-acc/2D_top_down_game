@@ -116,6 +116,12 @@ position = Vector2(-415, 2822)
 collision_layer = 2
 collision_mask = 23
 
+[node name="torret_18" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(-3259, 2927)
+collision_layer = 2
+collision_mask = 23
+
 [node name="torret_11" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(-13, 7630)

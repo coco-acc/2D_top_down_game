@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ti6tn58jpx1l"]
+
+[ext_resource type="Texture2D" uid="uid://dmrjn13gju0tm" path="res://Img_assests/Torret/turret1/guard.png" id="1_fcuvo"]
+[ext_resource type="Script" uid="uid://bh1safkiorr5p" path="res://Enemies/Turret/guard.gd" id="1_uglx7"]
+
+[node name="guard" type="StaticBody2D" groups=["Non_destructables"]]
+scale = Vector2(-1, 1)
+script = ExtResource("1_uglx7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(-1, 1)
+texture = ExtResource("1_fcuvo")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-31, -78, 31, -65, 31, 67, -32, 78)

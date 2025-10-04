@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnba2rxkex3p"]
+
+[ext_resource type="Script" uid="uid://b0ec6hmnyuber" path="res://Objects/obstacles/obstacle_1.gd" id="1_6xvqr"]
+[ext_resource type="Texture2D" uid="uid://d312v8qh26w8v" path="res://Img_assests/Objects/img_10.png" id="1_mcm7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xvqr"]
+size = Vector2(284, 157)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mcm7y"]
+polygon = PackedVector2Array(-141, -69, -141, 60, 119.286, 63.5714, 144, 37, 141, -84, -112, -91)
+
+[node name="Obstacle_1" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_6xvqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14.5)
+scale = Vector2(1.4, 1.4)
+shape = SubResource("RectangleShape2D_6xvqr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_mcm7y")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(1.4, 1.4)
+occluder = SubResource("OccluderPolygon2D_mcm7y")
