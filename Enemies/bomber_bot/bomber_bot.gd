@@ -7,6 +7,7 @@ var explosion_damage: int = 20
 var is_exploding = false
 var has_exploded = false
 var can_explode = true
+var is_disabled = false
 
 @onready var player: Node2D = get_node("/root/Level/Player")
 @onready var explosion_area = $explosion_Area2D
@@ -34,7 +35,22 @@ func _ready() -> void:
 	explosion.hide()
 	shoot.hide()
 
+	if idle.material:
+		idle.material = idle.material.duplicate(true)
+		idle.material.set("shader_parameter/Dissolve_value_",0.0)
+
+	#spawn effect
+	spawn_effect()
+
+	# Disable behavior for 20 seconds
+	is_disabled = true
+	await get_tree().create_timer(1.2).timeout
+	is_disabled = false
+	
+
 func _physics_process(_delta: float) -> void:
+	if is_disabled:
+		return
 	if not player is Player:
 		return
 	if is_exploding:
@@ -49,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 	rotation = direction.angle()
 
 	# Detect movement
-	if velocity.length() > 0.1:  # 0.1 = small threshold so tiny floating errors don’t count
+	if velocity.length() > 0.2:  # 0.1 = small threshold so tiny floating errors don’t count
 		idle.hide()
 		walk.show()
 		# walk.sprite_frames.set_animation_("default", 24)
@@ -119,3 +135,9 @@ func explode() -> void:
 	#Wait for more seconds before freeing
 	await get_tree().create_timer(20.0).timeout
 	queue_free()
+
+func spawn_effect() -> void:
+	var tween = self.create_tween()
+	tween.tween_method( func(value):
+		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 1.0		
+		)
