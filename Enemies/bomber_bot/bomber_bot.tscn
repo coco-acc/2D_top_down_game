@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://qfdb8lsf4bkm"]
+[gd_scene load_steps=91 format=3 uid="uid://qfdb8lsf4bkm"]
 
 [ext_resource type="Script" uid="uid://dmbqtb83t4lal" path="res://Enemies/bomber_bot/bomber_bot.gd" id="1_mi0qa"]
 [ext_resource type="Texture2D" uid="uid://cduolp2vwsj6g" path="res://Img_assests/bomber/idle/bomber_bot.png" id="1_ve1vr"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://dwsog36rnhiy3" path="res://Img_assests/bomber/walk/10023.png" id="24_qvpqs"]
 [ext_resource type="Texture2D" uid="uid://oxokp6ilrmj" path="res://Img_assests/bomber/walk/10024.png" id="25_jc358"]
 [ext_resource type="Texture2D" uid="uid://cwdjveam311qs" path="res://Img_assests/bomber/walk/10025.png" id="26_yjmuy"]
+[ext_resource type="Shader" uid="uid://bqfvdrtod7sr2" path="res://Enemies/bomber_bot/bomber_bot.tres" id="29_pkkuq"]
 [ext_resource type="Texture2D" uid="uid://cqn1fkfk3fnxo" path="res://Img_assests/explosions/explosion_1.png" id="74_2v151"]
 [ext_resource type="Texture2D" uid="uid://damsw7t8ach4w" path="res://Img_assests/explosions/overlay.png" id="76_hpige"]
 
@@ -486,6 +487,17 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n2k3f"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_agdyg"]
+noise = SubResource("FastNoiseLite_n2k3f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajp0y"]
+shader = ExtResource("29_pkkuq")
+shader_parameter/Noise = SubResource("NoiseTexture2D_agdyg")
+shader_parameter/Dissolve_value_ = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkug"]
 size = Vector2(218, 192)
 
@@ -501,6 +513,7 @@ collision_mask = 31
 script = ExtResource("1_mi0qa")
 
 [node name="Shadow" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true
@@ -509,6 +522,7 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_3wvvv")
 
 [node name="walk" type="AnimatedSprite2D" parent="."]
+visible = false
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(-2, 15)
@@ -529,14 +543,15 @@ frame = 23
 frame_progress = 0.712778
 
 [node name="idle" type="Sprite2D" parent="."]
-visible = false
 z_as_relative = false
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_ajp0y")
 position = Vector2(30, 11)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_ve1vr")
 
 [node name="shoot" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.237539, 0.237539, 0.237539, 0.835294)
 z_index = -1
 z_as_relative = false

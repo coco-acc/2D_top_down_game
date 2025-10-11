@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=13 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
 [ext_resource type="PackedScene" uid="uid://c83c46fs005n7" path="res://Objects/walls/rubble.tscn" id="3_jku83"]
 [ext_resource type="Script" uid="uid://clb4nw7swjhh3" path="res://Level/Level_prototype/obstacles.gd" id="3_kbho2"]
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
+[ext_resource type="PackedScene" uid="uid://cjihuoyeeti7l" path="res://Level/Level_prototype/Spawnner/enemy_spawnner.tscn" id="4_w2736"]
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/Turret/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
 [ext_resource type="PackedScene" uid="uid://qfdb8lsf4bkm" path="res://Enemies/bomber_bot/bomber_bot.tscn" id="8_275vi"]
@@ -38,27 +39,18 @@ environment = SubResource("Environment_5rxru")
 position = Vector2(0, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(3103, 7754)
+position = Vector2(8228, 2608)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Bomber_bot" parent="Enemies" instance=ExtResource("8_275vi")]
 position = Vector2(4858, 527)
 
-[node name="Bomber_bot2" parent="Enemies" instance=ExtResource("8_275vi")]
-position = Vector2(4723, 4028)
+[node name="Spawn" type="Node2D" parent="."]
+position = Vector2(7104, 2795)
 
-[node name="Bomber_bot3" parent="Enemies" instance=ExtResource("8_275vi")]
-position = Vector2(4686, 3675)
-
-[node name="Bomber_bot4" parent="Enemies" instance=ExtResource("8_275vi")]
-position = Vector2(7208, 4021)
-
-[node name="Bomber_bot5" parent="Enemies" instance=ExtResource("8_275vi")]
-position = Vector2(4900, 4561)
-
-[node name="Bomber_bot6" parent="Enemies" instance=ExtResource("8_275vi")]
-position = Vector2(6900, 1753)
+[node name="Enemy_spawnner" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(-9150, 1674)
 
 [node name="turrets" type="Node2D" parent="."]
 
@@ -167,7 +159,6 @@ collision_mask = 23
 [node name="torret_3" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(5005, 2603)
-rotation = -3.14159
 collision_layer = 2
 collision_mask = 23
 
@@ -209,7 +200,7 @@ rotation = -1.57079
 position = Vector2(3074, 2764)
 
 [node name="rubble" parent="walls" instance=ExtResource("3_jku83")]
-position = Vector2(-785, -4247)
+position = Vector2(238, -4562)
 
 [node name="rubble6" parent="walls" instance=ExtResource("3_jku83")]
 position = Vector2(786, -3059)
@@ -231,7 +222,7 @@ position = Vector2(311, 756)
 rotation = 1.57079
 
 [node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1970, -139)
+position = Vector2(2423, 195)
 
 [node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(-18649, 2766)
@@ -265,7 +256,7 @@ position = Vector2(4919, 6006)
 position = Vector2(5255, 7027)
 
 [node name="box27" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(8315, 6902)
+position = Vector2(8199, 6902)
 
 [node name="box20" parent="Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(6892, 7942)
@@ -298,7 +289,7 @@ position = Vector2(-404, 3969)
 position = Vector2(282, 3969)
 
 [node name="Obstacle_1" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(7869, 471)
+position = Vector2(7869, 350)
 rotation = -3.14159
 
 [node name="Obstacle_2" parent="Obstacles" instance=ExtResource("10_lxc0q")]

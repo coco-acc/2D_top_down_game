@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjihuoyeeti7l"]
+
+[ext_resource type="Script" uid="uid://ws70nq4csx5b" path="res://Level/Level_prototype/Spawnner/enemy_spawnner.gd" id="1_uhggt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyk7q"]
+size = Vector2(2312, 230)
+
+[node name="Enemy_spawnner" type="Node2D"]
+script = ExtResource("1_uhggt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xyk7q")
+
+[node name="1" type="Marker2D" parent="."]
+position = Vector2(-866, 327)
+
+[node name="2" type="Marker2D" parent="."]
+position = Vector2(262, 316)
+
+[node name="9" type="Marker2D" parent="."]
+position = Vector2(885, 258)
+
+[node name="3" type="Marker2D" parent="."]
+position = Vector2(-252, 525)
+
+[node name="4" type="Marker2D" parent="."]
+position = Vector2(795, 543)
+
+[node name="5" type="Marker2D" parent="."]
+position = Vector2(-20, -343)
+
+[node name="10" type="Marker2D" parent="."]
+position = Vector2(-457, -444)
+
+[node name="6" type="Marker2D" parent="."]
+position = Vector2(-923, -235)
+
+[node name="7" type="Marker2D" parent="."]
+position = Vector2(422, -183)
+
+[node name="8" type="Marker2D" parent="."]
+position = Vector2(910, -309)

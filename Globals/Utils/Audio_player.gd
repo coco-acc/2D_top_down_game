@@ -13,7 +13,9 @@ static var sfx_audio := {
 	"MG1" : preload("res://Audio_assets/sfx/machin-gun-mg34-double-sound.mp3"),
 	"MG2" : preload("res://Audio_assets/sfx/mg1.wav"),
 
-	"explosion" : preload("res://Audio_assets/sfx/explosion-fx.mp3")
+	"explosion" : preload("res://Audio_assets/sfx/explosion-fx.mp3"),
+	"door" : preload("res://Audio_assets/sfx/door/1/3.wav"),
+	"door2" : preload("res://Audio_assets/sfx/door/1/door2.wav")
 }
 
 static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, continuous: bool = false, start: float = 0.0, bus: String = "SFX") -> void:
