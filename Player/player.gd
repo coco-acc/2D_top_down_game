@@ -3,7 +3,8 @@ extends CharacterBody2D
 
 # Movement properties
 var speed = 400
-var jump_velocity = 1000
+var jump_distance = 500.0
+var jump_await = 1.0
 var is_jumping := false
 var is_crouching := false
 var can_crouch := false
@@ -59,7 +60,7 @@ func _ready():
 	camera.rotation_smoothing_speed = 5.0  # Adjust smoothness (higher = faster follow)
 
 	# Connect signals
-	jump_timer.wait_time = 0.05
+	jump_timer.wait_time = 1.0
 	jump_timer.one_shot = true
 	reload_timer.wait_time = stats["reload"]
 	reload_timer.one_shot = true
@@ -204,7 +205,7 @@ func move_state(direction: Vector2, delta: float):
 	var switch_time = 0.5  # Time in seconds between switches (adjust for faster/slower)
 
 	if Input.is_action_pressed("walk") and direction:
-		speed = 350
+		speed = 850
 		switch_time = 0.2
 		animation.sprite_frames.set_animation_speed("default", 24)
 	else:
@@ -235,13 +236,43 @@ func move_state(direction: Vector2, delta: float):
 	velocity = direction * speed
 
 func jump_state(direction: Vector2):
-	if not is_jumping:
-		jump_timer.start()
-		velocity = jump_velocity * direction
-		is_jumping = true
-		camera.zoom = Vector2(0.52, 0.52)
-	else:
-		velocity = jump_velocity * direction
+	# if not is_jumping:
+	# 	jump_timer.start()
+	# 	velocity = jump_velocity * direction
+	# 	is_jumping = true
+	# 	camera.zoom = Vector2(0.52, 0.52)
+	# else:
+	# 	velocity = jump_velocity * direction
+
+	if is_jumping:
+		return  # prevent re-triggering mid-jump
+
+	is_jumping = true
+	jump_timer.start()
+	camera.zoom = Vector2(0.52, 0.52)
+
+	var jump_tween = create_tween()
+	# var target = global_position + (direction.normalized() * jump_distance)
+	var target = jump_distance * direction
+	# set_physics_process(false)
+
+	jump_tween.tween_property(self, "velocity", target, jump_await)\
+		.set_trans(Tween.TRANS_SINE)\
+		.set_ease(Tween.EASE_IN_OUT)
+
+	# Optionally reset zoom or state after tween finishes
+	jump_tween.finished.connect(func():
+		camera.zoom = Vector2(0.5, 0.5)
+		is_jumping = false
+		velocity = Vector2.ZERO
+		change_state(State.IDLE)
+		# set_physics_process(true)
+		# if previous_state:
+		# 	change_state(previous_state)
+		# else:
+		# 	change_state(State.IDLE)
+	)
+	move_and_slide()
 
 func crouch_state(direction):
 	crouched = true
@@ -345,9 +376,8 @@ func _on_secondary_delay_timeout() -> void:
 	attack = true
 
 func _on_jump_timer_timeout() -> void:
-	is_jumping = false  # Reset jumping flag when timer ends
-	camera.zoom = Vector2(0.5, 0.5)
-	change_state(State.IDLE)
+	# is_jumping = false  # Reset jumping flag when timer ends
+	pass
 
 func _on_gun_collider_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Non_destructables"):

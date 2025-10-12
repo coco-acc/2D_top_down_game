@@ -113,12 +113,12 @@ func move_in(body: Node2D) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		at_door = true
-	print("Entering doorway: ", body.name)
+	# print("Entering doorway: ", body.name)
 
 	
 func _on_body_exited(body: Node) -> void:
 	if body is CharacterBody2D:
-		print("Exiting doorway: ", body.name)
+		# print("Exiting doorway: ", body.name)
 		at_door = false
 
 func _on_sprite_A_finished() -> void:
