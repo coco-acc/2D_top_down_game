@@ -6,8 +6,9 @@ extends CanvasLayer
 # @onready var score_label = $MarginContainer/VBoxContainer/ScoreLabel
 
 func set_health(value: int) -> void:
-	health_label.text = "Health: %d" % value
+	health_label.text = "Health:" 
 	health_bar.value = value
+	#health_bar.text = "%d" % value
 
 func set_ammo(value: int) -> void:
 	ammo_label.text = "Ammo: %d" % value

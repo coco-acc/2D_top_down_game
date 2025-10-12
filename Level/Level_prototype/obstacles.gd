@@ -10,7 +10,7 @@ var was_crouching := false  # Track previous crouch state
 
 func _ready() -> void:
 	# Create and configure the timer
-	timer.wait_time = 0.5
+	timer.wait_time = player.jump_await
 	timer.one_shot = true
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
