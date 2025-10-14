@@ -44,7 +44,9 @@ func _ready() -> void:
 
 	# Disable behavior for 20 seconds
 	is_disabled = true
+	# self.set_physics_process(false)
 	await get_tree().create_timer(1.2).timeout
+	# self.set_physics_process(true)
 	is_disabled = false
 	
 

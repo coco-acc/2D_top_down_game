@@ -43,3 +43,7 @@ position = Vector2(422, -183)
 
 [node name="8" type="Marker2D" parent="."]
 position = Vector2(910, -309)
+
+[node name="Polygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-1055, -540, 1024, -546, 1058, 543, -1053, 550)

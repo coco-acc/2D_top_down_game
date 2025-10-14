@@ -17,7 +17,7 @@ var attack: bool = true
 
 # Camera properties
 @onready var camera := $Camera2D
-@export var camera_offset_distance: int = 100
+@onready var camera_offset_distance: int = 100
 var direction_to = Vector2()
 var aspect_ratio: float = 16.0 / 9.0
 

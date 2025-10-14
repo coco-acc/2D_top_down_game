@@ -2,10 +2,12 @@ extends Node2D
 
 @onready var area = $Area2D
 @onready var level = get_node("/root/Level/Enemies")
+@onready var polygon = $Polygon
 
 var markers: Array[Marker2D] = []
-var enemy_number: int = 5
+@export var enemy_number: int = 5
 var respawn_delay: float = 45.0
+var delay = 0.5
 
 var bomber_bot_scene = preload("res://Enemies/bomber_bot/bomber_bot.tscn")
 
@@ -22,8 +24,11 @@ func spawn_enemies() -> void:
 	for i in range(enemy_number):
 		var spawn_point = markers.pick_random()
 		var bomber_bot = bomber_bot_scene.instantiate()
+		bomber_bot.set_physics_process(false)
 		bomber_bot.global_position = spawn_point.global_position
 		level.add_child(bomber_bot)
+		await get_tree().create_timer(delay).timeout
+		bomber_bot.set_physics_process(true)
 
 func _on_body_entered(body: Node) -> void:
 	if body is Player:
