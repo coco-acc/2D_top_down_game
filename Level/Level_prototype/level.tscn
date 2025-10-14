@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=18 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -32,6 +32,15 @@ adjustment_enabled = true
 adjustment_brightness = 0.7
 adjustment_contrast = 1.02
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6cco"]
+size = Vector2(888, 981)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jf350"]
+size = Vector2(764, 985)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tum5v"]
+size = Vector2(1780, 748)
+
 [node name="Level" type="Node2D"]
 
 [node name="World" type="WorldEnvironment" parent="."]
@@ -40,8 +49,11 @@ environment = SubResource("Environment_5rxru")
 [node name="ground" parent="." instance=ExtResource("1_5xok0")]
 visibility_layer = 3
 
+[node name="ground2" parent="." instance=ExtResource("1_5xok0")]
+visibility_layer = 3
+
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(-2148, 5497)
+position = Vector2(18401, 2612)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -52,7 +64,67 @@ position = Vector2(4858, 527)
 position = Vector2(7104, 2795)
 
 [node name="Enemy_spawnner" parent="Spawn" instance=ExtResource("4_w2736")]
-position = Vector2(-9150, 1674)
+position = Vector2(-5504, 4457)
+rotation = -1.57079
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner" index="1"]
+polygon = PackedVector2Array(-732.002, -1213, -34.0024, -1214, -36.9702, -515.753, -591.001, -508.999, -591, -246.999, -48.0005, -220, -38.998, 753, -741.998, 748.002)
+
+[node name="Enemy_spawnner2" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(8021, -218)
+rotation = 1.57079
+enemy_number = 1
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner2" index="1"]
+polygon = PackedVector2Array(-351.001, 317.999, 285.999, 318.001, 283.997, 1361, -335.003, 1331, -334.531, 1189.39, -139.003, 1189, -124.002, 760, 111.998, 723, 99.9988, 476, -332.136, 471.632)
+
+[node name="Enemy_spawnner5" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(3690, -218)
+rotation = 1.57079
+enemy_number = 3
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner5" index="1"]
+polygon = PackedVector2Array(-314, 103.999, 281, 138.001, 308.997, 1583, -325.003, 1605, -324.109, 1483.01, -809.003, 1477, -811, 262.998, -314.98, 237.61)
+
+[node name="Enemy_spawnner6" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(3690, -1851)
+rotation = 3.14159
+enemy_number = 3
+
+[node name="CollisionShape2D" parent="Spawn/Enemy_spawnner6/Area2D" index="0"]
+position = Vector2(684.002, -414.997)
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner6" index="1"]
+position = Vector2(1188, -862.995)
+polygon = PackedVector2Array(337, 77.0016, 348.995, 1122, 155.995, 1132, 142.993, 1506, -757.007, 1503, -753.002, 497.997, -957.002, 492.996, -958, 81.9958)
+
+[node name="Enemy_spawnner3" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(3305, 3097)
+rotation = -1.57079
+enemy_number = 3
+
+[node name="Area2D" parent="Spawn/Enemy_spawnner3" index="0"]
+position = Vector2(0.00113062, 509)
+rotation = 1.57079
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner3" index="1"]
+position = Vector2(-34.0003, -131)
+rotation = 1.57079
+polygon = PackedVector2Array(-342, -718, 286, -711, 273.997, 1315, -335.003, 1331, -334.22, 1096.32, -159, 1096, -152, 27, -341, 13)
+
+[node name="Enemy_spawnner4" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(3253, 5654)
+rotation = -1.57079
+enemy_number = 3
+
+[node name="Area2D" parent="Spawn/Enemy_spawnner4" index="0"]
+position = Vector2(0.00113062, 509)
+rotation = 1.57079
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner4" index="1"]
+position = Vector2(-34.0003, -131)
+rotation = 1.57079
+polygon = PackedVector2Array(-327.998, -769.001, 13, -776, 35, 312, 343, 415, 361, 1342, -101, 1338, -109, 187, -329, 198)
 
 [node name="turrets" type="Node2D" parent="."]
 
@@ -134,6 +206,10 @@ position = Vector2(6244, 8513)
 collision_layer = 2
 collision_mask = 23
 
+[node name="CollisionShape2D" parent="turrets/torret_13/AttackZone" index="0"]
+position = Vector2(216, -290.5)
+shape = SubResource("RectangleShape2D_g6cco")
+
 [node name="torret_16" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(5011, 6329)
@@ -145,6 +221,9 @@ z_index = -1
 position = Vector2(7275, 5095)
 collision_layer = 2
 collision_mask = 23
+
+[node name="CollisionShape2D" parent="turrets/torret_17/AttackZone" index="0"]
+position = Vector2(0, -148.5)
 
 [node name="torret_14" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
@@ -158,6 +237,10 @@ position = Vector2(8855, 8514)
 collision_layer = 2
 collision_mask = 23
 
+[node name="CollisionShape2D" parent="turrets/torret_15/AttackZone" index="0"]
+position = Vector2(-77, -259.5)
+shape = SubResource("RectangleShape2D_jf350")
+
 [node name="torret_3" parent="turrets" instance=ExtResource("6_ibnq1")]
 z_index = -1
 position = Vector2(5005, 2603)
@@ -169,6 +252,11 @@ z_index = -1
 position = Vector2(8261, 2541)
 collision_layer = 2
 collision_mask = 23
+
+[node name="CollisionShape2D" parent="turrets/torret_19/AttackZone" index="0"]
+visible = true
+position = Vector2(566, 0)
+shape = SubResource("RectangleShape2D_tum5v")
 
 [node name="High_obstacles" type="Node2D" parent="." groups=["Non_destructables"]]
 
@@ -292,7 +380,7 @@ position = Vector2(5429, 519)
 rotation = 1.57079
 
 [node name="box17" parent="Obstacles" instance=ExtResource("3_xkwrd")]
-position = Vector2(1223, 7651)
+position = Vector2(1223, 7529)
 rotation = 1.57079
 
 [node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
@@ -418,7 +506,7 @@ position = Vector2(14148, 2296)
 scale = Vector2(1, -1)
 
 [node name="Obstacle_39" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(14501, 2540)
+position = Vector2(14501, 2455)
 rotation = -1.57079
 scale = Vector2(-1, -1)
 
@@ -533,3 +621,14 @@ color = Color(0, 0.0980392, 1, 1)
 
 [node name="Map_drawer" type="Node2D" parent="UI/Mini_map/SubViewport/mini_world"]
 script = ExtResource("13_jf350")
+
+[editable path="Spawn/Enemy_spawnner"]
+[editable path="Spawn/Enemy_spawnner2"]
+[editable path="Spawn/Enemy_spawnner5"]
+[editable path="Spawn/Enemy_spawnner6"]
+[editable path="Spawn/Enemy_spawnner3"]
+[editable path="Spawn/Enemy_spawnner4"]
+[editable path="turrets/torret_13"]
+[editable path="turrets/torret_17"]
+[editable path="turrets/torret_15"]
+[editable path="turrets/torret_19"]
