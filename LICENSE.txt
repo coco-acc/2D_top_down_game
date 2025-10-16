@@ -1,0 +1,19 @@
+Copyright (c) 2025 coco-acc
+All Rights Reserved.
+
+This video game, including but not limited to its source code, binaries, game design, artwork, animations, audio, music, dialogue, story, and all associated assets ("the Game"), is the exclusive property of coco-acc.
+
+No part of the Game may be copied, reproduced, modified, distributed, publicly displayed, uploaded, or transmitted in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage and retrieval system, without the prior written consent of the copyright holder.
+
+You are granted permission to:
+- Download and play the Game for personal, non-commercial purposes only, if an official build is publicly released.
+
+You are not granted permission to:
+- Access or distribute the Game’s source code or assets.
+- Modify, reverse-engineer, decompile, or create derivative works based on the Game.
+- Sell, sublicense, rent, or otherwise exploit the Game or any of its parts.
+
+Any unauthorized use of the Game, its content, or source code may result in legal action.
+
+For licensing or business inquiries, please contact:
+ayikocc@gmail.com
