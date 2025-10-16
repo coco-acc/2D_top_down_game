@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=22 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
 [ext_resource type="PackedScene" uid="uid://c83c46fs005n7" path="res://Objects/walls/rubble.tscn" id="3_jku83"]
 [ext_resource type="Script" uid="uid://clb4nw7swjhh3" path="res://Level/Level_prototype/obstacles.gd" id="3_kbho2"]
 [ext_resource type="PackedScene" uid="uid://cfxqxhno71ju5" path="res://Objects/box/box.tscn" id="3_xkwrd"]
+[ext_resource type="PackedScene" uid="uid://bv6l7wslonwmo" path="res://Globals/Dialogues/dialogue_area_2d.tscn" id="4_tum5v"]
 [ext_resource type="PackedScene" uid="uid://cjihuoyeeti7l" path="res://Level/Level_prototype/Spawnner/enemy_spawnner.tscn" id="4_w2736"]
 [ext_resource type="PackedScene" uid="uid://cbuux1n4snffx" path="res://Enemies/Turret/turret_1.tscn" id="6_ibnq1"]
 [ext_resource type="PackedScene" uid="uid://b1335mosm0ipn" path="res://Objects/Lights/Point_Light/PointLight.tscn" id="7_5rxru"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ckp4ly8cqst8x" path="res://Objects/obstacles/obstacle_2.tscn" id="10_w2736"]
 [ext_resource type="Script" uid="uid://dn84ujgkxvdpe" path="res://Level/Level_prototype/mini_world.gd" id="12_6w7ob"]
 [ext_resource type="Script" uid="uid://ctmt6mb4tihmh" path="res://Level/Level_prototype/map_drawer.gd" id="13_jf350"]
+[ext_resource type="PackedScene" uid="uid://6ia45vs1bs8l" path="res://Globals/Dialogues/tutorial.tscn" id="14_g6cco"]
 
 [sub_resource type="Environment" id="Environment_5rxru"]
 background_energy_multiplier = 0.1
@@ -32,6 +34,9 @@ adjustment_enabled = true
 adjustment_brightness = 0.7
 adjustment_contrast = 1.02
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ma88d"]
+size = Vector2(3860.8, 209.01)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6cco"]
 size = Vector2(888, 981)
 
@@ -40,6 +45,9 @@ size = Vector2(764, 985)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tum5v"]
 size = Vector2(1780, 748)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xk1c"]
+size = Vector2(1533, 734)
 
 [node name="Level" type="Node2D"]
 
@@ -53,7 +61,7 @@ visibility_layer = 3
 visibility_layer = 3
 
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(18401, 2612)
+position = Vector2(7439, 7699)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -71,12 +79,12 @@ rotation = -1.57079
 polygon = PackedVector2Array(-732.002, -1213, -34.0024, -1214, -36.9702, -515.753, -591.001, -508.999, -591, -246.999, -48.0005, -220, -38.998, 753, -741.998, 748.002)
 
 [node name="Enemy_spawnner2" parent="Spawn" instance=ExtResource("4_w2736")]
-position = Vector2(8021, -218)
+position = Vector2(9794, -218)
 rotation = 1.57079
 enemy_number = 1
 
 [node name="Polygon" parent="Spawn/Enemy_spawnner2" index="1"]
-polygon = PackedVector2Array(-351.001, 317.999, 285.999, 318.001, 283.997, 1361, -335.003, 1331, -334.531, 1189.39, -139.003, 1189, -124.002, 760, 111.998, 723, 99.9988, 476, -332.136, 471.632)
+polygon = PackedVector2Array(95.9917, 1320, -335.003, 1331, -334.531, 1189.39, -139.003, 1189, -124.002, 760, 111.998, 723)
 
 [node name="Enemy_spawnner5" parent="Spawn" instance=ExtResource("4_w2736")]
 position = Vector2(3690, -218)
@@ -97,6 +105,30 @@ position = Vector2(684.002, -414.997)
 [node name="Polygon" parent="Spawn/Enemy_spawnner6" index="1"]
 position = Vector2(1188, -862.995)
 polygon = PackedVector2Array(337, 77.0016, 348.995, 1122, 155.995, 1132, 142.993, 1506, -757.007, 1503, -753.002, 497.997, -957.002, 492.996, -958, 81.9958)
+
+[node name="Enemy_spawnner7" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(532, -2673)
+rotation = 1.57079
+
+[node name="CollisionShape2D" parent="Spawn/Enemy_spawnner7/Area2D" index="0"]
+position = Vector2(664.001, -414.999)
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner7" index="1"]
+position = Vector2(1188, -862.995)
+polygon = PackedVector2Array(-391.999, 565.997, 9.96545, 583.138, 16.9999, 919.998, 155, 1034, 105.998, 1677, -720.002, 1715, -723.005, 1529.05, -613.001, 1498, -625.001, 1221, -728.71, 1175.86, -740.999, 414.997, -740.998, 88.9961, -420.105, 96.359)
+
+[node name="Enemy_spawnner8" parent="Spawn" instance=ExtResource("4_w2736")]
+position = Vector2(341, 1066)
+rotation = 1.57079
+
+[node name="CollisionShape2D" parent="Spawn/Enemy_spawnner8/Area2D" index="0"]
+position = Vector2(657.001, -449.999)
+rotation = -0.785397
+shape = SubResource("RectangleShape2D_ma88d")
+
+[node name="Polygon" parent="Spawn/Enemy_spawnner8" index="1"]
+position = Vector2(1188, -862.995)
+polygon = PackedVector2Array(-1462, 896.995, -663, 896.997, -647.999, 245.997, 73.0015, 278.999, 57.002, 63.999, 999.002, -36.999, 945.003, -601.999, 467.003, -454, 319.002, -198.001, 47.2706, -22.2466, -8.99658, -681.002, -1233, -593.004, -1168, -3.00391, -1509, 114.995)
 
 [node name="Enemy_spawnner3" parent="Spawn" instance=ExtResource("4_w2736")]
 position = Vector2(3305, 3097)
@@ -254,9 +286,18 @@ collision_layer = 2
 collision_mask = 23
 
 [node name="CollisionShape2D" parent="turrets/torret_19/AttackZone" index="0"]
-visible = true
 position = Vector2(566, 0)
 shape = SubResource("RectangleShape2D_tum5v")
+
+[node name="torret_20" parent="turrets" instance=ExtResource("6_ibnq1")]
+z_index = -1
+position = Vector2(13330, 2547)
+collision_layer = 2
+collision_mask = 23
+
+[node name="CollisionShape2D" parent="turrets/torret_20/AttackZone" index="0"]
+position = Vector2(576.5, -45)
+shape = SubResource("RectangleShape2D_8xk1c")
 
 [node name="High_obstacles" type="Node2D" parent="." groups=["Non_destructables"]]
 
@@ -273,10 +314,6 @@ rotation = 0.785397
 
 [node name="obstacle_6" parent="High_obstacles" instance=ExtResource("10_w2736")]
 position = Vector2(9288, 4830)
-
-[node name="obstacle_13" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(10935, 2770)
-rotation = 0.261799
 
 [node name="obstacle_10" parent="High_obstacles" instance=ExtResource("10_w2736")]
 position = Vector2(6686, 3845)
@@ -397,6 +434,24 @@ position = Vector2(282, 3969)
 position = Vector2(7869, 350)
 rotation = -3.14159
 
+[node name="Obstacle_25" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(7112, 443)
+rotation = -4.71238
+
+[node name="Obstacle_36" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(8091, 1141)
+rotation = -1.57079
+
+[node name="Obstacle_43" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(8091, 5321)
+rotation = -4.71238
+scale = Vector2(-1, 1)
+
+[node name="Obstacle_44" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(8091, 5735)
+rotation = -4.71238
+scale = Vector2(-1, 1)
+
 [node name="Obstacle_2" parent="Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(4944, 2003)
 
@@ -497,26 +552,27 @@ scale = Vector2(1, -1)
 position = Vector2(12061, 2278)
 scale = Vector2(1, -1)
 
-[node name="Obstacle_25" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(12527, 2278)
-scale = Vector2(1, -1)
-
 [node name="Obstacle_38" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(14148, 2296)
+position = Vector2(15921, 2296)
 scale = Vector2(1, -1)
 
 [node name="Obstacle_39" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(14501, 2455)
+position = Vector2(16279, 2452)
 rotation = -1.57079
 scale = Vector2(-1, -1)
 
-[node name="Obstacle_36" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(12890, 2848)
-rotation = -3.14159
+[node name="Obstacle_41" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(12849, 2349)
+rotation = -1.57079
 scale = Vector2(-1, -1)
 
+[node name="Obstacle_42" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(11045, 2884)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
 [node name="Obstacle_37" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(13356, 2848)
+position = Vector2(13876, 2848)
 rotation = -3.14159
 scale = Vector2(-1, -1)
 
@@ -526,21 +582,21 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 
 [node name="Obstacle_32" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(19161, 2843)
-rotation = 3.14159
-scale = Vector2(1, -1)
+position = Vector2(14205, 2758)
+rotation = 1.57079
+scale = Vector2(-1, -1)
 
 [node name="Obstacle_33" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(18685, 2293)
+position = Vector2(19107, 2293)
 scale = Vector2(-1, -1)
 
 [node name="Obstacle_34" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(17364, 2396)
+position = Vector2(18200, 2396)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
 [node name="Obstacle_35" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(17108, 2724)
+position = Vector2(17944, 2724)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
@@ -622,13 +678,47 @@ color = Color(0, 0.0980392, 1, 1)
 [node name="Map_drawer" type="Node2D" parent="UI/Mini_map/SubViewport/mini_world"]
 script = ExtResource("13_jf350")
 
+[node name="Dialogue" type="Node2D" parent="."]
+
+[node name="Tutorial" parent="Dialogue" instance=ExtResource("14_g6cco")]
+position = Vector2(18586, 2597)
+dialogue_text = "Press the primay key + directional key (shift+A) or + Arrow-key) to jump over those boxes."
+
+[node name="Dialogue_Area2D" parent="Dialogue" instance=ExtResource("4_tum5v")]
+unique_name_in_owner = true
+position = Vector2(20459, 2556)
+dialogue_text = "Press the directional keys (arrow buttons or (W,S,A,D)) to move East,North,South and West."
+
+[node name="Dialogue_Area2D4" parent="Dialogue" instance=ExtResource("4_tum5v")]
+unique_name_in_owner = true
+position = Vector2(14486, 2556)
+dialogue_text = "Move close to those boxes to take cover, You'll be safe from projectiles from the opposite side."
+
+[node name="Dialogue_Area2D2" parent="Dialogue" instance=ExtResource("4_tum5v")]
+unique_name_in_owner = true
+position = Vector2(16948, 2578)
+dialogue_text = "Press the action key (space-key or left-mouse) to shoot at the bot ."
+
+[node name="Dialogue_Area2D3" parent="Dialogue" instance=ExtResource("4_tum5v")]
+unique_name_in_owner = true
+position = Vector2(11982, 2578)
+dialogue_text = "Press the primary key (shift-key or right-mouse) to open the door"
+
+[node name="Dialogue_Area2D5" parent="Dialogue" instance=ExtResource("4_tum5v")]
+unique_name_in_owner = true
+position = Vector2(10703, 2538)
+dialogue_text = "Many bots and turrets a head, Your bullets reload automatically when finished, make sure not to die."
+
 [editable path="Spawn/Enemy_spawnner"]
 [editable path="Spawn/Enemy_spawnner2"]
 [editable path="Spawn/Enemy_spawnner5"]
 [editable path="Spawn/Enemy_spawnner6"]
+[editable path="Spawn/Enemy_spawnner7"]
+[editable path="Spawn/Enemy_spawnner8"]
 [editable path="Spawn/Enemy_spawnner3"]
 [editable path="Spawn/Enemy_spawnner4"]
 [editable path="turrets/torret_13"]
 [editable path="turrets/torret_17"]
 [editable path="turrets/torret_15"]
 [editable path="turrets/torret_19"]
+[editable path="turrets/torret_20"]

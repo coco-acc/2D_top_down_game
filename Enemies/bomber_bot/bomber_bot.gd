@@ -141,5 +141,5 @@ func explode() -> void:
 func spawn_effect() -> void:
 	var tween = self.create_tween()
 	tween.tween_method( func(value):
-		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 1.0		
+		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 0.5		
 		)

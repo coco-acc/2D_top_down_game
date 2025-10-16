@@ -31,7 +31,7 @@ var stats = {
 	"health": 100,
 	"speed": speed,
 	"is_alive": true,
-	"ammo": 30,
+	"ammo": 60,
 	"reload": 5.0
 }
 
@@ -348,7 +348,7 @@ func reload_state():
 	change_state(State.IDLE)
 
 func reload_mag():
-	stats["ammo"] = 30
+	stats["ammo"] = 60
 	HUD.set_ammo(stats["ammo"])
 	change_state(State.IDLE)
 

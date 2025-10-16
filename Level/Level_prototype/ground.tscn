@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bln81cgcs1cxx"]
+[gd_scene load_steps=24 format=4 uid="uid://bln81cgcs1cxx"]
 
 [ext_resource type="Texture2D" uid="uid://cj1733ld48ahk" path="res://Img_assests/tilesets/floor1/floor1.png" id="1_b323f"]
 [ext_resource type="Texture2D" uid="uid://ckeexciue4mjg" path="res://Img_assests/tilesets/tileset2.png" id="2_v7daa"]
@@ -183,8 +183,13 @@ sources/5 = SubResource("TileSetAtlasSource_fvjtn")
 sources/4 = SubResource("TileSetAtlasSource_5bii5")
 sources/1 = SubResource("TileSetAtlasSource_1aol5")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_murq2"]
+radius = 57024.3
+
 [node name="ground" type="Node2D"]
 z_index = -10
+metadata/_edit_vertical_guides_ = [-11504.0, -18872.0, -5742.0, 12306.0]
+metadata/_edit_horizontal_guides_ = [-6698.0, -9391.0, 6016.0, 6016.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_v7daa")
@@ -228,7 +233,6 @@ tile_map_data = PackedByteArray("AAD5////BAAAAAAAAAD5/wAABAAAAAAAAAD5/wEABAAAAAA
 polygon = PackedVector2Array(7785, 6511, 9473, 6545, 9470, 8840, 5921, 8792, 5860, 7150, 7798, 7163)
 
 [node name="floor" parent="TileMap2/Room2" index="1"]
-position = Vector2(17029.4, -7272.6)
 tile_map_data = PackedByteArray("AAAJAAsAAgAAAAAAAAAJAAwAAgAAAAAAAAAJAA0AAgAAAAAAAAAKAAsAAgAAAAAAAAAKAAwAAgAAAAAAAAAKAA0AAgAAAAAAAAALAAsAAgAAAAAAAAALAAwAAgAAAAAAAAALAA0AAgAAAAAAAAAMAAsAAgAAAAAAAAAMAAwAAgAAAAAAAAAMAA0AAgAAAAAAAAANAAsAAgAAAAAAAAANAAwAAgAAAAAAAAANAA0AAgAAAAAAAAAOAAsAAgAAAAAAAAAOAAwAAgAAAAAAAAAOAA0AAgAAAAAAAAAMAAoAAgAAAAAAAAANAAoAAgAAAAAAAAAOAAoAAgAAAAAAAAA=")
 
 [node name="cover" parent="TileMap2/Room2" index="2"]
@@ -265,8 +269,7 @@ polygon = PackedVector2Array(9761, 3362, 10719, 3362, 10720, 10236, 9760, 10238)
 tile_map_data = PackedByteArray("AAAQAA8AAwAAAAAAAAAPAAUAAwAAAAAAAAAPAAYAAwAAAAAAAAAPAAcAAwAAAAAAAAAPAAgAAwAAAAAAAAAPAAkAAwAAAAAAAAAQAAUAAwAAAAAAAAAQAAYAAwAAAAAAAAAQAAcAAwAAAAAAAAAQAAgAAwAAAAAAAAAPAAoAAwAAAAAAAAAPAAsAAwAAAAAAAAAPAAwAAwAAAAAAAAAQAAkAAwAAAAAAAAAQAAoAAwAAAAAAAAAQAAsAAwAAAAAAAAAQAAwAAwAAAAAAAAAPAA0AAwAAAAAAAAAPAA4AAwAAAAAAAAAPAA8AAwAAAAAAAAAQAA0AAwAAAAAAAAAQAA4AAwAAAAAAAAA=")
 
 [node name="cover" parent="TileMap2/corridor1" index="2"]
-position = Vector2(15824.3, -4206.57)
-tile_map_data = PackedByteArray("AAAQAA8ABAAAAAAAAAAPAAUABAAAAAAAAAAPAAYABAAAAAAAAAAPAAcABAAAAAAAAAAPAAgABAAAAAAAAAAQAAUABAAAAAAAAAAQAAYABAAAAAAAAAAQAAcABAAAAAAAAAAQAAgABAAAAAAAAAAPAAkABAAAAAAAAAAPAAoABAAAAAAAAAAPAAsABAAAAAAAAAAPAAwABAAAAAAAAAAPAA0ABAAAAAAAAAAPAA4ABAAAAAAAAAAQAAkABAAAAAAAAAAQAAoABAAAAAAAAAAQAAsABAAAAAAAAAAQAAwABAAAAAAAAAAQAA0ABAAAAAAAAAAQAA4ABAAAAAAAAAAPAA8ABAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAQAAoABAAAAAAAAAAQAAsABAAAAAAAAAAQAAwABAAAAAAAAAAQAA0ABAAAAAAAAAAQAA4ABAAAAAAAAAAQAA8ABAAAAAAAAAAPAA8ABAAAAAAAAAAPAA4ABAAAAAAAAAAPAA0ABAAAAAAAAAAPAAwABAAAAAAAAAAPAAsABAAAAAAAAAAPAAoABAAAAAAAAAAPAAkABAAAAAAAAAAPAAgABAAAAAAAAAAPAAcABAAAAAAAAAAPAAYABAAAAAAAAAAQAAYABAAAAAAAAAAQAAcABAAAAAAAAAAQAAgABAAAAAAAAAAQAAkABAAAAAAAAAAPAAUABAAAAAAAAAAQAAUABAAAAAAAAAA=")
 
 [node name="Room4" parent="TileMap2" instance=ExtResource("9_e6sph")]
 
@@ -357,6 +360,11 @@ position = Vector2(10235, 3183)
 rotation = -1.57079
 
 [node name="Node" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node"]
+visible = false
+position = Vector2(-24080, 32473)
+shape = SubResource("CircleShape2D_murq2")
 
 [editable path="TileMap2/Room"]
 [editable path="TileMap2/Room3"]

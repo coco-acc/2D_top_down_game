@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://6ia45vs1bs8l"]
+
+[ext_resource type="Script" uid="uid://rx44qsemdjt6" path="res://Globals/Dialogues/Dialogue_manager.gd" id="1_vxb7r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p4pfr"]
+size = Vector2(516, 1038)
+
+[node name="Tutorial" type="Area2D"]
+script = ExtResource("1_vxb7r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_p4pfr")
+
+[node name="Layer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Container" type="Control" parent="Layer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 154.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Layer/Container"]
+layout_mode = 2
+offset_left = 174.0
+offset_top = 508.0
+offset_right = 1110.0
+offset_bottom = 618.0
+text = "blah blah dusiiiiiihiugdb aGUIGASVUGSI"
+horizontal_alignment = 1
+vertical_alignment = 2
