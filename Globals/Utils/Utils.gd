@@ -218,3 +218,8 @@ static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotat
 	tween.tween_interval(10.0)
 	tween.tween_property(cartridge, "modulate:a", 0.0, 0.3)
 	tween.tween_callback(func(): cartridge.queue_free())
+
+static func dissolve_effect(scene_root: Node, sprite: Sprite2D, time) -> void:
+	var tween = scene_root.create_tween()
+	tween.tween_property(sprite, "modulate:a", 0.0, time)
+
