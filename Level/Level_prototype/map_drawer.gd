@@ -12,6 +12,7 @@ var polygons: Array = []
 var map_bounds: Rect2
 var map_scale: float = 1.0
 var map_offset: Vector2 = Vector2.ZERO
+var Mini_offset: Vector2 = Vector2(-4,-4)
 
 func _ready() -> void:
 	# Wait one frame so the viewport size is valid
@@ -22,25 +23,8 @@ func _ready() -> void:
 
 	queue_redraw()
 
-# --- Collect all CollisionPolygon2D shapes from the ground/rooms ---
+# --- Collect all CollisionPolygon2D shapes from the ground---
 func _collect_polygons() -> void:
-	# polygons.clear()
-	# var level = get_node(level_path)
-	# if not level:
-	# 	push_warning("Level not found at path: %s" % level_path)
-	# 	return
-
-	# for room in level.get_children():
-	# 	if room is Node2D:
-	# 		for area in room.get_children():
-	# 			if area is Area2D:
-	# 				for poly in area.get_children():
-	# 					if poly is CollisionPolygon2D and poly.polygon.size() > 0:
-	# 						var global_poly: Array[Vector2] = []
-	# 						for p in poly.polygon:
-	# 							global_poly.append(poly.to_global(p))
-	# 						polygons.append(global_poly)
-	# 					print("Found polygon in room:", room.name, "points:", poly.polygon.size())
 	polygons.clear()
 	var level = get_node_or_null(level_path)
 	if not level:
@@ -87,18 +71,11 @@ func _compute_transform() -> void:
 	# var map_center = map_bounds.position + map_bounds.size * 0.5
 	# map_offset = viewport_size * 0.5 - map_center * map_scale
 	map_scale = 0.01
-	map_offset = Vector2(128,128)  # center in viewport for testing
+	map_offset = Vector2(128,-500)  # center in viewport for testing
 	queue_redraw()
 
 # --- Draw polygons (filled + outlined) ---
 func _draw() -> void:
-
-	# var pol = [Vector2(0,0), Vector2(100,0), Vector2(100,100), Vector2(0,100)]
-	# var transformed_pol = []
-	# for p in pol:
-	# 	transformed_pol.append(p * 0.5 + Vector2(128,128)) # center + scale
-	# draw_colored_polygon(transformed_pol, Color(0,1,0,0.3))
-	# draw_polyline(transformed_pol + [transformed_pol[0]], Color(0,1,0), 2)
 
 	for poly in polygons:
 		var transformed_poly: Array[Vector2] = []
@@ -117,7 +94,7 @@ func _process(_delta: float) -> void:
 	var center = get_viewport_rect().size / 2
 
 	# Use the correct variable name 'player' (lowercase)
-	var player_map_pos = world_to_map(player.global_position)
+	var player_map_pos = world_to_map(player.global_position) + Mini_offset
 
 	# Move the map so the player is at the center
 	self.position = center - player_map_pos

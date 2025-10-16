@@ -44,7 +44,9 @@ func _ready() -> void:
 
 	# Disable behavior for 20 seconds
 	is_disabled = true
+	# self.set_physics_process(false)
 	await get_tree().create_timer(1.2).timeout
+	# self.set_physics_process(true)
 	is_disabled = false
 	
 
@@ -139,5 +141,5 @@ func explode() -> void:
 func spawn_effect() -> void:
 	var tween = self.create_tween()
 	tween.tween_method( func(value):
-		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 1.0		
+		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 0.5		
 		)

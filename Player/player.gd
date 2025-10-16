@@ -17,7 +17,7 @@ var attack: bool = true
 
 # Camera properties
 @onready var camera := $Camera2D
-@export var camera_offset_distance: int = 100
+@onready var camera_offset_distance: int = 100
 var direction_to = Vector2()
 var aspect_ratio: float = 16.0 / 9.0
 
@@ -31,7 +31,7 @@ var stats = {
 	"health": 100,
 	"speed": speed,
 	"is_alive": true,
-	"ammo": 30,
+	"ammo": 60,
 	"reload": 5.0
 }
 
@@ -252,16 +252,24 @@ func jump_state(direction: Vector2):
 	camera.zoom = Vector2(0.52, 0.52)
 
 	var jump_tween = create_tween()
+	var scale_tween = create_tween()
 	# var target = global_position + (direction.normalized() * jump_distance)
 	var target = jump_distance * direction
 	# set_physics_process(false)
 
+	scale_tween.tween_property(self, "scale", Vector2(1.025, 1.025), jump_await * 0.3)
 	jump_tween.tween_property(self, "velocity", target, jump_await)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 
 	# Optionally reset zoom or state after tween finishes
+	scale_tween.finished.connect(func():
+		# self.scale = Vector2(1, 1)
+		var scale_tween2 = create_tween()
+		scale_tween2.tween_property(self, "scale", Vector2(1, 1), jump_await * 0.7)
+		)
 	jump_tween.finished.connect(func():
+		self.scale = Vector2(1, 1)
 		camera.zoom = Vector2(0.5, 0.5)
 		is_jumping = false
 		velocity = Vector2.ZERO
@@ -340,7 +348,7 @@ func reload_state():
 	change_state(State.IDLE)
 
 func reload_mag():
-	stats["ammo"] = 30
+	stats["ammo"] = 60
 	HUD.set_ammo(stats["ammo"])
 	change_state(State.IDLE)
 

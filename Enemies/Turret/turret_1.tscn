@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bv81mq5hwr28i" path="res://Objects/Lights/glow/glow.tscn" id="5_6fobd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swfx4"]
-size = Vector2(3258, 1806)
+size = Vector2(1971, 1644)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_apq2m"]
 radius = 76.0263
@@ -25,6 +25,7 @@ visible = false
 shape = SubResource("RectangleShape2D_swfx4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_apq2m")
 
@@ -41,7 +42,7 @@ rotation = 1.5708
 scale = Vector2(1.5, 1.5)
 
 [node name="BulletPos" type="Marker2D" parent="GunSprite"]
-position = Vector2(-0.232535, -225.015)
+position = Vector2(-0.232491, -213.015)
 rotation = -1.5708
 scale = Vector2(0.666667, 0.666667)
 
