@@ -50,7 +50,6 @@ func _ready() -> void:
 	# 	idle.material = idle.material.duplicate(true)
 	# 	idle.material.set("shader_parameter/Dissolve_value_",0.0)
 	apply_dissolve(idle, 0.0)
-	apply_dissolve(shoot, 1.0)
 
 	#spawn effect
 	dissolve_effect(idle, 0.0, 1.0, 0.5)

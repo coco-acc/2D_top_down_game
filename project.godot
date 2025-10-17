@@ -27,6 +27,12 @@ AudioPlayer="*res://Globals/Utils/Audio_player.gd"
 
 project/assembly_name="Top_Down Game"
 
+[file_customization]
+
+folder_colors={
+"res://Globals/Shaders/": "teal"
+}
+
 [global_group]
 
 obstacles=""

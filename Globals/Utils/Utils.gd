@@ -223,3 +223,20 @@ static func dissolve_effect(scene_root: Node, sprite: Sprite2D, time) -> void:
 	var tween = scene_root.create_tween()
 	tween.tween_property(sprite, "modulate:a", 0.0, time)
 
+static func generate_noise_texture(size: int = 128) -> ImageTexture:
+	var img := Image.create(size, size, false, Image.FORMAT_R8) # 8-bit grayscale
+
+	var noise := FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.frequency = 0.01
+	noise.seed = randi()
+	
+	for y in range(size):
+		for x in range(size):
+			var n = noise.get_noise_2d(x, y)      # returns -1..1
+			n = clamp((n + 1.0) * 0.5, 0.0, 1.0)  # remap to 0..1
+			img.set_pixel(x, y, Color(n, n, n, 1.0))
+	
+	# In Godot 4.4, no need to lock() / unlock()
+	var tex := ImageTexture.create_from_image(img)
+	return tex
