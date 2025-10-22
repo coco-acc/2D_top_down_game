@@ -26,7 +26,7 @@ var bot_stats = {
 	"health": 100,
 	"speed": 0,
 	"heat_up": 0.0,
-	"is_alive": true
+	"is_alive": true,
 }
 
 func _ready() -> void:
@@ -61,36 +61,82 @@ func _ready() -> void:
 	# self.set_physics_process(true)
 	is_disabled = false
 
-func _physics_process(_delta: float) -> void:
-	if is_disabled:
+func _physics_process(delta: float) -> void:
+	# if is_disabled:
+	# 	return
+	# if not player is Player:
+	# 	return
+	# if is_exploding:
+	# 	return
+	
+	# # Move towards the player
+	# var direction: Vector2 = (player.global_position - global_position).normalized()
+
+	# velocity = direction * speed
+	# move_and_slide()
+
+	# rotation = direction.angle()
+
+	# # Detect movement
+	# if velocity.length() > 0.1:  # 0.1 = small threshold so tiny floating errors don’t count
+	# 	idle.hide()
+	# 	walk.show()
+	# 	# walk.sprite_frames.set_animation_("default", 24)
+	# 	walk.speed_scale = 1.0
+	# 	walk.play("default")
+		
+	# else:
+	# 	idle.show()
+	# 	walk.hide()
+	if is_disabled or not (player is Player) or is_exploding:
 		return
-	if not player is Player:
-		return
+
+	var target_dir: Vector2 = (player.global_position - global_position).normalized()
+	var target_angle: float = target_dir.angle()
+
+	# if get_last_slide_collision():
+	# 	var collision = get_last_slide_collision()
+	# 	var collider = collision.get_collider()
+	# 	if not collider == null:
+	# 		# print("collider:", collider)
+	# 		if collider is CharacterBody2D:
+	# 			var target_dir_b = (player.global_position - collider.global_position).normalized()
+	# 			if target_dir > target_dir_b:
+	# 				velocity =  target_dir * speed
+	# 			else:
+	# 				velocity = Vector2.ZERO
+
+	# Smoothly rotate toward player
+	var angle_diff: float = wrapf(target_angle - rotation, -PI, PI)
+	var rotate_speed: float = 5.0  # how fast it turns
+	if abs(angle_diff) > 0.05:
+		# Rotate but don't move forward yet
+		rotation += sign(angle_diff) * rotate_speed * delta
+		velocity = Vector2.ZERO
+	else:
+		# Aligned — move forward
+		rotation = target_angle
+		velocity = target_dir * speed
+
+	var coll = move_and_collide(velocity * delta)
+	if coll:
+		velocity = Vector2.ZERO  # stop on impact
+
+	# --- Animation logic ---
 	if is_exploding:
 		return
-	
-	# Move towards the player
-	var direction: Vector2 = (player.global_position - global_position).normalized()
 
-	velocity = direction * speed
-	move_and_slide()
-
-	rotation = direction.angle()
-
-	# Detect movement
-	if velocity.length() > 0.1:  # 0.1 = small threshold so tiny floating errors don’t count
+	if velocity.length() > 0.1 or abs(angle_diff) > 0.05:
+		# Either moving or turning → play walking animation
 		idle.hide()
 		walk.show()
-		# walk.sprite_frames.set_animation_("default", 24)
-		walk.speed_scale = 1.0
-		walk.play("default")
-		
+		if not walk.is_playing():
+			walk.speed_scale = 1.0
+			walk.play("default")
 	else:
+		# Fully idle (not rotating or moving)
 		idle.show()
 		walk.hide()
-	
-	# Check if close enough damage the player
-	# if global_position.distance_to(player.global_position) <= impact_radius and is_exploding:
 		
 func _on_explosion_body_entered(body: Node2D) -> void:
 	if body == player and body is CharacterBody2D:

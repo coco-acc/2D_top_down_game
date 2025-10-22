@@ -32,7 +32,8 @@ var stats = {
 	"speed": speed,
 	"is_alive": true,
 	"ammo": 60,
-	"reload": 5.0
+	"reload": 5.0,
+	"stamina": 30
 }
 
 # @onready var jump_delay := $jumpDelay
@@ -182,6 +183,9 @@ func idle_state(direction: Vector2):
 		change_state(State.ATTACK)
 	elif can_crouch:
 		change_state(State.CROUCH)
+		
+	if stats["stamina"] < 30:
+			stats["stamina"] += 1
 
 func move_state(direction: Vector2, delta: float):
 	var animation = $move2/legs
@@ -204,15 +208,18 @@ func move_state(direction: Vector2, delta: float):
 
 	var switch_time = 0.5  # Time in seconds between switches (adjust for faster/slower)
 
-	if Input.is_action_pressed("walk") and direction:
+	if Input.is_action_pressed("walk") and direction and stats["stamina"] > 5:
 		speed = 850
 		switch_time = 0.2
+		stats["stamina"] -= 5
 		animation.sprite_frames.set_animation_speed("default", 24)
 	else:
 		speed = 450
 		switch_time = 0.5
 		animation.sprite_frames.set_animation_speed("default", 12)
 		angle = 1
+		if stats["stamina"] < 30:
+			stats["stamina"] += 1
 	animation.play()
 
 	# Continuous rotation effect while moving
