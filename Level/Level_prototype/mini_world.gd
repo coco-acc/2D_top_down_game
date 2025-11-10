@@ -22,3 +22,4 @@ func _process(_delta: float) -> void:
 	# mini_camera.position = player.global_position
 	# icon.position = player.global_position
 	icon.position = map_drawer.world_to_map(player.global_position)
+	icon.rotation = player.rotation

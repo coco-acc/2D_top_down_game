@@ -15,6 +15,9 @@ var hold := false
 var shoot: bool = true
 var attack: bool = true
 
+# Stamina reload speed
+var Recharge_speed := 5.0
+
 # Camera properties
 @onready var camera := $Camera2D
 @onready var camera_offset_distance: int = 100
@@ -28,12 +31,19 @@ var previous_state: State = State.IDLE
 
 #stats
 var stats = {
+	"max_health" : 100,
 	"health": 100,
 	"speed": speed,
 	"is_alive": true,
 	"ammo": 60,
 	"reload": 5.0,
-	"stamina": 30
+	"stamina": 100,
+	"scrap": 0
+}
+
+var loot = {
+	"Medi_pack" : 0,
+	"Ammo" : 0
 }
 
 # @onready var jump_delay := $jumpDelay
@@ -48,11 +58,14 @@ var stats = {
 @onready var node := $"."
 
 @onready var reload_timer = Timer.new()
+@onready var stamina_timer = Timer.new()
 # @onready var sfx = AudioStreamPlayer2D.new()
 
 @onready var bullet = preload("res://Globals/bullets/Bullet_1.tscn")
 @onready var HUD_scene = preload("res://Objects/HUD/hud.tscn")
 var HUD = null
+
+var last_stats := stats.duplicate() # keep previous frame values
 
 func _ready():
 	#camera setup
@@ -66,12 +79,37 @@ func _ready():
 	reload_timer.wait_time = stats["reload"]
 	reload_timer.one_shot = true
 	node.add_child(reload_timer)
+
+	stamina_timer.wait_time = Recharge_speed
+	node.add_child(stamina_timer)
+	stamina_timer.timeout.connect(_on_stamina_timer_timeout)
+	stamina_timer.start()
 	# node.add_child(sfx)
 
 	HUD = HUD_scene.instantiate()
 	node.add_child(HUD)
 	HUD.set_ammo(stats["ammo"])
 	HUD.set_health(stats["health"])
+	HUD.set_currency(stats["scrap"])
+	HUD.set_stamina(stats["stamina"])
+
+func _process(_delta: float) -> void:
+	# detect changes and update HUD when needed
+	if stats["health"] != last_stats["health"]:
+		HUD.set_health(stats["health"])
+		# update snapshot for next frame
+		last_stats = stats.duplicate()
+	if stats["scrap"] != last_stats["scrap"]:
+		HUD.set_currency(stats["scrap"])
+		# update snapshot for next frame
+		last_stats = stats.duplicate()
+	if stats["ammo"] != last_stats["ammo"]:
+		HUD.set_ammo(stats["ammo"])
+		# update snapshot for next frame
+		last_stats = stats.duplicate()
+	if stats["stamina"] != last_stats["stamina"]:
+		HUD.set_stamina(stats["stamina"] )
+		last_stats = stats.duplicate()
 
 func _physics_process(delta: float):
 	# if not player_stats["is_alive"]:
@@ -108,9 +146,16 @@ func _physics_process(delta: float):
 		# Apply rotation to the player
 		rotation = angle
 
-
 	handle_state(delta)
 	move_and_slide()
+
+	#Reduce sliding when collides with CharacterBody2D(s)
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision.get_collider() is CharacterBody2D:
+		# Damp parallel movement along the other body
+			var n = collision.get_normal()
+			velocity = velocity.slide(n) * 0.1 # reduce motion along the tangent
 
 func handle_state(delta: float):
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -183,9 +228,8 @@ func idle_state(direction: Vector2):
 		change_state(State.ATTACK)
 	elif can_crouch:
 		change_state(State.CROUCH)
-		
-	if stats["stamina"] < 30:
-			stats["stamina"] += 1
+	# if stats["stamina"] < 30:
+	# 		stats["stamina"] += 1
 
 func move_state(direction: Vector2, delta: float):
 	var animation = $move2/legs
@@ -211,15 +255,15 @@ func move_state(direction: Vector2, delta: float):
 	if Input.is_action_pressed("walk") and direction and stats["stamina"] > 5:
 		speed = 850
 		switch_time = 0.2
-		stats["stamina"] -= 5
+		stats["stamina"] -= 1
 		animation.sprite_frames.set_animation_speed("default", 24)
 	else:
 		speed = 450
 		switch_time = 0.5
 		animation.sprite_frames.set_animation_speed("default", 12)
 		angle = 1
-		if stats["stamina"] < 30:
-			stats["stamina"] += 1
+		# if stats["stamina"] < 30:
+		# 	stats["stamina"] += 1
 	animation.play()
 
 	# Continuous rotation effect while moving
@@ -327,7 +371,7 @@ func attack_state(direction):
 
 		shoot = false
 		stats["ammo"] -= 1
-		HUD.set_ammo(stats["ammo"])
+		# HUD.set_ammo(stats["ammo"])
 		shoot_delay.start()
 
 	if Input.is_action_just_released("Primary_action") or Input.is_action_just_released("Mouse_shoot"):
@@ -356,7 +400,7 @@ func reload_state():
 
 func reload_mag():
 	stats["ammo"] = 60
-	HUD.set_ammo(stats["ammo"])
+	# HUD.set_ammo(stats["ammo"])
 	change_state(State.IDLE)
 
 func mele_attack_state():
@@ -380,7 +424,7 @@ func hit(damage):
 		if stats["health"] <= 0:
 			stats["health"] = 0
 			stats["is_alive"] = false
-	HUD.set_health(stats["health"])
+	# HUD.set_health(stats["health"])
 	if stats["health"] <= 0:
 		print("Player is dead.")
 
@@ -401,3 +445,6 @@ func _on_gun_collider_body_entered(body: Node2D) -> void:
 func _on_gun_collider_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Non_destructables"):
 		hold = false
+func _on_stamina_timer_timeout() -> void:
+	if not stats["stamina"] == 100:
+		stats["stamina"] += 2 

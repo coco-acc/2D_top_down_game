@@ -13,6 +13,7 @@ config_version=5
 config/name="Top_Down Game"
 run/main_scene="uid://bbbk7360uccfd"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/image="uid://n275iu44subp"
 
 [audio]
 
@@ -22,6 +23,11 @@ buses/default_bus_layout="uid://dtsiw6jw40be6"
 
 Utility="*res://Globals/Utils/Utils.gd"
 AudioPlayer="*res://Globals/Utils/Audio_player.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [dotnet]
 

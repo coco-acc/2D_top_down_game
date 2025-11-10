@@ -24,22 +24,23 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -575.0
-offset_top = -154.0
+offset_top = -168.0
 offset_right = 575.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="1" type="Sprite2D" parent="Layer/Container"]
-position = Vector2(575.9, 79.55)
+position = Vector2(652.05, 74.4)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_p4pfr")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer/Container"]
 layout_mode = 2
-offset_left = 197.9
-offset_top = 39.55
-offset_right = 933.9
-offset_bottom = 113.55
+offset_left = 273.95
+offset_top = 39.95
+offset_right = 1009.95
+offset_bottom = 113.95
 text = "blah blah dusiiiiiihiugdb aGUIGASVUGSI"
 horizontal_alignment = 1
 vertical_alignment = 1

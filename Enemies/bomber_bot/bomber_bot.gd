@@ -62,53 +62,15 @@ func _ready() -> void:
 	is_disabled = false
 
 func _physics_process(delta: float) -> void:
-	# if is_disabled:
-	# 	return
-	# if not player is Player:
-	# 	return
-	# if is_exploding:
-	# 	return
-	
-	# # Move towards the player
-	# var direction: Vector2 = (player.global_position - global_position).normalized()
-
-	# velocity = direction * speed
-	# move_and_slide()
-
-	# rotation = direction.angle()
-
-	# # Detect movement
-	# if velocity.length() > 0.1:  # 0.1 = small threshold so tiny floating errors don’t count
-	# 	idle.hide()
-	# 	walk.show()
-	# 	# walk.sprite_frames.set_animation_("default", 24)
-	# 	walk.speed_scale = 1.0
-	# 	walk.play("default")
-		
-	# else:
-	# 	idle.show()
-	# 	walk.hide()
 	if is_disabled or not (player is Player) or is_exploding:
 		return
 
 	var target_dir: Vector2 = (player.global_position - global_position).normalized()
 	var target_angle: float = target_dir.angle()
 
-	# if get_last_slide_collision():
-	# 	var collision = get_last_slide_collision()
-	# 	var collider = collision.get_collider()
-	# 	if not collider == null:
-	# 		# print("collider:", collider)
-	# 		if collider is CharacterBody2D:
-	# 			var target_dir_b = (player.global_position - collider.global_position).normalized()
-	# 			if target_dir > target_dir_b:
-	# 				velocity =  target_dir * speed
-	# 			else:
-	# 				velocity = Vector2.ZERO
-
 	# Smoothly rotate toward player
 	var angle_diff: float = wrapf(target_angle - rotation, -PI, PI)
-	var rotate_speed: float = 5.0  # how fast it turns
+	var rotate_speed: float = 2.0  # how fast it turns
 	if abs(angle_diff) > 0.05:
 		# Rotate but don't move forward yet
 		rotation += sign(angle_diff) * rotate_speed * delta
@@ -126,8 +88,14 @@ func _physics_process(delta: float) -> void:
 	if is_exploding:
 		return
 
-	if velocity.length() > 0.1 or abs(angle_diff) > 0.05:
+	if velocity.length() > 0.1:
 		# Either moving or turning → play walking animation
+		idle.hide()
+		walk.show()
+		if not walk.is_playing():
+			walk.speed_scale = 1.0
+			walk.play("default")
+	elif velocity.length() < 0.1 and  abs(angle_diff) > 0.01:
 		idle.hide()
 		walk.show()
 		if not walk.is_playing():
@@ -166,6 +134,7 @@ func hit(damage) -> void:
 	damage = 10
 	Utils.get_hit(bot_stats, damage)
 	if bot_stats["health"] <= 0 and not has_exploded:
+		Utils.spawn_item(global_position, get_tree().current_scene)
 		explode()
 
 func explode() -> void:
