@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://qfdb8lsf4bkm"]
+[gd_scene load_steps=92 format=3 uid="uid://qfdb8lsf4bkm"]
 
 [ext_resource type="Script" uid="uid://dmbqtb83t4lal" path="res://Enemies/bomber_bot/bomber_bot.gd" id="1_mi0qa"]
 [ext_resource type="Texture2D" uid="uid://cduolp2vwsj6g" path="res://Img_assests/bomber/idle/bomber_bot.png" id="1_ve1vr"]
@@ -498,6 +498,8 @@ shader = ExtResource("29_pkkuq")
 shader_parameter/Noise = SubResource("NoiseTexture2D_agdyg")
 shader_parameter/Dissolve_value_ = 1.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pkkuq"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkug"]
 size = Vector2(218, 192)
 
@@ -556,6 +558,7 @@ modulate = Color(0.237539, 0.237539, 0.237539, 0.835294)
 z_index = -1
 z_as_relative = false
 y_sort_enabled = true
+material = SubResource("CanvasItemMaterial_pkkuq")
 position = Vector2(20, -29)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("76_hpige")
@@ -566,9 +569,10 @@ position = Vector2(6, -13)
 shape = SubResource("RectangleShape2D_qjkug")
 
 [node name="explosion_Area2D" type="Area2D" parent="."]
-visible = false
 position = Vector2(-10, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosion_Area2D"]
 position = Vector2(10, -4)
 shape = SubResource("CircleShape2D_v04uv")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

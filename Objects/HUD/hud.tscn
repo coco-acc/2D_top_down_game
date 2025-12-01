@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfn3cmniyyrww"]
+[gd_scene load_steps=9 format=3 uid="uid://dfn3cmniyyrww"]
 
 [ext_resource type="Script" uid="uid://bepkyxhe7elmb" path="res://Objects/HUD/hud.gd" id="1_x4ej0"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_x4ej0"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3me4v"]
-texture = SubResource("CanvasTexture_x4ej0")
-modulate_color = Color(1, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://bq26tfptmymm5" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/health_bar1.svg" id="2_wyvgw"]
+[ext_resource type="Texture2D" uid="uid://ditkn477bhmhb" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/health_bar2.svg" id="3_txm0u"]
+[ext_resource type="Texture2D" uid="uid://c0rkijqjcv4rk" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/stamina.svg" id="4_txm0u"]
+[ext_resource type="Texture2D" uid="uid://cxsghdj1lf0e5" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/stamina2.svg" id="5_4p43v"]
+[ext_resource type="Texture2D" uid="uid://y0koynyk05ef" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/base.svg" id="6_im2tr"]
+[ext_resource type="Texture2D" uid="uid://dr370g1u5ltev" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/base2.svg" id="7_gcqre"]
+[ext_resource type="Texture2D" uid="uid://bec8yjj0fl6he" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/base3.svg" id="8_iof4c"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_x4ej0")
@@ -24,29 +25,63 @@ theme_override_constants/margin_left = 10
 [node name="Ammo" type="Label" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-offset_right = 1152.0
-offset_bottom = 40.0
+[node name="Health_and_Stamina" type="HBoxContainer" parent="."]
+offset_left = 41.0
+offset_top = 2.0
+offset_right = 281.0
+offset_bottom = 64.0
 size_flags_vertical = 8
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="Health_and_Stamina"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
 
-[node name="Health" type="Label" parent="HBoxContainer2/MarginContainer2"]
+[node name="Health" type="TextureProgressBar" parent="Health_and_Stamina/MarginContainer2"]
+layout_mode = 2
+value = 50.0
+texture_over = ExtResource("2_wyvgw")
+texture_progress = ExtResource("3_txm0u")
+texture_progress_offset = Vector2(3.5, 3.5)
+
+[node name="stamina" type="HBoxContainer" parent="."]
+offset_left = 41.0
+offset_top = 38.0
+offset_right = 245.0
+offset_bottom = 50.0
+
+[node name="StaminaContainer" type="MarginContainer" parent="stamina"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+
+[node name="stamina" type="TextureProgressBar" parent="stamina/StaminaContainer"]
+layout_mode = 2
+texture_over = ExtResource("4_txm0u")
+texture_progress = ExtResource("5_4p43v")
+texture_progress_offset = Vector2(1.8, 2)
+
+[node name="Scrap" type="HBoxContainer" parent="."]
+offset_left = 1656.0
+offset_right = 1920.0
+offset_bottom = 60.0
+alignment = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="Scrap"]
+layout_mode = 2
+theme_override_constants/margin_right = 60
+
+[node name="Scrap" type="Label" parent="Scrap/MarginContainer4"]
 layout_mode = 2
 vertical_alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="."]
-offset_left = 10.0
-offset_top = -11.0
-offset_right = 210.0
-offset_bottom = 49.0
-theme_override_constants/margin_top = 50
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(120, 43)
+texture = ExtResource("6_im2tr")
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer3"]
-custom_minimum_size = Vector2(200, 10)
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0.159497, 0.415138, 0.301838, 1)
-theme_override_styles/fill = SubResource("StyleBoxTexture_3me4v")
-show_percentage = false
+[node name="Base2" type="Sprite2D" parent="."]
+position = Vector2(1800, 51)
+texture = ExtResource("7_gcqre")
+
+[node name="Base3" type="Sprite2D" parent="."]
+position = Vector2(983, 1)
+texture = ExtResource("8_iof4c")

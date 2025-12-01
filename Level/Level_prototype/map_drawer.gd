@@ -1,18 +1,18 @@
 extends Node2D
 
-@export var level_path: NodePath = "/root/Level/ground"
-@export var line_color: Color = Color(0.9, 0.9, 0.9)
-@export var fill_color: Color = Color(0.2, 0.4, 0.6, 0.3)
-@export var line_width: float = 2.0
-@export var margin: float = 100.0  # extra border space in map
-@onready var icon = get_node("/root/Level/UI/Mini_map/SubViewport/mini_world/PlayerIcon")
+@onready var level_path: NodePath = "/root/Level/ground"
+@onready var line_color: Color = Color(0.9, 0.9, 0.9)
+@onready var fill_color: Color = Color(0.2, 0.4, 0.6, 0.3)
+@onready var line_width: float = 2.0
+@onready var margin: float = 100.0  # extra border space in map
+@onready var icon = get_node("/root/Level/UI/HBoxContainer/Mini_map/SubViewport/MarginContainer/mini_world/PlayerIcon")
 @onready var player: Node2D = get_node("/root/Level/Player")
 
 var polygons: Array = []
 var map_bounds: Rect2
 var map_scale: float = 1.0
 var map_offset: Vector2 = Vector2.ZERO
-var Mini_offset: Vector2 = Vector2(-4,-4)
+var Mini_offset: Vector2 = Vector2(0,0)
 
 func _ready() -> void:
 	# Wait one frame so the viewport size is valid

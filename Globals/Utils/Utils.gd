@@ -205,16 +205,79 @@ static func bullet_cartridge(position: Vector2, scene_root: Node2D, facing_rotat
 	tween.parallel().tween_property(cartridge, "rotation_degrees", cartridge.rotation_degrees + spin_amount, 0.5)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-	# # Drop
-	# tween.tween_property(cartridge, "position:y", cartridge.position.y + randf_range(-10, -25), 0.3)\
-	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-
-	# THEN drop **in world-space** (add a positive Y offset)
-	# var drop_amount = randf_range(10, 25)
-	# tween.tween_property(cartridge, "global_position", target_pos + Vector2(0, drop_amount), 0.3)\
-	# 	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-
 	# Fade out
 	tween.tween_interval(10.0)
 	tween.tween_property(cartridge, "modulate:a", 0.0, 0.3)
 	tween.tween_callback(func(): cartridge.queue_free())
+
+static func dissolve_effect(scene_root: Node, sprite: Sprite2D, time) -> void:
+	var tween = scene_root.create_tween()
+	tween.tween_property(sprite, "modulate:a", 0.0, time)
+
+static func generate_noise_texture(size: int = 128) -> ImageTexture:
+	var img := Image.create(size, size, false, Image.FORMAT_R8) # 8-bit grayscale
+
+	var noise := FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.frequency = 0.01
+	noise.seed = randi()
+	
+	for y in range(size):
+		for x in range(size):
+			var n = noise.get_noise_2d(x, y)      # returns -1..1
+			n = clamp((n + 1.0) * 0.5, 0.0, 1.0)  # remap to 0..1
+			img.set_pixel(x, y, Color(n, n, n, 1.0))
+	
+	# In Godot 4.4, no need to lock() / unlock()
+	var tex := ImageTexture.create_from_image(img)
+	return tex
+
+static func spawn_item(global_position: Vector2, root_scene) -> void:
+	const ITEM_SCENE := preload("res://Objects/Coins_Health_Ammo/Item.tscn")
+	const TEXTURES := {
+		"scrap": preload("res://Img_assests/Objects/Scrap/1.png"),
+		"health": preload("res://Img_assests/Objects/Health_Aid/health.png")
+	}
+	# Randomly pick an item type
+	var item_types = ["scrap", "health"]
+	var item_type = item_types[randi() % item_types.size()]
+
+	# Instance the item scene
+	var item_instance = ITEM_SCENE.instantiate()
+
+	# Assign texture based on chosen item
+	var sprite_node = item_instance.get_node_or_null("Sprite2D")
+	if sprite_node:
+		sprite_node.texture = TEXTURES[item_type]
+
+	# Set position in the world
+	item_instance.global_position = global_position
+
+	# Add to the current scene tree (use root if autoload)
+	root_scene.call_deferred("add_child",item_instance)
+
+	# Connect signal
+	item_instance.call_deferred("connect", "body_entered", Callable(Utils, "_on_item_body_entered").bind(item_instance, item_type))
+
+static func _on_item_body_entered(body: Node, item_instance: Area2D, item_type: String) -> void:
+	if not is_instance_valid(item_instance):
+		return
+	if not body is Player:
+		return
+
+	# var item_type: String = item_instance.get_meta("item_type")
+
+	match item_type:
+		"health":
+			if body.stats["health"]:
+				body.stats["health"] = clamp(body.stats["health"] + 20, 0, body.stats["max_health"])
+		"scrap":
+			# if body.stats["scrap"]:
+			if "scrap" in body.stats and body.stats["health"]:
+				body.stats["scrap"] += 1
+	if item_instance.is_connected("body_entered", _on_item_body_entered):
+		# Note: disconnect requires the same callable; skip disconnect if you prefer
+		pass	
+	
+	if is_instance_valid(item_instance):
+		item_instance.queue_free()

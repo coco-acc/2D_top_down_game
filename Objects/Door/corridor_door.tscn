@@ -243,7 +243,6 @@ scale = Vector2(1, -1)
 polygon = PackedVector2Array(6058.9, 7367, 6058.9, 7726, 5466.9, 7727, 5465.9, 7618, 5116.9, 7619, 5112.9, 7365, 5775.9, 7368)
 
 [node name="door_way" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="doorWay" type="CollisionPolygon2D" parent="door_way"]
 position = Vector2(-5777, -8006)

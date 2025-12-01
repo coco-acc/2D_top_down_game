@@ -4,10 +4,14 @@ extends CharacterBody2D
 var speed: float = 120.0
 var impact_radius: float = 500.0
 var explosion_damage: int = 20
+var explosion_delay = 0.5
 var is_exploding = false
 var has_exploded = false
 var can_explode = true
 var is_disabled = false
+
+var is_delayed = false
+@onready var delay_timer: Timer
 
 @onready var player: Node2D = get_node("/root/Level/Player")
 @onready var explosion_area = $explosion_Area2D
@@ -22,25 +26,33 @@ var bot_stats = {
 	"health": 100,
 	"speed": 0,
 	"heat_up": 0.0,
-	"is_alive": true
+	"is_alive": true,
 }
 
 func _ready() -> void:
+	#Delay timer 
+	delay_timer = Timer.new()
+	delay_timer.wait_time = explosion_delay
+	delay_timer.one_shot = true
+	add_child(delay_timer)
+	delay_timer.timeout.connect(_on_delay_timer_timeout)
 	
 	if player == null:
 		push_error("player not found")
 	explosion_area.body_entered.connect(_on_explosion_body_entered)
+	explosion_area.body_exited.connect(_on_explosion_body_exited)
 	idle.show()
 	walk.hide()
 	explosion.hide()
 	shoot.hide()
 
-	if idle.material:
-		idle.material = idle.material.duplicate(true)
-		idle.material.set("shader_parameter/Dissolve_value_",0.0)
+	# if idle.material:
+	# 	idle.material = idle.material.duplicate(true)
+	# 	idle.material.set("shader_parameter/Dissolve_value_",0.0)
+	apply_dissolve(idle, 0.0)
 
 	#spawn effect
-	spawn_effect()
+	dissolve_effect(idle, 0.0, 1.0, 0.5)
 
 	# Disable behavior for 20 seconds
 	is_disabled = true
@@ -48,45 +60,71 @@ func _ready() -> void:
 	await get_tree().create_timer(1.2).timeout
 	# self.set_physics_process(true)
 	is_disabled = false
-	
 
-func _physics_process(_delta: float) -> void:
-	if is_disabled:
+func _physics_process(delta: float) -> void:
+	if is_disabled or not (player is Player) or is_exploding:
 		return
-	if not player is Player:
-		return
+
+	var target_dir: Vector2 = (player.global_position - global_position).normalized()
+	var target_angle: float = target_dir.angle()
+
+	# Smoothly rotate toward player
+	var angle_diff: float = wrapf(target_angle - rotation, -PI, PI)
+	var rotate_speed: float = 2.0  # how fast it turns
+	if abs(angle_diff) > 0.05:
+		# Rotate but don't move forward yet
+		rotation += sign(angle_diff) * rotate_speed * delta
+		velocity = Vector2.ZERO
+	else:
+		# Aligned — move forward
+		rotation = target_angle
+		velocity = target_dir * speed
+
+	var coll = move_and_collide(velocity * delta)
+	if coll:
+		velocity = Vector2.ZERO  # stop on impact
+
+	# --- Animation logic ---
 	if is_exploding:
 		return
-	
-	# Move towards the player
-	var direction: Vector2 = (player.global_position - global_position).normalized()
 
-	velocity = direction * speed
-	move_and_slide()
-
-	rotation = direction.angle()
-
-	# Detect movement
-	if velocity.length() > 0.2:  # 0.1 = small threshold so tiny floating errors don’t count
+	if velocity.length() > 0.1:
+		# Either moving or turning → play walking animation
 		idle.hide()
 		walk.show()
-		# walk.sprite_frames.set_animation_("default", 24)
-		walk.speed_scale = 1.0
-		walk.play("default")
-		
+		if not walk.is_playing():
+			walk.speed_scale = 1.0
+			walk.play("default")
+	elif velocity.length() < 0.1 and  abs(angle_diff) > 0.01:
+		idle.hide()
+		walk.show()
+		if not walk.is_playing():
+			walk.speed_scale = 1.0
+			walk.play("default")
 	else:
+		# Fully idle (not rotating or moving)
 		idle.show()
 		walk.hide()
-	
-	# Check if close enough damage the player
-	# if global_position.distance_to(player.global_position) <= impact_radius and is_exploding:
 		
-func _on_explosion_body_entered(body: Node) -> void:
+func _on_explosion_body_entered(body: Node2D) -> void:
 	if body == player and body is CharacterBody2D:
-		explode()
-		if body.has_method("hit"):
-			body.hit(explosion_damage)
+		delay_timer.start()  # Start the countdown
 
+
+func _on_explosion_body_exited(body: Node2D) -> void:
+	if body == player and body is CharacterBody2D:
+		delay_timer.stop()
+		is_delayed = false
+
+func _on_delay_timer_timeout() -> void:
+	is_delayed = true
+	# Check if the player is still in the area before exploding
+	for body in explosion_area.get_overlapping_bodies():
+		if body == player and body is CharacterBody2D:
+			explode()
+			if body.has_method("hit"):
+				body.hit(explosion_damage)
+			break
 
 func hit(damage) -> void:
 	# Ignore hits if already exploding or exploded
@@ -96,6 +134,7 @@ func hit(damage) -> void:
 	damage = 10
 	Utils.get_hit(bot_stats, damage)
 	if bot_stats["health"] <= 0 and not has_exploded:
+		Utils.spawn_item(global_position, get_tree().current_scene)
 		explode()
 
 func explode() -> void:
@@ -136,10 +175,20 @@ func explode() -> void:
 
 	#Wait for more seconds before freeing
 	await get_tree().create_timer(20.0).timeout
+	Utils.dissolve_effect(self, shoot, 0.5)
+	await get_tree().create_timer(1.0).timeout
 	queue_free()
 
-func spawn_effect() -> void:
-	var tween = self.create_tween()
-	tween.tween_method( func(value):
-		idle.material.set("shader_parameter/Dissolve_value_", value), 0.0, 1.0, 0.5		
-		)
+func dissolve_effect(sprite: Sprite2D, start: float, end: float, time: float) -> void:
+	if sprite.material == null:
+		push_warning("%s has no material; skipping dissolve effect." % sprite.name)
+		return
+	var tween = create_tween()
+	tween.tween_method(func(value):
+		sprite.material.set("shader_parameter/Dissolve_value_", value), start, end, time)
+
+
+func apply_dissolve(sprite: Sprite2D, value: float):
+	if sprite.material:
+		sprite.material = sprite.material.duplicate(true)
+		sprite.material.set("shader_parameter/Dissolve_value_", value)

@@ -20,6 +20,7 @@ var close_animation : AnimatedSprite2D
 func _ready() -> void:
 	door_frame.add_to_group("Non_destructables")
 	door.add_to_group("Non_destructables")
+	# door_way.add_to_group("Non_destructables")
 	door_way.body_entered.connect(_on_body_entered)
 	door_way.body_exited.connect(_on_body_exited)
 	overlay.modulate = Color(1,1,1,0)

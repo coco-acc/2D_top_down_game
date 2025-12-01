@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://6ia45vs1bs8l"]
+[gd_scene load_steps=4 format=3 uid="uid://6ia45vs1bs8l"]
 
 [ext_resource type="Script" uid="uid://rx44qsemdjt6" path="res://Globals/Dialogues/Dialogue_manager.gd" id="1_vxb7r"]
+[ext_resource type="Texture2D" uid="uid://dasco6jkav515" path="res://Img_assests/UI_&_ICONS/Dialogue_boxes/1.png" id="2_p4pfr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4pfr"]
 size = Vector2(516, 1038)
@@ -17,16 +18,29 @@ layer = 4
 
 [node name="Container" type="Control" parent="Layer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1150.0
-offset_bottom = 154.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.0
+offset_top = -168.0
+offset_right = 575.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="1" type="Sprite2D" parent="Layer/Container"]
+position = Vector2(652.05, 74.4)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_p4pfr")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer/Container"]
 layout_mode = 2
-offset_left = 174.0
-offset_top = 508.0
-offset_right = 1110.0
-offset_bottom = 618.0
+offset_left = 273.95
+offset_top = 39.95
+offset_right = 1009.95
+offset_bottom = 113.95
 text = "blah blah dusiiiiiihiugdb aGUIGASVUGSI"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
