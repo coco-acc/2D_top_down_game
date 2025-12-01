@@ -5,7 +5,7 @@ extends Node2D
 @onready var fill_color: Color = Color(0.2, 0.4, 0.6, 0.3)
 @onready var line_width: float = 2.0
 @onready var margin: float = 100.0  # extra border space in map
-@onready var icon = get_node("/root/Level/UI/Mini_map/SubViewport/mini_world/PlayerIcon")
+@onready var icon = get_node("/root/Level/UI/HBoxContainer/Mini_map/SubViewport/MarginContainer/mini_world/PlayerIcon")
 @onready var player: Node2D = get_node("/root/Level/Player")
 
 var polygons: Array = []

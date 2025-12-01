@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://y6o7i05pfars"]
+
+[ext_resource type="Texture2D" uid="uid://bcckupts7w6lm" path="res://Img_assests/UI_&_ICONS/paused/paused_bg.png" id="1_8qg61"]
+[ext_resource type="Script" uid="uid://v37k060dyf1b" path="res://UI/paused.gd" id="1_hdthg"]
+[ext_resource type="Texture2D" uid="uid://c52h57vf5ky1" path="res://Img_assests/UI_&_ICONS/paused/options_button.png" id="3_yn4bl"]
+[ext_resource type="Texture2D" uid="uid://bycprfhhs67wx" path="res://Img_assests/UI_&_ICONS/paused/options_button2.png" id="4_sm282"]
+[ext_resource type="Texture2D" uid="uid://dmkgbd6grb147" path="res://Img_assests/UI_&_ICONS/paused/quit_button.png" id="5_72irf"]
+[ext_resource type="Texture2D" uid="uid://cecriirgfsly7" path="res://Img_assests/UI_&_ICONS/paused/resume_button.png" id="5_fj1y8"]
+[ext_resource type="Texture2D" uid="uid://nd52vr5lcnvg" path="res://Img_assests/UI_&_ICONS/paused/resume_button2.png" id="6_3hugn"]
+[ext_resource type="Texture2D" uid="uid://bjhkwcqaob6v5" path="res://Img_assests/UI_&_ICONS/paused/quit_button2.png" id="6_kgd8m"]
+
+[node name="paused" type="Node2D"]
+script = ExtResource("1_hdthg")
+
+[node name="PausedBg" type="Sprite2D" parent="."]
+position = Vector2(946, 527)
+texture = ExtResource("1_8qg61")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PausedBg"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1493.0
+offset_top = -628.0
+offset_right = -516.0
+offset_bottom = -219.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="resume" type="TextureButton" parent="PausedBg/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_fj1y8")
+texture_pressed = ExtResource("6_3hugn")
+texture_hover = ExtResource("6_3hugn")
+texture_focused = ExtResource("6_3hugn")
+
+[node name="options" type="TextureButton" parent="PausedBg/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_yn4bl")
+texture_pressed = ExtResource("4_sm282")
+texture_hover = ExtResource("4_sm282")
+texture_focused = ExtResource("4_sm282")
+
+[node name="quit" type="TextureButton" parent="PausedBg/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_72irf")
+texture_pressed = ExtResource("6_kgd8m")
+texture_hover = ExtResource("6_kgd8m")
+texture_focused = ExtResource("6_kgd8m")

@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var paused_bg = $BG
+@onready var grid = $BG2
+@onready var anime = $motion_graphics
 @onready var box = $CanvasLayer/VBoxContainer
 @onready var target_scale : Vector2
 
@@ -10,13 +12,16 @@ extends Node2D
 @onready var quit_button = $CanvasLayer/VBoxContainer/Quit
 @onready var credits = $CanvasLayer/VBoxContainer2
 @onready var buttons = $CanvasLayer/VBoxContainer
+@onready var credits_button = $CanvasLayer/VBoxContainer2/TextureButton
 
 # Loading label
-@onready var loading_label = $LoadingLabel
+@onready var loading_label = $VBoxContainer/LoadingLabel
+@onready var loading_label_container = $VBoxContainer
 
 var game_scene : PackedScene
 var game_scene_path := "res://Level/Level_prototype/level.tscn"
 var is_loading := true
+var middle : Vector2
 
 func _ready() -> void:
 	# Start loading the game scene asynchronously
@@ -52,8 +57,18 @@ func _on_resize():
 	var credits_size = box.get_combined_minimum_size() * box.scale
 	credits.position = Vector2(0, (screen_size.y - credits_size.y))
 
-	# Center loading text
-	loading_label.position = screen_size / 2
+	# Scale Center loading
+	# var grid_texture = grid.texture.get_size()
+	# var grid_scale = max(screen_size.x / grid_texture.x, screen_size.y / grid_texture.y)
+
+	# grid.scale = Vector2(grid_scale, grid_scale)
+
+	anime.scale = box.scale * 0.6
+
+	middle = screen_size / 2
+	
+	grid.position = middle
+	anime.position = middle
 
 func _process(_delta):
 	if is_loading:
@@ -62,6 +77,9 @@ func _process(_delta):
 			ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 				if loading_label:
 					loading_label.text = "Loading..."
+
+					var loading_size = loading_label.get_combined_minimum_size()
+					loading_label_container.position = Vector2((middle.x - loading_size.x) - (loading_size.x/2), (middle.y - (loading_size.y - 200)))
 			ResourceLoader.THREAD_LOAD_LOADED:
 				game_scene = ResourceLoader.load_threaded_get(game_scene_path)
 				is_loading = false
@@ -76,6 +94,7 @@ func _process(_delta):
 func _on_play_pressed() -> void:
 	if game_scene:
 		get_tree().change_scene_to_packed(game_scene)
+		queue_free()
 	else:
 		print("Game scene not ready yet!")
 
@@ -83,7 +102,15 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _set_buttons_enabled(enabled: bool):
-	buttons.visible = enabled
+	# Loading 
+	grid.visible = not enabled
+	anime.visible = not enabled
+	if anime.visible:
+		anime.play("default")
+
+	# menu
+	buttons.visible = enabled 
+	credits_button.visible = enabled
 	for child in buttons.get_children():
 		if child is TextureButton:
 			child.disabled = not enabled
