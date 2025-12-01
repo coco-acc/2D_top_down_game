@@ -12,40 +12,43 @@
 [node name="paused" type="Node2D"]
 script = ExtResource("1_hdthg")
 
-[node name="PausedBg" type="Sprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="PausedBg" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(946, 527)
 texture = ExtResource("1_8qg61")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PausedBg"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1493.0
-offset_top = -628.0
-offset_right = -516.0
-offset_bottom = -219.0
+offset_left = -504.0
+offset_top = -21.0
+offset_right = 473.0
+offset_bottom = 388.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="resume" type="TextureButton" parent="PausedBg/VBoxContainer"]
+[node name="resume" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_fj1y8")
 texture_pressed = ExtResource("6_3hugn")
 texture_hover = ExtResource("6_3hugn")
 texture_focused = ExtResource("6_3hugn")
 
-[node name="options" type="TextureButton" parent="PausedBg/VBoxContainer"]
+[node name="options" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_yn4bl")
 texture_pressed = ExtResource("4_sm282")
 texture_hover = ExtResource("4_sm282")
 texture_focused = ExtResource("4_sm282")
 
-[node name="quit" type="TextureButton" parent="PausedBg/VBoxContainer"]
+[node name="quit" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_72irf")
 texture_pressed = ExtResource("6_kgd8m")
