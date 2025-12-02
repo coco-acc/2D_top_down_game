@@ -18,6 +18,9 @@ extends Node2D
 @onready var loading_label = $VBoxContainer/LoadingLabel
 @onready var loading_label_container = $VBoxContainer
 
+# Loading progress bar
+@onready var progress = $TextureProgressBar
+
 var game_scene : PackedScene
 var game_scene_path := "res://Level/Level_prototype/level.tscn"
 var is_loading := true
@@ -71,25 +74,54 @@ func _on_resize():
 	grid.position = middle
 	anime.position = middle
 
+	# Position progress bar below the animated sprite
+	if progress:
+		progress.scale = box.scale * 1.5  # Adjust multiplier as needed
+		
+		# Position progress bar centered horizontally and below the sprite
+		progress.position = Vector2(
+			middle.x - (progress.size.x * progress.scale.x) / 2,  # Center horizontally
+			middle.y + 150  # Fixed offset below center
+		)
+
 func _process(_delta):
 	if is_loading:
-		var status = ResourceLoader.load_threaded_get_status(game_scene_path)
+		var progress_array = []  # Create array to store progress
+		var status = ResourceLoader.load_threaded_get_status(game_scene_path, progress_array)
 		match status:
 			ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 				if loading_label:
-					loading_label.text = "Loading..."
-
+					# Update progress bar based on loading progress
+					# progress_array now contains the progress value (0.0 to 1.0)
+					if progress_array.size() > 0:
+						var percent = progress_array[0] * 100  # Convert to percentage
+						progress.value = percent
+						loading_label.text = "Loading... %d%%" % percent
+					else:
+						loading_label.text = "Loading..."
+						progress.value = 0
+					
 					var loading_size = loading_label.get_combined_minimum_size()
-					loading_label_container.position = Vector2((middle.x - loading_size.x) - (loading_size.x/2), (middle.y - (loading_size.y - 200)))
+					# loading_label_container.position = Vector2((middle.x - loading_size.x) - (loading_size.x/2), (middle.y - (loading_size.y - 200)))
+					loading_label_container.position = Vector2(\
+						((middle.x - loading_size.x / 2) - 30),  # Center horizontally
+						middle.y + 180  # Fixed offset below center (adjust as needed)
+					)
 			ResourceLoader.THREAD_LOAD_LOADED:
 				game_scene = ResourceLoader.load_threaded_get(game_scene_path)
 				is_loading = false
 				if loading_label:
-					loading_label.text = ""
+					loading_label.text = "Loaded!"
+				if progress:
+					progress.value = 100  # Set to 100% when complete
+				# Small delay to show 100% before hiding
+				await get_tree().create_timer(0.5).timeout
 				_set_buttons_enabled(true)
 			ResourceLoader.THREAD_LOAD_FAILED:
 				if loading_label:
 					loading_label.text = "Failed to load game!"
+				if progress:
+					progress.value = 0
 				is_loading = false
 
 func _on_play_pressed() -> void:
@@ -104,9 +136,13 @@ func _on_quit_pressed() -> void:
 func _set_buttons_enabled(enabled: bool):
 	# Loading 
 	grid.visible = not enabled
+	loading_label.visible = not enabled
 	anime.visible = not enabled
 	if anime.visible:
 		anime.play("default")
+
+	if progress:
+		progress.visible = not enabled
 
 	# menu
 	buttons.visible = enabled 
