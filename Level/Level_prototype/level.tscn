@@ -71,7 +71,7 @@ visibility_layer = 3
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(5150, -913)
+position = Vector2(9079, 7458)
 
 [node name="Enemies" type="Node2D" parent="."]
 

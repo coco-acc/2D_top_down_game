@@ -111,7 +111,7 @@ func _process(_delta):
 				game_scene = ResourceLoader.load_threaded_get(game_scene_path)
 				is_loading = false
 				if loading_label:
-					loading_label.text = "Loaded!"
+					loading_label.text = "Loaded"
 				if progress:
 					progress.value = 100  # Set to 100% when complete
 				# Small delay to show 100% before hiding
