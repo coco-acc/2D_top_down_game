@@ -235,12 +235,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	# If mouse is over ANY UI control, pass to game
 	if hovered_control != null:
 		# Optional: Debug which control is blocking
-		print("Blocked by: ", hovered_control.name)
+		# print("Blocked by: ", hovered_control.name)
 		hovered_control.mouse_filter = Control.MOUSE_FILTER_PASS
 	
 	# Process shooting input
 	if shoot and event.is_action_pressed("Mouse_shoot"):
 		change_state(State.ATTACK)
+		crouched = false
 	elif event.is_action_released("Mouse_shoot"):
 		Audio_Player.stop_sfx("MG2")
 		change_state(previous_state if previous_state else State.IDLE)
