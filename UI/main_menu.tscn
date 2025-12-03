@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://ds44hq5eycv5f"]
+[gd_scene load_steps=66 format=3 uid="uid://ds44hq5eycv5f"]
 
 [ext_resource type="Texture2D" uid="uid://tano3h3yyg0j" path="res://Img_assests/UI_&_ICONS/Menus/main_menu.png" id="1_p8ccj"]
 [ext_resource type="Script" uid="uid://bwyim4fochbuy" path="res://UI/main_menu.gd" id="1_tk8dj"]
@@ -62,6 +62,8 @@
 [ext_resource type="Texture2D" uid="uid://rak6niq6n2g4" path="res://Img_assests/UI_&_ICONS/Loading_screen/motion_graphics/10048.png" id="51_7tnu8"]
 [ext_resource type="Texture2D" uid="uid://bcm653af5dctk" path="res://Img_assests/UI_&_ICONS/Loading_screen/motion_graphics/10049.png" id="52_ika86"]
 [ext_resource type="Texture2D" uid="uid://cbuslbxpwciat" path="res://Img_assests/UI_&_ICONS/Loading_screen/motion_graphics/10050.png" id="53_qht8x"]
+[ext_resource type="Texture2D" uid="uid://ctmrhf3m2rw84" path="res://Img_assests/UI_&_ICONS/Loading_screen/progress_bar_base2.png" id="63_puswy"]
+[ext_resource type="Texture2D" uid="uid://bimo2i5i7ue5w" path="res://Img_assests/UI_&_ICONS/Loading_screen/progress_bar2.png" id="64_q21d6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gehsy"]
 animations = [{
@@ -304,3 +306,9 @@ alignment = 1
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_over = ExtResource("63_puswy")
+texture_progress = ExtResource("64_q21d6")

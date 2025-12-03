@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://0tl7yjtxt06d"]
+
+[ext_resource type="Texture2D" uid="uid://ckbje0a3vbwbf" path="res://Img_assests/UI_&_ICONS/options/options_bg.png" id="1_ua1a0"]
+
+[node name="Options" type="CanvasLayer"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_ua1a0")

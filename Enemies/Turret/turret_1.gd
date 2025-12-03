@@ -129,11 +129,42 @@ func hit(damage):
 		queue_free()
 
 func start_firing_phase():
+	# Set state to COOLDOWN initially while rotating toward target
+	state = TurretState.COOLDOWN
+	can_shoot = false
+	
+	# If we have a target, rotate toward it before firing
+	if target:
+		# Calculate target angle
+		direction = (target.global_position - global_position).normalized()
+		attack_angle = direction.angle() + deg_to_rad(90)
+		
+		# Create tween to rotate toward target
+		var rotate_tween = create_tween()
+		rotate_tween.tween_property(
+			gun_sprite,
+			"rotation",
+			attack_angle,
+			0.5  # Rotation duration - adjust as needed
+		).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+		
+		# When tween completes, change to FIRING state
+		rotate_tween.finished.connect(_on_rotate_to_target_finished, CONNECT_ONE_SHOT)
+	else:
+		# No target, start firing phase immediately (will just idle)
+		_actually_start_firing_phase()
+
+# Helper function that actually starts the firing phase
+func _actually_start_firing_phase():
 	state = TurretState.FIRING
 	can_shoot = true
-	fire_duration = randf_range(8.0, 15.0) * current_level  # default range, will change for difficulty later
+	fire_duration = randf_range(8.0, 15.0) * current_level
 	shoot_timer.start()
 	cycle_timer.start(fire_duration)
+
+# Callback when rotation tween finishes
+func _on_rotate_to_target_finished():
+	_actually_start_firing_phase()
 
 func start_cooldown_phase():
 	state = TurretState.COOLDOWN
@@ -156,6 +187,7 @@ func _on_attack_zone_body_entered(body):
 func _on_attack_zone_body_exited(body):
 	if body == target:
 		target = null
+
 func apply_rotation_recoil():
 	var recoil_tween = create_tween()
 	var rot = 2

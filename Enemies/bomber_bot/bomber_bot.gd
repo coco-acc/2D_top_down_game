@@ -46,19 +46,14 @@ func _ready() -> void:
 	explosion.hide()
 	shoot.hide()
 
-	# if idle.material:
-	# 	idle.material = idle.material.duplicate(true)
-	# 	idle.material.set("shader_parameter/Dissolve_value_",0.0)
 	apply_dissolve(idle, 0.0)
 
 	#spawn effect
 	dissolve_effect(idle, 0.0, 1.0, 0.5)
 
-	# Disable behavior for 20 seconds
+	# Disable behavior for 1.2 seconds
 	is_disabled = true
-	# self.set_physics_process(false)
 	await get_tree().create_timer(1.2).timeout
-	# self.set_physics_process(true)
 	is_disabled = false
 
 func _physics_process(delta: float) -> void:
@@ -144,10 +139,9 @@ func explode() -> void:
 	if explosion_area:
 		explosion_area.queue_free()
 		
-	#play SFX
+	
 	Audio_Player.play_sfx(self, "explosion", 5.0, true, 0.0, "Explosion")
-	# Damage player (if it has a health variable or method)
-
+	
 	# Remove collision from physics world (bullets can't hit anymore)
 	set_collision_layer(0)
 	set_collision_mask(0)
@@ -158,7 +152,6 @@ func explode() -> void:
 	walk.hide()
 
 	# Queue free after short delay
-	# can_explode = false
 	explosion.sprite_frames.set_animation_loop("default", false)
 	explosion.play("default")
 	shoot.show()
