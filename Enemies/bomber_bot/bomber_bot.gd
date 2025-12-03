@@ -10,6 +10,12 @@ var has_exploded = false
 var can_explode = true
 var is_disabled = false
 
+#obstacle avoidance
+var is_stuck := false
+var stuck_timer := 0.0
+var STUCK_TIME_THRESHOLD := 3.0
+var avoidance_direction := 1  # Start with left avoidance
+
 var is_delayed = false
 @onready var delay_timer: Timer
 
@@ -22,6 +28,7 @@ var is_delayed = false
 @onready var shoot := $shoot
 @onready var shadow := $Shadow
 
+@onready var raycasts = $Nav
 var bot_stats = {
 	"health": 100,
 	"speed": 0,
@@ -60,8 +67,25 @@ func _physics_process(delta: float) -> void:
 	if is_disabled or not (player is Player) or is_exploding:
 		return
 
+	# Check if stuck based on velocity
+	if velocity.length() < 5.0:  # Adjust threshold based on your bomber's speed
+		stuck_timer += delta
+		if stuck_timer >= STUCK_TIME_THRESHOLD:
+			is_stuck = true
+	else:
+		stuck_timer = 0.0
+		is_stuck = false
+
 	var target_dir: Vector2 = (player.global_position - global_position).normalized()
 	var target_angle: float = target_dir.angle()
+
+	# obstacle handling
+	var obstacle_perpendicular = detect_obstacle()
+	if obstacle_perpendicular != Vector2.ZERO:
+		# Use perpendicular vector for avoidance
+		target_dir = obstacle_perpendicular
+		target_angle = target_dir.angle()
+
 
 	# Smoothly rotate toward player
 	var angle_diff: float = wrapf(target_angle - rotation, -PI, PI)
@@ -100,6 +124,22 @@ func _physics_process(delta: float) -> void:
 		# Fully idle (not rotating or moving)
 		idle.show()
 		walk.hide()
+
+func detect_obstacle() -> Vector2:
+	for ray in raycasts.get_children():
+		if ray.is_colliding():
+			var collision_normal = ray.get_collision_normal()
+			
+			if is_stuck:
+				# Switch direction when stuck
+				avoidance_direction *= -1
+				is_stuck = false
+				stuck_timer = 0.0
+			
+			var perpendicular = (Vector2(-collision_normal.y * avoidance_direction, 
+										collision_normal.x * avoidance_direction) * randf_range(10, 35)).normalized()
+			return perpendicular
+	return Vector2.ZERO
 		
 func _on_explosion_body_entered(body: Node2D) -> void:
 	if body == player and body is CharacterBody2D:
