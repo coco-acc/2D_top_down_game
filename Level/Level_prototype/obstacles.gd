@@ -1,7 +1,7 @@
 extends Node2D
 class_name Obstacles
 
-@onready var player := $".."/Player  # Direct reference to player node
+@onready var player: Node2D = get_node("/root/Level/Player")  # Direct reference to player node
 var obstacle_children: Array[Node]
 var timer := Timer.new()
 var obstacle_swap_states := {}  # Dictionary to track swap states per obstacle

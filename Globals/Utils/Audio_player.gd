@@ -1,8 +1,6 @@
 extends Node
 class_name Audio_Player
 
-# static var player: AudioStreamPlayer2D = null
-# static var time: Timer = null
 static var active_players := {}
 
 # Dictionary of preloaded SFX (set this up elsewhere)
@@ -25,7 +23,6 @@ static func play_sfx(scene_root: Node, file: String, duration: float = -1.0, con
 		return
 
 	# Create player once
-	# if player == null:
 	var player = AudioStreamPlayer2D.new()
 	scene_root.add_child(player)
 

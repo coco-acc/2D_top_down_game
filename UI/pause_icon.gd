@@ -7,6 +7,7 @@ func _ready() -> void:
 	_on_resize()
 
 func _pause_pressed() -> void:
+	# print("button is working")
 	if not get_tree().paused:
 		get_tree().paused = true  # Pause all gameplay
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
