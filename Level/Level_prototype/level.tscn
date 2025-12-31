@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bbbk7360uccfd"]
+[gd_scene load_steps=31 format=3 uid="uid://bbbk7360uccfd"]
 
 [ext_resource type="PackedScene" uid="uid://bln81cgcs1cxx" path="res://Level/Level_prototype/ground.tscn" id="1_5xok0"]
 [ext_resource type="PackedScene" uid="uid://bh7e4pymisjtq" path="res://Player/player.tscn" id="2_jcr5m"]
@@ -61,6 +61,14 @@ size = Vector2(1780, 748)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xk1c"]
 size = Vector2(1533, 734)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lfoej"]
+vertices = PackedVector2Array(4499, 549, 4686.1875, 433.8672, 5226, 421.1875, 5226, 844, 4850.4375, 901.6797, 2098, -14, 2098, 344.32813, 1968.5078, 120.046875, 4920, 8218, 5322.8438, 8495.242, 2358, 8550.727, 3793, 8218, 5310.4063, 7230, 4920, 7806, 4930, 7230, 4499, 137, 4691.7813, -412.53125, 951.96094, 3487.4688, 1606.1406, 3529.4766, 1596.8594, 4762.742, 917.7969, 4780.6016, 607, 4172, 607, 3760, 2293.5, 682.96094, 2128.9766, 398, 2748, 398, 3849, 549, 975.0781, 976.27344, 520, 1081, 520, 431, 521, 373, 2358, 7920.9063, 3793, 7806, 3849, 137, 2748, -14, 521, -277, 1611.6875, 326.03125, 1936.7031, 888.96094, 5638, 411.52344, 5963.3203, 403.89063, 5949.289, 1438.0078, 5638, 844, 5255.0625, 1596.5313, 917.7969, 4784.422, 280.20313, 4780.6016, -43, 4172, -799.4375, -221.3125, -792.4297, -2156, 4037.5469, -2075.9297, 4049.5, -1529.1719, 109, -277, -1486.75, 6638.7813, 280.20313, 5240.3984, 903.39844, 5240.3984, 880.72656, 7378.4063, -1467.75, 7923.8984, 5261.172, 2218.3984, 5269.633, 3079.6016, 4975.203, 3079.6016, 4856.492, 2218.3984, 4862.5625, 3539.0781, 4975.203, 3539.3984, 5256.6484, 1758.6016, 4854.383, 1758.6016, -729, 4172, -4055.4297, 6621.7813, -4080.5469, -240.28906, -729, 3760, 5274.1484, 3539.3984, 4833.75, 4784.8906, 4729.797, 4785.8516, 4729.797, 4359.6016, 4186.953, 4359.6016, 4191.3516, 3533.0703, 1432, 7854, 1432, 7381.0703, 4839.258, 7397.578, -43, 3760, -79, 4172, -79, 3760, 5244, 5797, 4835.883, 5797, 1020, 7379.078, 1020, 7854, 5346.742, -1482.2969, 5335.2734, -420.53125, 108, 1081, 108, 431, 5306.3594, 6818, 5244, 6209, 4930, 6818, 4836.742, 6209, 109, 373)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 9, 8, 13, 14), PackedInt32Array(1, 0, 15, 16), PackedInt32Array(17, 18, 19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(27, 17, 28, 29, 30), PackedInt32Array(11, 10, 31, 32), PackedInt32Array(33, 26, 25, 34), PackedInt32Array(30, 35, 36, 37, 27), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(3, 41, 40, 42, 4), PackedInt32Array(19, 43, 20), PackedInt32Array(21, 20, 44, 45), PackedInt32Array(46, 47, 48, 49, 50), PackedInt32Array(51, 52, 53, 54, 55), PackedInt32Array(56, 57, 58, 59), PackedInt32Array(60, 59, 58, 61), PackedInt32Array(42, 62, 63, 4), PackedInt32Array(64, 51, 65, 66, 46, 67), PackedInt32Array(68, 69, 70, 71, 61), PackedInt32Array(71, 72, 73, 60), PackedInt32Array(74, 75, 76, 32, 31), PackedInt32Array(77, 45, 78, 79), PackedInt32Array(80, 81, 69, 68), PackedInt32Array(54, 82, 83, 55), PackedInt32Array(84, 85, 16, 49), PackedInt32Array(71, 60, 61), PackedInt32Array(86, 28, 17, 22, 77), PackedInt32Array(86, 77, 79), PackedInt32Array(86, 79, 67, 46, 87), PackedInt32Array(49, 16, 15, 33, 34), PackedInt32Array(78, 45, 44), PackedInt32Array(64, 78, 44, 52, 51), PackedInt32Array(7, 36, 35, 5), PackedInt32Array(49, 34, 5, 35), PackedInt32Array(26, 0, 4, 37, 23), PackedInt32Array(80, 68, 88, 89), PackedInt32Array(89, 88, 90, 91), PackedInt32Array(76, 91, 90, 14, 13), PackedInt32Array(76, 13, 32), PackedInt32Array(74, 31, 55, 83), PackedInt32Array(37, 4, 27), PackedInt32Array(92, 30, 29, 87), PackedInt32Array(92, 87, 46, 50), PackedInt32Array(50, 49, 35)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4201, -361, -919, -342, -912, -2278, 4155, -2194, 4167, -1645, 5468, -1598, 5454, -302, 4811, -294, 4807, 311, 6085, 281, 6068, 1534, 5376, 1692, 5444, 8613, 2238, 8673, 2238, 8041, -1586, 8044, -1605, 6758, -4175, 6741)])
+parsed_geometry_type = 1
+cell_size = 4.0
+agent_radius = 120.0
+
 [node name="Level" type="Node2D"]
 
 [node name="World" type="WorldEnvironment" parent="."]
@@ -71,7 +79,7 @@ visibility_layer = 3
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_jcr5m")]
-position = Vector2(4685, 7728)
+position = Vector2(1904, 7698)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -81,6 +89,7 @@ position = Vector2(7104, 2795)
 [node name="Enemy_spawnner" parent="Spawn" instance=ExtResource("4_w2736")]
 position = Vector2(-5504, 4457)
 rotation = -1.57079
+enemy_number = 1
 
 [node name="Polygon" parent="Spawn/Enemy_spawnner" index="1"]
 polygon = PackedVector2Array(-732.002, -1213, -34.0024, -1214, -36.9702, -515.753, -591.001, -508.999, -591, -246.999, -48.0005, -220, -54.9937, 1020, -714.994, 999.005)
@@ -405,61 +414,6 @@ collision_mask = 23
 position = Vector2(576.5, -45)
 shape = SubResource("RectangleShape2D_8xk1c")
 
-[node name="High_obstacles" type="Node2D" parent="." groups=["Non_destructables"]]
-
-[node name="obstacle_2" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(8638, 456)
-
-[node name="obstacle_13" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(6076.9995, -584.00006)
-rotation = 2.879789
-
-[node name="obstacle_14" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(6479.0005, -360.00012)
-rotation = 1.8325931
-
-[node name="obstacle_15" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(7887, -792)
-rotation = 0.78539705
-
-[node name="obstacle_16" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(7893, -405)
-rotation = 1.047196
-
-[node name="obstacle_3" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(8369, 1549)
-rotation = 0.785397
-
-[node name="obstacle_4" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(7824, 1539)
-rotation = 0.785397
-
-[node name="obstacle_6" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(9288, 4830)
-
-[node name="obstacle_10" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(6686, 3845)
-rotation = -3.14159
-
-[node name="obstacle_7" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(9302, 5238)
-
-[node name="obstacle_9" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(9296, 5643)
-
-[node name="obstacle_8" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(10529, 7808)
-
-[node name="obstacle_11" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(10543, 8216)
-
-[node name="obstacle_12" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(10537, 8621)
-
-[node name="obstacle_5" parent="High_obstacles" instance=ExtResource("10_w2736")]
-position = Vector2(-6471, 2861)
-rotation = 2.09439
-
 [node name="walls" type="Node2D" parent="."]
 position = Vector2(3074, 2764)
 
@@ -478,281 +432,339 @@ rotation = 1.56669
 position = Vector2(-3082, -3176)
 rotation = 3.14159
 
-[node name="Obstacles" type="Node2D" parent="."]
+[node name="Nav_mess" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_lfoej")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Nav_mess"]
+vertices = PackedVector2Array(1094, 1094, 1073, 3375, 1727, 3417, 1716, 4879, 1027, 4901, 1002, 7259, 4719, 7277, 4714, 4906, 4064, 4912, 4072, 3412, 4742, 3418, 4731, 1024)
+affect_navigation_mesh = true
+
+[node name="Obstacles" type="Node2D" parent="Nav_mess"]
 script = ExtResource("3_kbho2")
 
-[node name="box" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(311, 756)
 rotation = 1.57079
 
-[node name="box2" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box2" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(2423, 195)
 
-[node name="box12" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box12" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(-18649, 2766)
 rotation = 1.5708
 
-[node name="box14" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box14" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(-14593, 2720)
 rotation = 1.5708
 
-[node name="box13" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box13" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(-22509, 2695)
 rotation = 1.5708
 
-[node name="box5" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box5" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4174, 346)
 
-[node name="box15" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box15" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(1950, 506)
 rotation = 1.0472
 
-[node name="box18" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box18" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4118, 8015)
 
-[node name="box19" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box19" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4595, 8015)
 
-[node name="box24" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box24" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(4919, 6006)
 
-[node name="box25" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box25" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(5255, 7027)
 
-[node name="box27" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box27" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(8199, 6902)
 
-[node name="box20" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box20" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(6892, 7942)
 
-[node name="box21" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box21" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(7412, 7942)
 
-[node name="box22" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box22" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(8300, 7942)
 
-[node name="box23" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box23" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(8809, 7942)
 
-[node name="box6" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box6" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(5429, 519)
 rotation = 1.57079
 
-[node name="box17" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box17" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(1223, 7529)
 rotation = 1.57079
 
-[node name="box4" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box4" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(312, 48)
 rotation = 1.57079
 
-[node name="box3" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box3" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(-404, 3969)
 
-[node name="box16" parent="Obstacles" instance=ExtResource("3_xkwrd")]
+[node name="box16" parent="Nav_mess/Obstacles" instance=ExtResource("3_xkwrd")]
 position = Vector2(282, 3969)
 
-[node name="Obstacle_1" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_1" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(7869, 350)
 rotation = -3.14159
 
-[node name="Obstacle_25" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_25" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(7112, 443)
-rotation = -4.71238
+rotation = 1.5708053
 
-[node name="Obstacle_36" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_36" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(8091, 1141)
 rotation = -1.57079
 
-[node name="Obstacle_43" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_43" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(8091, 5321)
-rotation = -4.71238
-scale = Vector2(-1, 1)
+rotation = -1.5707873
+scale = Vector2(1, -1)
 
-[node name="Obstacle_44" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_44" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(8091, 5735)
-rotation = -4.71238
-scale = Vector2(-1, 1)
+rotation = -1.5707873
+scale = Vector2(1, -1)
 
-[node name="Obstacle_2" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_2" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(4944, 2003)
 
-[node name="Obstacle_6" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_6" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-7665, 2403)
 rotation = 1.57079
 
-[node name="Obstacle_8" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_8" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-5510, 2302)
-rotation = 3.14159
-scale = Vector2(-1, 1)
+scale = Vector2(1, -1)
 
-[node name="Obstacle_9" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_9" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-5936, 2302)
-rotation = 3.14159
-scale = Vector2(-1, 1)
+scale = Vector2(1, -1)
 
-[node name="Obstacle_10" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_10" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-7058, 2832)
-rotation = 6.28318
 
-[node name="Obstacle_7" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_7" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-8901, 3069)
 
-[node name="Obstacle_12" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_12" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-9455, 2364)
-rotation = 1.57079
-scale = Vector2(-1, 1)
+rotation = -1.5708026
+scale = Vector2(1, -1)
 
-[node name="Obstacle_11" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_11" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(-9460, 2848)
-rotation = 1.57079
-scale = Vector2(-1, 1)
+rotation = -1.5708026
+scale = Vector2(1, -1)
 
-[node name="Obstacle_3" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_3" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(5294, 3295)
 rotation = 3.14159
 
-[node name="Obstacle_45" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_45" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(4411, 4604)
 
-[node name="Obstacle_4" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_4" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(7308, 3194)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_13" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_13" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(8599, 3627)
-scale = Vector2(-1, -1)
+rotation = 3.1415927
 
-[node name="Obstacle_16" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_16" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9125, 6012)
-scale = Vector2(-1, 1)
+rotation = 3.1415927
+scale = Vector2(1, -1)
 
-[node name="Obstacle_15" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_15" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(6897, 4582)
 
-[node name="Obstacle_17" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_17" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(7545, 4582)
 
-[node name="Obstacle_14" parent="Obstacles" instance=ExtResource("10_lxc0q")]
-position = Vector2(9120, 3593)
-scale = Vector2(-1, -1)
+[node name="Obstacle_46" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(599, 5025)
 
-[node name="Obstacle_18" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_14" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
+position = Vector2(9120, 3593)
+rotation = 3.1415927
+
+[node name="Obstacle_18" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9246, 4307)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_20" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_20" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(10503, 4315)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_21" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_21" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(10503, 4954)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_22" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_22" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9950, 6175)
 rotation = -1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_23" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_23" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9950, 6774)
 rotation = -1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_26" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_26" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9962, 8938)
 rotation = -1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_27" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_27" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9962, 9537)
 rotation = -1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_24" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_24" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(12061, 2278)
 scale = Vector2(1, -1)
 
-[node name="Obstacle_38" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_38" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(15921, 2296)
 scale = Vector2(1, -1)
 
-[node name="Obstacle_39" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_39" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(16279, 2452)
-rotation = -1.57079
-scale = Vector2(-1, -1)
+rotation = 1.5708026
 
-[node name="Obstacle_41" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_41" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(12849, 2349)
-rotation = -1.57079
-scale = Vector2(-1, -1)
+rotation = 1.5708026
 
-[node name="Obstacle_42" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_42" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(11045, 2884)
 rotation = -3.14159
 scale = Vector2(1, -1)
 
-[node name="Obstacle_37" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_37" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(13876, 2848)
-rotation = -3.14159
-scale = Vector2(-1, -1)
 
-[node name="Obstacle_30" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_30" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(20207, 2855)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
-[node name="Obstacle_32" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_32" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(14205, 2758)
-rotation = 1.57079
-scale = Vector2(-1, -1)
+rotation = -1.5708026
 
-[node name="Obstacle_33" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_33" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(19107, 2293)
-scale = Vector2(-1, -1)
+rotation = 3.1415927
 
-[node name="Obstacle_34" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_34" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(18200, 2396)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_35" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_35" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(17944, 2724)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_31" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_31" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(20673, 2855)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
-[node name="Obstacle_5" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_5" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(6807, 2319)
-rotation = 4.71238
+rotation = -1.5708053
 scale = Vector2(1, -1)
 
-[node name="Obstacle_19" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_19" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(8861, 2541)
-rotation = 4.71238
+rotation = -1.5708053
 scale = Vector2(1, -1)
 
-[node name="Obstacle_28" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_28" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(10515, 538)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_29" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_29" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(10515, 1064)
 rotation = 1.57079
 scale = Vector2(1, -1)
 
-[node name="Obstacle_40" parent="Obstacles" instance=ExtResource("10_lxc0q")]
+[node name="Obstacle_40" parent="Nav_mess/Obstacles" instance=ExtResource("10_lxc0q")]
 position = Vector2(9304, 456)
 rotation = 1.57079
+
+[node name="High_obstacles" type="Node2D" parent="Nav_mess" groups=["Non_destructables"]]
+
+[node name="obstacle_2" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(8638, 456)
+
+[node name="obstacle_13" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(6076.9995, -584.00006)
+rotation = 2.879789
+
+[node name="obstacle_14" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(6479.0005, -360.00012)
+rotation = 1.8325931
+
+[node name="obstacle_15" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(7887, -792)
+rotation = 0.78539705
+
+[node name="obstacle_16" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(7893, -405)
+rotation = 1.047196
+
+[node name="obstacle_3" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(8369, 1549)
+rotation = 0.785397
+
+[node name="obstacle_4" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(7824, 1539)
+rotation = 0.785397
+
+[node name="obstacle_6" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9288, 4830)
+
+[node name="obstacle_10" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(6686, 3845)
+rotation = -3.14159
+
+[node name="obstacle_7" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9302, 5238)
+
+[node name="obstacle_9" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(9296, 5643)
+
+[node name="obstacle_8" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(10529, 7808)
+
+[node name="obstacle_11" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(10543, 8216)
+
+[node name="obstacle_12" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(10537, 8621)
+
+[node name="obstacle_5" parent="Nav_mess/High_obstacles" instance=ExtResource("10_w2736")]
+position = Vector2(-6471, 2861)
+rotation = 2.09439
 
 [node name="Lights" type="Node2D" parent="."]
 

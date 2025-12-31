@@ -36,7 +36,7 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_p4pfr")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer/Container"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 273.95
 offset_top = 39.95
 offset_right = 1009.95

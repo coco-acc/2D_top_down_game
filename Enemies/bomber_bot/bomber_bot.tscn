@@ -524,14 +524,11 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_3wvvv")
 
 [node name="walk" type="AnimatedSprite2D" parent="."]
-visible = false
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(-2, 15)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_l6rxt")
-frame = 10
-frame_progress = 0.0311127
 
 [node name="explosion" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -545,6 +542,7 @@ frame = 23
 frame_progress = 0.712778
 
 [node name="idle" type="Sprite2D" parent="."]
+visible = false
 z_as_relative = false
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_ajp0y")
@@ -564,15 +562,41 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("76_hpige")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(6, -13)
+position = Vector2(-7, 19)
 shape = SubResource("RectangleShape2D_qjkug")
 
 [node name="explosion_Area2D" type="Area2D" parent="."]
 position = Vector2(-10, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosion_Area2D"]
+visible = false
 position = Vector2(10, -4)
 shape = SubResource("CircleShape2D_v04uv")
 
+[node name="Nav" type="Node2D" parent="."]
+
+[node name="forward" type="RayCast2D" parent="Nav"]
+position = Vector2(0, 19)
+target_position = Vector2(234, 0)
+collision_mask = 20
+
+[node name="forward_left" type="RayCast2D" parent="Nav"]
+position = Vector2(-2, 17)
+target_position = Vector2(116, -104)
+collision_mask = 20
+
+[node name="forward_right" type="RayCast2D" parent="Nav"]
+position = Vector2(4, 21)
+target_position = Vector2(108, 103)
+collision_mask = 20
+
+[node name="right_side" type="RayCast2D" parent="Nav"]
+target_position = Vector2(0, 180)
+collision_mask = 20
+
+[node name="left_side" type="RayCast2D" parent="Nav"]
+target_position = Vector2(0, -140)
+collision_mask = 20
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_mask = 2

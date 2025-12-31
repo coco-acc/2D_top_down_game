@@ -6,3 +6,10 @@
 
 [node name="Bg" type="Sprite2D" parent="."]
 texture = ExtResource("1_ua1a0")
+
+[node name="music_volume" type="HSlider" parent="."]
+offset_right = 288.0
+offset_bottom = 16.0
+min_value = -80.0
+max_value = 6.0
+value = -40.0
